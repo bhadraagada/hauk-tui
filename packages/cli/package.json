@@ -1,0 +1,27 @@
+{
+  "name": "@hauktui/cli",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "CLI scaffolder for haukTUI components (copy source files into your project)",
+  "bin": {
+    "hauktui": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "if (Test-Path dist) { Remove-Item -Recurse -Force dist }"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}

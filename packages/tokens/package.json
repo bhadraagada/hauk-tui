@@ -1,0 +1,20 @@
+{
+  "name": "@hauktui/tokens",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Design tokens (colors, spacing, runtime capabilities) for haukTUI",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "if (Test-Path dist) { Remove-Item -Recurse -Force dist }"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}
