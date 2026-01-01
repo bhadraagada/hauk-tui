@@ -1,0 +1,98 @@
+---
+title: Date Picker
+description: Combined input and calendar for date selection
+---
+
+# Date Picker
+
+Date picker combines a text input with a calendar dropdown for easy date entry.
+
+```bash
+hauk add date-picker
+```
+
+## Usage
+
+### Basic Date Picker
+
+```tsx
+import { DatePicker } from "./tui/components/date-picker";
+
+<DatePicker
+  value={date}
+  onValueChange={setDate}
+  placeholder="Select date..."
+/>;
+```
+
+### With Format
+
+```tsx
+import { DatePicker } from "./tui/components/date-picker";
+
+<DatePicker
+  value={birthdate}
+  onValueChange={setBirthdate}
+  format="MM/DD/YYYY"
+  placeholder="MM/DD/YYYY"
+/>;
+```
+
+### Range Picker
+
+```tsx
+import { DatePicker } from "./tui/components/date-picker";
+
+<DatePicker
+  mode="range"
+  value={dateRange}
+  onValueChange={setDateRange}
+  placeholder="Select date range..."
+/>;
+```
+
+### With Constraints
+
+```tsx
+import { DatePicker } from "./tui/components/date-picker";
+
+<DatePicker
+  value={appointmentDate}
+  onValueChange={setAppointmentDate}
+  minDate={new Date()}
+  maxDate={addDays(new Date(), 90)}
+  placeholder="Select appointment date"
+/>;
+```
+
+## Props
+
+| Prop            | Type                                            | Default        | Description               |
+| --------------- | ----------------------------------------------- | -------------- | ------------------------- |
+| `value`         | `Date` \| `[Date, Date]` \| `null`              | -              | Selected date or range    |
+| `onValueChange` | `(value: Date \| [Date, Date] \| null) => void` | -              | Handler when date changes |
+| `mode`          | `"single"` \| `"range"`                         | `"single"`     | Selection mode            |
+| `format`        | `string`                                        | `"YYYY-MM-DD"` | Date display format       |
+| `placeholder`   | `string`                                        | -              | Placeholder text          |
+| `minDate`       | `Date`                                          | -              | Earliest selectable date  |
+| `maxDate`       | `Date`                                          | -              | Latest selectable date    |
+| `disabled`      | `boolean`                                       | `false`        | Disable input             |
+
+## Keyboard Shortcuts
+
+| Key         | Action                        |
+| ----------- | ----------------------------- |
+| `Enter`     | Open calendar dropdown        |
+| `Escape`    | Close calendar                |
+| `↑` `↓`     | Navigate calendar (when open) |
+| `Type`      | Manually enter date           |
+| `Backspace` | Clear date                    |
+
+## Features
+
+- **Calendar popup** - Visual date selection
+- **Manual entry** - Type dates directly
+- **Range support** - Select date ranges
+- **Format customization** - Custom date formats
+- **Validation** - Automatic date validation
+- **Constraints** - Min/max date boundaries

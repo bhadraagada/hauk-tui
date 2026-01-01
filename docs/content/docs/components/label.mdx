@@ -1,0 +1,85 @@
+---
+title: Label
+description: Form label component with required indicator
+---
+
+# Label
+
+Form label component with optional required indicator and description text.
+
+```bash
+hauk add label
+```
+
+## Usage
+
+```tsx
+import { Label } from "./tui/components/label";
+
+function App() {
+  return (
+    <Box flexDirection="column">
+      <Label>Username</Label>
+      <TextInput />
+    </Box>
+  );
+}
+```
+
+## Examples
+
+### Basic Label
+
+```tsx
+<Label>Email Address</Label>
+```
+
+### Required Field
+
+```tsx
+<Label required>Password</Label>
+// Displays: Password *
+```
+
+### With Description
+
+```tsx
+<Label description="Enter your work email">Email</Label>
+```
+
+### With Input
+
+```tsx
+<Box flexDirection="column" gap={1}>
+  <Label required>Username</Label>
+  <TextInput placeholder="Enter username" />
+</Box>
+```
+
+## Props
+
+| Prop          | Type        | Default | Description             |
+| ------------- | ----------- | ------- | ----------------------- |
+| `children`    | `ReactNode` | -       | Label text              |
+| `required`    | `boolean`   | `false` | Show required indicator |
+| `description` | `string`    | -       | Help text below label   |
+| `htmlFor`     | `string`    | -       | Associated input ID     |
+
+## Styling
+
+Labels display with optional indicators:
+
+```
+Username
+
+Password *
+
+Email
+Enter your work email
+```
+
+## Notes
+
+- Supports required indicator and description
+- Use with form inputs for accessibility
+- Description appears below the label

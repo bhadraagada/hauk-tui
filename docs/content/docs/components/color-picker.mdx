@@ -1,0 +1,144 @@
+---
+title: ColorPicker
+description: Color grid selection with keyboard navigation
+---
+
+# ColorPicker
+
+Color picker component with a grid of preset colors and keyboard navigation.
+
+```bash
+hauk add color-picker
+```
+
+## Usage
+
+```tsx
+import { ColorPicker } from "./tui/components/color-picker";
+
+function App() {
+  const [color, setColor] = useState("#ff0000");
+
+  return <ColorPicker value={color} onChange={setColor} />;
+}
+```
+
+## Examples
+
+### Basic Color Picker
+
+```tsx
+const [color, setColor] = useState("#00ff00");
+
+<ColorPicker value={color} onChange={setColor} />;
+```
+
+Output:
+
+```
+╭────────────────────────────╮
+│ Color Picker               │
+│                            │
+│   #00ff00   (green)        │
+│                            │
+│ ███ ███ ███ ███ ███        │
+│ ███ ███ ███ ███ ███        │
+│ ███ ███ [■] ███ ███        │
+│ ███ ███ ███ ███ ███        │
+│                            │
+│ Arrow keys to move, Enter  │
+╰────────────────────────────╯
+```
+
+### Custom Preset Colors
+
+```tsx
+<ColorPicker
+  value={color}
+  onChange={setColor}
+  presets={["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"]}
+/>
+```
+
+### Without Preview
+
+```tsx
+<ColorPicker value={color} onChange={setColor} showPreview={false} />
+```
+
+### Brand Colors
+
+```tsx
+<ColorPicker
+  value={color}
+  onChange={setColor}
+  presets={[
+    "#1DA1F2", // Twitter
+    "#4267B2", // Facebook
+    "#E1306C", // Instagram
+    "#FF0000", // YouTube
+    "#0A66C2", // LinkedIn
+  ]}
+/>
+```
+
+## Props
+
+| Prop          | Type                      | Default         | Description                   |
+| ------------- | ------------------------- | --------------- | ----------------------------- |
+| `value`       | `string`                  | -               | Current color value (hex)     |
+| `onChange`    | `(color: string) => void` | -               | Callback when color changes   |
+| `presets`     | `string[]`                | Default palette | Preset colors                 |
+| `showPreview` | `boolean`                 | `true`          | Show color preview            |
+| `focusId`     | `string`                  | -               | Focus ID for focus management |
+
+## Default Preset Colors
+
+The default palette includes:
+
+```
+#ff0000  #ff7700  #ffff00  #00ff00  #00ffff
+#0000ff  #7700ff  #ff00ff  #ffffff  #888888
+#000000  #ff5555  #ffaa55  #ffff55  #55ff55
+#55ffff  #5555ff  #aa55ff  #ff55ff  #aaaaaa
+```
+
+## Keyboard Shortcuts
+
+| Key       | Action               |
+| --------- | -------------------- |
+| `↑` / `k` | Move up in grid      |
+| `↓` / `j` | Move down in grid    |
+| `←` / `h` | Move left in grid    |
+| `→` / `l` | Move right in grid   |
+| `Enter`   | Select focused color |
+| `Space`   | Select focused color |
+
+## Terminal Color Names
+
+When a color matches a terminal color, its name is displayed:
+
+| Hex       | Name    |
+| --------- | ------- |
+| `#ff0000` | red     |
+| `#00ff00` | green   |
+| `#0000ff` | blue    |
+| `#ffff00` | yellow  |
+| `#ff00ff` | magenta |
+| `#00ffff` | cyan    |
+| `#ffffff` | white   |
+| `#000000` | black   |
+
+## Features
+
+- **Color Grid** - Visual grid of preset colors
+- **Keyboard Navigation** - Navigate with arrow keys
+- **Color Preview** - Shows selected color with hex value
+- **Terminal Names** - Shows terminal color names when applicable
+- **Custom Presets** - Provide your own color palette
+
+## Notes
+
+- Arrow keys to navigate grid, Enter to select
+- 5 colors per row in the default grid layout
+- Supports vim-style h/j/k/l navigation

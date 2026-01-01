@@ -1,0 +1,106 @@
+---
+title: Toggle Group
+description: Group of mutually exclusive or multi-select toggles
+---
+
+# Toggle Group
+
+Toggle group component for selecting one or multiple options from a set of toggle buttons.
+
+```bash
+hauk add toggle-group
+```
+
+## Usage
+
+### Single Selection
+
+```tsx
+import { ToggleGroup } from "./tui/components/toggle-group";
+
+<ToggleGroup type="single" value={alignment} onValueChange={setAlignment}>
+  <ToggleGroup.Item value="left">Left</ToggleGroup.Item>
+  <ToggleGroup.Item value="center">Center</ToggleGroup.Item>
+  <ToggleGroup.Item value="right">Right</ToggleGroup.Item>
+</ToggleGroup>;
+```
+
+### Multiple Selection
+
+```tsx
+import { ToggleGroup } from "./tui/components/toggle-group";
+
+<ToggleGroup type="multiple" value={formatting} onValueChange={setFormatting}>
+  <ToggleGroup.Item value="bold">Bold</ToggleGroup.Item>
+  <ToggleGroup.Item value="italic">Italic</ToggleGroup.Item>
+  <ToggleGroup.Item value="underline">Underline</ToggleGroup.Item>
+</ToggleGroup>;
+```
+
+### Vertical Orientation
+
+```tsx
+import { ToggleGroup } from "./tui/components/toggle-group";
+
+<ToggleGroup
+  type="single"
+  value={view}
+  onValueChange={setView}
+  orientation="vertical"
+>
+  <ToggleGroup.Item value="list">List View</ToggleGroup.Item>
+  <ToggleGroup.Item value="grid">Grid View</ToggleGroup.Item>
+  <ToggleGroup.Item value="table">Table View</ToggleGroup.Item>
+</ToggleGroup>;
+```
+
+### With Disabled Items
+
+```tsx
+import { ToggleGroup } from "./tui/components/toggle-group";
+
+<ToggleGroup type="single" value={plan} onValueChange={setPlan}>
+  <ToggleGroup.Item value="free">Free</ToggleGroup.Item>
+  <ToggleGroup.Item value="pro">Pro</ToggleGroup.Item>
+  <ToggleGroup.Item value="enterprise" disabled>
+    Enterprise (Coming Soon)
+  </ToggleGroup.Item>
+</ToggleGroup>;
+```
+
+## Props
+
+### ToggleGroup
+
+| Prop            | Type                                  | Default        | Description                          |
+| --------------- | ------------------------------------- | -------------- | ------------------------------------ |
+| `type`          | `'single' \| 'multiple'`              | -              | Selection mode (required)            |
+| `value`         | `string \| string[]`                  | -              | Selected value(s) (required)         |
+| `onValueChange` | `(value: string \| string[]) => void` | -              | Handler for value changes (required) |
+| `orientation`   | `'horizontal' \| 'vertical'`          | `'horizontal'` | Layout direction                     |
+| `disabled`      | `boolean`                             | `false`        | Disable entire group                 |
+
+### ToggleGroup.Item
+
+| Prop       | Type        | Default | Description                   |
+| ---------- | ----------- | ------- | ----------------------------- |
+| `value`    | `string`    | -       | Unique item value (required)  |
+| `disabled` | `boolean`   | `false` | Disable this item             |
+| `children` | `ReactNode` | -       | Item label/content (required) |
+
+## Keyboard Shortcuts
+
+| Key               | Action                 |
+| ----------------- | ---------------------- |
+| `←` / `h`         | Navigate left/up       |
+| `→` / `l`         | Navigate right/down    |
+| `Space` / `Enter` | Toggle selected item   |
+| `Tab`             | Navigate to next group |
+
+## Features
+
+- **Single or multiple** - Mutually exclusive or multi-select modes
+- **Keyboard navigation** - Arrow keys or vim bindings
+- **Flexible layout** - Horizontal or vertical orientation
+- **Disabled state** - Individual or group-level disabling
+- **Visual feedback** - Clear selected/unselected states

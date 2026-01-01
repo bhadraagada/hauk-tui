@@ -1,0 +1,83 @@
+---
+title: hauk init
+description: Initialize haukTUI in your project
+---
+
+# hauk init
+
+Initialize haukTUI in your terminal UI project. This command sets up the configuration file and prepares your project for adding components.
+
+## Usage
+
+```bash
+hauk init [options]
+```
+
+## Options
+
+| Option                | Alias | Description                      |
+| --------------------- | ----- | -------------------------------- |
+| `--output-dir <path>` | `-o`  | Set component output directory   |
+| `--typescript`        | `-ts` | Use TypeScript (default: true)   |
+| `--force`             | `-f`  | Overwrite existing configuration |
+| `--help`              | `-h`  | Show help                        |
+
+## Examples
+
+### Basic initialization
+
+```bash
+hauk init
+```
+
+This creates `hauk.config.json` with default settings:
+
+```json
+{
+  "outputDir": "src/tui/components",
+  "typescript": true
+}
+```
+
+### Custom output directory
+
+```bash
+hauk init --output-dir src/components/tui
+```
+
+### Force reinitialize
+
+```bash
+hauk init --force
+```
+
+## What it creates
+
+After running `hauk init`, your project will have:
+
+```
+your-project/
+├── hauk.config.json    # Configuration file
+├── hauk.lock.json      # Lock file (created on first add)
+└── src/
+    └── tui/
+        └── components/ # Component directory (created on first add)
+```
+
+## Prerequisites
+
+Before running `hauk init`, ensure you have:
+
+1. **A React/Ink project** - haukTUI components are built for Ink
+2. **Required peer dependencies**:
+   ```bash
+   npm install react ink @hauktui/core @hauktui/tokens @hauktui/primitives-ink
+   ```
+
+## Next Steps
+
+After initialization:
+
+1. [Add your first component](/docs/cli/add)
+2. [Configure design tokens](/docs/theming/tokens)
+3. [Browse available components](/docs/components)

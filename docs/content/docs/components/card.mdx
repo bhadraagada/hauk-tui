@@ -1,0 +1,148 @@
+---
+title: Card
+description: Container card with title, description, content, and footer
+---
+
+# Card
+
+Container card component with optional title, description, content, and footer sections.
+
+```bash
+hauk add card
+```
+
+## Usage
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "./tui/components/card";
+
+function App() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Card description text</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Text>Card content goes here.</Text>
+      </CardContent>
+      <CardFooter>
+        <Button>Action</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+## Examples
+
+### Basic Card
+
+```tsx
+<Card>
+  <CardContent>
+    <Text>Simple card content</Text>
+  </CardContent>
+</Card>
+```
+
+### With Header
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Welcome</CardTitle>
+    <CardDescription>Get started with haukTUI</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Your journey begins here.</Text>
+  </CardContent>
+</Card>
+```
+
+### With Footer
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Confirm</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <Text>Are you sure?</Text>
+  </CardContent>
+  <CardFooter>
+    <Button>Yes</Button>
+    <Button>No</Button>
+  </CardFooter>
+</Card>
+```
+
+### Different Border Styles
+
+```tsx
+<Card borderStyle="single">Single border</Card>
+<Card borderStyle="double">Double border</Card>
+<Card borderStyle="rounded">Rounded corners</Card>
+```
+
+## Props
+
+### Card
+
+| Prop          | Type                                | Default    | Description  |
+| ------------- | ----------------------------------- | ---------- | ------------ |
+| `borderStyle` | `"single" \| "double" \| "rounded"` | `"single"` | Border style |
+| `borderColor` | `string`                            | token      | Border color |
+| `children`    | `ReactNode`                         | -          | Card content |
+
+### CardHeader, CardContent, CardFooter
+
+| Prop       | Type        | Default | Description     |
+| ---------- | ----------- | ------- | --------------- |
+| `children` | `ReactNode` | -       | Section content |
+
+### CardTitle
+
+| Prop       | Type        | Default | Description |
+| ---------- | ----------- | ------- | ----------- |
+| `children` | `ReactNode` | -       | Title text  |
+
+### CardDescription
+
+| Prop       | Type        | Default | Description      |
+| ---------- | ----------- | ------- | ---------------- |
+| `children` | `ReactNode` | -       | Description text |
+
+## Styling
+
+```
+┌────────────────────────────┐
+│ Card Title                 │
+│ Card description text      │
+│ ────────────────────────── │
+│ Card content goes here.   │
+│ ────────────────────────── │
+│ [ Action ]                 │
+└────────────────────────────┘
+```
+
+### Border Styles
+
+```
+Single:  ┌───┐    Double:  ╔═══╗    Rounded: ╭───╮
+         │   │             ║   ║             │   │
+         └───┘             ╚═══╝             ╰───╯
+```
+
+## Notes
+
+- Supports customizable border styles and optional footer
+- All sections are optional
+- Use CardHeader for title and description grouping

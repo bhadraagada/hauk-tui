@@ -1,0 +1,154 @@
+---
+title: Components
+description: Browse all 57 haukTUI components organized by category.
+---
+
+import { Card, Cards } from "fumadocs-ui/components/card";
+
+# Components
+
+haukTUI provides **57 components** across 6 categories. Each component is:
+
+- Fully keyboard accessible
+- Customizable via props and source code
+- TypeScript native with full type definitions
+- Designed for terminal environments
+
+## Browse by Category
+
+<Cards>
+  <Card title="Primitives" href="/docs/components/primitives">
+    Basic building blocks: Button, Badge, Avatar, Kbd, Label, Typography
+  </Card>
+  <Card title="Input" href="/docs/components/input">
+    Form controls: TextInput, Select, Checkbox, Slider, DatePicker, and more
+  </Card>
+  <Card title="Layout" href="/docs/components/layout">
+    Structure components: Card, Table, Accordion, Resizable, DataTable
+  </Card>
+  <Card title="Navigation" href="/docs/components/navigation">
+    Navigation: Tabs, Breadcrumb, Sidebar, Menubar, Pagination
+  </Card>
+  <Card title="Feedback" href="/docs/components/feedback">
+    User feedback: Dialog, Toast, Alert, Progress, Spinner, Drawer
+  </Card>
+  <Card title="Display" href="/docs/components/display">
+    Visual components: Banner, Chart, Carousel
+  </Card>
+</Cards>
+
+## All Components
+
+### Primitives (6)
+
+| Component                                 | Description                               |
+| ----------------------------------------- | ----------------------------------------- |
+| [Button](/docs/components/button)         | Focusable button with keyboard activation |
+| [Badge](/docs/components/badge)           | Small status indicator labels             |
+| [Avatar](/docs/components/avatar)         | User avatar with initials                 |
+| [Kbd](/docs/components/kbd)               | Keyboard shortcut display                 |
+| [Label](/docs/components/label)           | Form label with required indicator        |
+| [Typography](/docs/components/typography) | Text styling variants                     |
+
+### Input (17)
+
+| Component                                        | Description                   |
+| ------------------------------------------------ | ----------------------------- |
+| [TextInput](/docs/components/text-input)         | Single-line text input        |
+| [Textarea](/docs/components/textarea)            | Multi-line text input         |
+| [PasswordInput](/docs/components/password-input) | Secure password input         |
+| [Checkbox](/docs/components/checkbox)            | Toggle checkbox               |
+| [Toggle](/docs/components/toggle)                | Switch/toggle component       |
+| [Switch](/docs/components/switch)                | Alternative switch with sizes |
+| [RadioGroup](/docs/components/radio-group)       | Radio button group            |
+| [Select](/docs/components/select)                | Dropdown select               |
+| [Combobox](/docs/components/combobox)            | Searchable select             |
+| [Slider](/docs/components/slider)                | Range slider                  |
+| [Calendar](/docs/components/calendar)            | Date calendar                 |
+| [DatePicker](/docs/components/date-picker)       | Date picker input             |
+| [InputOTP](/docs/components/input-otp)           | OTP/PIN code input            |
+| [Command](/docs/components/command)              | Command palette               |
+| [Field](/docs/components/field)                  | Form field wrapper            |
+| [Form](/docs/components/form)                    | Form with validation          |
+| [ToggleGroup](/docs/components/toggle-group)     | Group of toggle buttons       |
+
+### Layout (9)
+
+| Component                                   | Description               |
+| ------------------------------------------- | ------------------------- |
+| [Card](/docs/components/card)               | Container card            |
+| [Accordion](/docs/components/accordion)     | Collapsible sections      |
+| [Collapsible](/docs/components/collapsible) | Single collapsible        |
+| [Table](/docs/components/table)             | Data table with selection |
+| [DataTable](/docs/components/data-table)    | Advanced sortable table   |
+| [List](/docs/components/list)               | Scrollable list           |
+| [Separator](/docs/components/separator)     | Visual divider            |
+| [ScrollArea](/docs/components/scroll-area)  | Scrollable container      |
+| [Resizable](/docs/components/resizable)     | Resizable panels          |
+
+### Navigation (8)
+
+| Component                                          | Description               |
+| -------------------------------------------------- | ------------------------- |
+| [Tabs](/docs/components/tabs)                      | Tab navigation            |
+| [Breadcrumb](/docs/components/breadcrumb)          | Breadcrumb trail          |
+| [Pagination](/docs/components/pagination)          | Page navigation           |
+| [Sidebar](/docs/components/sidebar)                | Application sidebar       |
+| [Menubar](/docs/components/menubar)                | Horizontal menu bar       |
+| [NavigationMenu](/docs/components/navigation-menu) | Navigation with dropdowns |
+| [DropdownMenu](/docs/components/dropdown-menu)     | Dropdown menu             |
+| [ContextMenu](/docs/components/context-menu)       | Context menu              |
+
+### Feedback (14)
+
+| Component                                        | Description           |
+| ------------------------------------------------ | --------------------- |
+| [Alert](/docs/components/alert)                  | Alert messages        |
+| [Dialog](/docs/components/dialog)                | Modal dialog          |
+| [AlertDialog](/docs/components/alert-dialog)     | Confirmation dialog   |
+| [ConfirmDialog](/docs/components/confirm-dialog) | Yes/No dialog         |
+| [Toast](/docs/components/toast)                  | Notification messages |
+| [Progress](/docs/components/progress)            | Progress bar          |
+| [Spinner](/docs/components/spinner)              | Loading spinner       |
+| [Skeleton](/docs/components/skeleton)            | Loading placeholder   |
+| [Empty](/docs/components/empty)                  | Empty state           |
+| [Drawer](/docs/components/drawer)                | Slide-out panel       |
+| [Sheet](/docs/components/sheet)                  | Modal sheet           |
+| [Popover](/docs/components/popover)              | Floating content      |
+| [Tooltip](/docs/components/tooltip)              | Hover tooltip         |
+| [HoverCard](/docs/components/hover-card)         | Hover card            |
+
+### Display (3)
+
+| Component                             | Description      |
+| ------------------------------------- | ---------------- |
+| [Banner](/docs/components/banner)     | ASCII art banner |
+| [Chart](/docs/components/chart)       | ASCII charts     |
+| [Carousel](/docs/components/carousel) | Item carousel    |
+
+## Adding Components
+
+Use the CLI to add any component:
+
+```bash
+# Add a single component
+npx @hauktui/cli add button
+
+# Add multiple components
+npx @hauktui/cli add button dialog toast alert
+
+# Add all components
+npx @hauktui/cli add --all
+```
+
+## Component Structure
+
+Each component consists of:
+
+```
+component-name/
+├── component-name.tsx   # Main component code
+└── index.ts             # Public exports
+```
+
+You own the code - feel free to modify, extend, or customize as needed.

@@ -1,0 +1,157 @@
+---
+title: Theming Overview
+description: Customize the look and feel of your terminal UI
+---
+
+# Theming Overview
+
+haukTUI uses a design token system that makes it easy to customize the appearance of your terminal UI. Unlike web applications, terminal UIs work with a limited color palette and character-based layouts.
+
+## How Theming Works
+
+haukTUI theming is built on three core concepts:
+
+1. **Design Tokens** - Semantic color and style variables
+2. **Focus Management** - Keyboard navigation and focus states
+3. **Keymaps** - Customizable keyboard shortcuts
+
+## Quick Setup
+
+```tsx
+import { TokensProvider, useTokens } from "./tui/tokens";
+
+function App() {
+  return (
+    <TokensProvider
+      tokens={{
+        colors: {
+          primary: "magenta",
+          secondary: "cyan",
+          success: "green",
+          warning: "yellow",
+          error: "red",
+          muted: "gray",
+        },
+        focusIndicator: "▶",
+      }}
+    >
+      <YourApp />
+    </TokensProvider>
+  );
+}
+```
+
+## Terminal Color Palette
+
+Terminal UIs support a limited set of colors compared to web. haukTUI supports:
+
+### Standard Colors
+
+| Color     | Usage                        |
+| --------- | ---------------------------- |
+| `black`   | Backgrounds, borders         |
+| `red`     | Errors, destructive actions  |
+| `green`   | Success, confirmations       |
+| `yellow`  | Warnings, cautions           |
+| `blue`    | Links, informational         |
+| `magenta` | Primary accent, focus        |
+| `cyan`    | Secondary accent, highlights |
+| `white`   | Text, foreground             |
+| `gray`    | Muted text, disabled         |
+
+### Bright Variants
+
+All standard colors have bright variants:
+
+- `blackBright`, `redBright`, `greenBright`, etc.
+
+## Theme Structure
+
+A complete theme includes:
+
+```tsx
+const theme = {
+  colors: {
+    // Semantic colors
+    primary: "magenta",
+    secondary: "cyan",
+    accent: "blue",
+
+    // Status colors
+    success: "green",
+    warning: "yellow",
+    error: "red",
+    info: "blue",
+
+    // UI colors
+    muted: "gray",
+    border: "gray",
+    background: "black",
+    foreground: "white",
+  },
+
+  // Focus styling
+  focusIndicator: "▶",
+  focusColor: "magenta",
+
+  // Border characters
+  borders: {
+    single: ["┌", "─", "┐", "│", "└", "┘"],
+    double: ["╔", "═", "╗", "║", "╚", "╝"],
+    rounded: ["╭", "─", "╮", "│", "╰", "╯"],
+  },
+};
+```
+
+## Using Tokens
+
+Access tokens in your components:
+
+```tsx
+import { useTokens } from "./tui/tokens";
+
+function MyComponent() {
+  const tokens = useTokens();
+
+  return (
+    <Box borderColor={tokens.colors.border}>
+      <Text color={tokens.colors.primary}>Hello Terminal!</Text>
+    </Box>
+  );
+}
+```
+
+## Best Practices
+
+### 1. Use Semantic Colors
+
+```tsx
+// Good - semantic meaning
+<Text color={tokens.colors.error}>Failed to save</Text>
+
+// Avoid - hard-coded colors
+<Text color="red">Failed to save</Text>
+```
+
+### 2. Respect Terminal Limitations
+
+- Stick to the 16-color palette for maximum compatibility
+- Test in different terminal emulators
+- Avoid relying solely on color (use symbols too)
+
+### 3. Provide Visual Focus Indicators
+
+```tsx
+// Good - visible focus indicator
+{isFocused && <Text color="magenta">▶ </Text>}
+<Text>{label}</Text>
+
+// Avoid - color-only focus
+<Text color={isFocused ? "magenta" : "white"}>{label}</Text>
+```
+
+## Next Steps
+
+- [Design Tokens](/docs/theming/tokens) - Deep dive into the token system
+- [Focus Management](/docs/theming/focus) - Keyboard navigation
+- [Keymaps](/docs/theming/keymaps) - Customize keyboard shortcuts

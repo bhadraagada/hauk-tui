@@ -1,0 +1,109 @@
+---
+title: Progress
+description: Progress bar with percentage display
+---
+
+# Progress
+
+Progress bar component showing completion percentage.
+
+```bash
+hauk add progress
+```
+
+## Usage
+
+```tsx
+import { Progress } from "./tui/components/progress";
+
+function App() {
+  return <Progress value={65} />;
+}
+```
+
+## Examples
+
+### Basic Progress
+
+```tsx
+<Progress value={50} />
+```
+
+### With Label
+
+```tsx
+<Progress value={75} showLabel />
+```
+
+### Custom Width
+
+```tsx
+<Progress value={30} width={40} />
+```
+
+### Label Position
+
+```tsx
+<Progress value={50} showLabel labelPosition="left" />
+<Progress value={50} showLabel labelPosition="right" />
+<Progress value={50} showLabel labelPosition="inside" />
+```
+
+### Custom Characters
+
+```tsx
+<Progress value={60} fillChar="█" emptyChar="░" />
+```
+
+### Indeterminate
+
+```tsx
+<Progress indeterminate />
+```
+
+## Props
+
+| Prop            | Type                            | Default     | Description                       |
+| --------------- | ------------------------------- | ----------- | --------------------------------- |
+| `value`         | `number`                        | `0`         | Progress percentage (0-100)       |
+| `width`         | `number`                        | `20`        | Bar width in characters           |
+| `showLabel`     | `boolean`                       | `false`     | Show percentage label             |
+| `labelPosition` | `"left" \| "right" \| "inside"` | `"right"`   | Label position                    |
+| `fillChar`      | `string`                        | `"█"`       | Filled section character          |
+| `emptyChar`     | `string`                        | `"░"`       | Empty section character           |
+| `color`         | `string`                        | `"primary"` | Progress bar color                |
+| `indeterminate` | `boolean`                       | `false`     | Show animated indeterminate state |
+
+## Styling
+
+### Default
+
+```
+████████████░░░░░░░░ 60%
+```
+
+### Label Positions
+
+```
+Left:   60% ████████████░░░░░░░░
+Right:  ████████████░░░░░░░░ 60%
+Inside: ██████ 60% ██░░░░░░░░░░
+```
+
+### Custom Characters
+
+```
+▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░ 60%
+```
+
+### Indeterminate
+
+```
+░░░░███░░░░░░░░░░░░░ (animated)
+```
+
+## Notes
+
+- Customizable fill/empty characters and label position
+- Supports indeterminate state for unknown duration tasks
+- Width can be adjusted to fit layout

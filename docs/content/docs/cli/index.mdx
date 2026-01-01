@@ -1,0 +1,89 @@
+---
+title: CLI Overview
+description: The haukTUI command-line interface for managing components
+---
+
+# CLI Overview
+
+The haukTUI CLI helps you add components to your terminal UI projects. It handles downloading components from the registry, managing dependencies, and configuring your project.
+
+## Installation
+
+```bash
+# npm
+npm install -g @hauktui/cli
+
+# pnpm
+pnpm add -g @hauktui/cli
+
+# yarn
+yarn global add @hauktui/cli
+
+# bun
+bun add -g @hauktui/cli
+```
+
+## Commands
+
+| Command                | Description                        |
+| ---------------------- | ---------------------------------- |
+| `hauk init`            | Initialize haukTUI in your project |
+| `hauk add <component>` | Add a component to your project    |
+| `hauk list`            | List all available components      |
+| `hauk help`            | Show help information              |
+
+## Quick Start
+
+```bash
+# Initialize a new project
+hauk init
+
+# Add your first component
+hauk add button
+
+# Add multiple components
+hauk add card tabs dialog
+```
+
+## Configuration
+
+The CLI creates a `hauk.config.json` file in your project root:
+
+```json
+{
+  "outputDir": "src/tui/components",
+  "typescript": true,
+  "registryUrl": "https://registry.hauktui.dev"
+}
+```
+
+### Options
+
+| Option        | Type      | Default                | Description                 |
+| ------------- | --------- | ---------------------- | --------------------------- |
+| `outputDir`   | `string`  | `"src/tui/components"` | Where to install components |
+| `typescript`  | `boolean` | `true`                 | Use TypeScript              |
+| `registryUrl` | `string`  | Official registry      | Custom registry URL         |
+
+## Lock File
+
+The CLI maintains a `hauk.lock.json` file that tracks installed components and their versions:
+
+```json
+{
+  "components": {
+    "button": {
+      "version": "0.0.1",
+      "installedAt": "2024-01-15T10:30:00.000Z"
+    }
+  }
+}
+```
+
+This ensures reproducible installations across your team.
+
+## Next Steps
+
+- [Initialize your project](/docs/cli/init)
+- [Add components](/docs/cli/add)
+- [Browse components](/docs/components)

@@ -1,0 +1,134 @@
+---
+title: Form
+description: Form container with validation and submission handling
+---
+
+# Form
+
+Full-featured form component with validation, error handling, and submission management.
+
+```bash
+hauk add form
+```
+
+## Usage
+
+### Basic Form
+
+```tsx
+import { Form } from "./tui/components/form";
+import { Field } from "./tui/components/field";
+import { TextInput } from "./tui/components/text-input";
+import { Button } from "./tui/components/button";
+
+<Form onSubmit={handleSubmit}>
+  <Field label="Name">
+    <TextInput value={name} onChange={setName} />
+  </Field>
+
+  <Field label="Email">
+    <TextInput value={email} onChange={setEmail} />
+  </Field>
+
+  <Button type="submit">Submit</Button>
+</Form>;
+```
+
+### With Validation
+
+```tsx
+import { Form } from "./tui/components/form";
+
+const schema = {
+  email: {
+    required: true,
+    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    message: "Invalid email address",
+  },
+  password: {
+    required: true,
+    minLength: 8,
+    message: "Password must be at least 8 characters",
+  },
+};
+
+<Form
+  onSubmit={handleSubmit}
+  validation={schema}
+  onError={(errors) => setErrors(errors)}
+>
+  <Field label="Email" error={errors.email}>
+    <TextInput value={email} onChange={setEmail} />
+  </Field>
+
+  <Field label="Password" error={errors.password}>
+    <PasswordInput value={password} onChange={setPassword} />
+  </Field>
+
+  <Button type="submit">Sign Up</Button>
+</Form>;
+```
+
+### With Loading State
+
+```tsx
+import { Form } from "./tui/components/form";
+
+<Form onSubmit={handleSubmit} loading={isSubmitting}>
+  <Field label="Message">
+    <Textarea value={message} onChange={setMessage} />
+  </Field>
+
+  <Button type="submit" disabled={isSubmitting}>
+    {isSubmitting ? "Sending..." : "Send"}
+  </Button>
+</Form>;
+```
+
+## Props
+
+| Prop         | Type                                        | Default | Description                        |
+| ------------ | ------------------------------------------- | ------- | ---------------------------------- |
+| `onSubmit`   | `(data: FormData) => void \| Promise<void>` | -       | Form submission handler (required) |
+| `children`   | `ReactNode`                                 | -       | Form fields and content (required) |
+| `validation` | `ValidationSchema`                          | -       | Field validation rules             |
+| `onError`    | `(errors: ValidationErrors) => void`        | -       | Validation error handler           |
+| `loading`    | `boolean`                                   | `false` | Show loading state                 |
+| `disabled`   | `boolean`                                   | `false` | Disable entire form                |
+
+## Types
+
+```tsx
+interface ValidationSchema {
+  [field: string]: {
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    pattern?: RegExp;
+    custom?: (value: any) => boolean;
+    message: string;
+  };
+}
+
+interface ValidationErrors {
+  [field: string]: string;
+}
+```
+
+## Keyboard Shortcuts
+
+| Key         | Action                                      |
+| ----------- | ------------------------------------------- |
+| `Tab`       | Navigate between fields                     |
+| `Shift+Tab` | Navigate backwards                          |
+| `Enter`     | Submit form (when focused on submit button) |
+| `Esc`       | Cancel/reset (if onCancel provided)         |
+
+## Features
+
+- **Built-in validation** - Schema-based field validation
+- **Error handling** - Automatic error display per field
+- **Loading states** - Built-in submission loading UI
+- **Keyboard navigation** - Tab through fields naturally
+- **Submit on Enter** - Submit when Enter pressed on button
+- **Reset support** - Optional form reset functionality

@@ -1,0 +1,84 @@
+---
+title: Breadcrumb
+description: Navigation breadcrumb trail
+---
+
+# Breadcrumb
+
+Breadcrumb navigation component for showing the current location in a hierarchy.
+
+```bash
+hauk add breadcrumb
+```
+
+## Usage
+
+### Basic Breadcrumb
+
+```tsx
+import { Breadcrumb } from "./tui/components/breadcrumb";
+
+<Breadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects" },
+    { label: "MyApp", href: "/projects/myapp" },
+  ]}
+/>;
+```
+
+### With Custom Separator
+
+```tsx
+import { Breadcrumb } from "./tui/components/breadcrumb";
+
+<Breadcrumb items={items} separator="›" />;
+```
+
+### With Click Handlers
+
+```tsx
+import { Breadcrumb } from "./tui/components/breadcrumb";
+
+<Breadcrumb
+  items={[
+    { label: "Home", onClick: () => navigate("/") },
+    { label: "Settings", onClick: () => navigate("/settings") },
+    { label: "Profile" },
+  ]}
+/>;
+```
+
+## Props
+
+| Prop        | Type               | Default | Description                       |
+| ----------- | ------------------ | ------- | --------------------------------- |
+| `items`     | `BreadcrumbItem[]` | -       | Breadcrumb path items (required)  |
+| `separator` | `string`           | `'/'`   | Separator character between items |
+| `maxItems`  | `number`           | -       | Max items before collapsing       |
+
+## Types
+
+```tsx
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  onClick?: () => void;
+}
+```
+
+## Keyboard Shortcuts
+
+| Key       | Action                    |
+| --------- | ------------------------- |
+| `←` / `h` | Navigate to previous item |
+| `→` / `l` | Navigate to next item     |
+| `Enter`   | Activate focused item     |
+
+## Features
+
+- **Path navigation** - Show current location hierarchy
+- **Clickable items** - Navigate to any level
+- **Custom separators** - Choose your divider character
+- **Collapsing** - Automatically collapse long paths
+- **Keyboard accessible** - Arrow key navigation

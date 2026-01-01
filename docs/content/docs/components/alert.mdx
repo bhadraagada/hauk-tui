@@ -1,0 +1,104 @@
+---
+title: Alert
+description: Alert message display with variants
+---
+
+# Alert
+
+Alert message display with variants for info, success, warning, and error states.
+
+```bash
+hauk add alert
+```
+
+## Usage
+
+```tsx
+import { Alert } from "./tui/components/alert";
+
+function App() {
+  return <Alert variant="success">Operation completed successfully!</Alert>;
+}
+```
+
+## Examples
+
+### Variants
+
+```tsx
+<Alert variant="info">
+  This is an informational message.
+</Alert>
+
+<Alert variant="success">
+  Your changes have been saved.
+</Alert>
+
+<Alert variant="warning">
+  Please review before continuing.
+</Alert>
+
+<Alert variant="error">
+  An error occurred. Please try again.
+</Alert>
+```
+
+### With Title
+
+```tsx
+<Alert variant="warning" title="Warning">
+  Your session will expire in 5 minutes.
+</Alert>
+```
+
+### With Icon
+
+```tsx
+<Alert variant="error" icon="✕">
+  Failed to save file.
+</Alert>
+```
+
+## Props
+
+| Prop       | Type        | Default  | Description    |
+| ---------- | ----------- | -------- | -------------- |
+| `children` | `ReactNode` | -        | Alert message  |
+| `variant`  | `string`    | `"info"` | Alert variant  |
+| `title`    | `string`    | -        | Optional title |
+| `icon`     | `string`    | auto     | Custom icon    |
+
+### Variants
+
+| Variant   | Color  | Default Icon | Use Case               |
+| --------- | ------ | ------------ | ---------------------- |
+| `info`    | blue   | `ℹ`          | Informational messages |
+| `success` | green  | `✓`          | Success confirmations  |
+| `warning` | yellow | `⚠`          | Warnings, cautions     |
+| `error`   | red    | `✕`          | Error messages         |
+
+## Styling
+
+```
+┌─ ℹ Info ──────────────────────────────┐
+│ This is an informational message.    │
+└───────────────────────────────────────┘
+
+┌─ ✓ Success ───────────────────────────┐
+│ Your changes have been saved.        │
+└───────────────────────────────────────┘
+
+┌─ ⚠ Warning ───────────────────────────┐
+│ Please review before continuing.     │
+└───────────────────────────────────────┘
+
+┌─ ✕ Error ─────────────────────────────┐
+│ An error occurred. Please try again. │
+└───────────────────────────────────────┘
+```
+
+## Notes
+
+- Use variant prop for different alert types
+- Icons are automatically assigned based on variant
+- Custom icons can be provided via the icon prop

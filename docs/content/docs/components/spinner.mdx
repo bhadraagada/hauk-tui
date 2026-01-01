@@ -1,0 +1,95 @@
+---
+title: Spinner
+description: Animated loading spinner with multiple variants
+---
+
+# Spinner
+
+Animated loading spinner with multiple style variants.
+
+```bash
+hauk add spinner
+```
+
+## Usage
+
+```tsx
+import { Spinner } from "./tui/components/spinner";
+
+function App() {
+  return <Spinner />;
+}
+```
+
+## Examples
+
+### Basic Spinner
+
+```tsx
+<Spinner />
+```
+
+### With Label
+
+```tsx
+<Spinner label="Loading..." />
+```
+
+### Variants
+
+```tsx
+<Spinner variant="dots" />
+<Spinner variant="line" />
+<Spinner variant="arc" />
+<Spinner variant="circle" />
+<Spinner variant="bounce" />
+```
+
+### Custom Color
+
+```tsx
+<Spinner color="cyan" />
+```
+
+### Sizes
+
+```tsx
+<Spinner size="sm" />
+<Spinner size="md" />
+<Spinner size="lg" />
+```
+
+## Props
+
+| Prop      | Type                   | Default     | Description   |
+| --------- | ---------------------- | ----------- | ------------- |
+| `variant` | `string`               | `"dots"`    | Spinner style |
+| `label`   | `string`               | -           | Loading text  |
+| `color`   | `string`               | `"primary"` | Spinner color |
+| `size`    | `"sm" \| "md" \| "lg"` | `"md"`      | Spinner size  |
+
+### Variants
+
+| Variant  | Animation    | Description    |
+| -------- | ------------ | -------------- |
+| `dots`   | `⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏` | Braille dots   |
+| `line`   | `\|/-\\`     | Rotating line  |
+| `arc`    | `◜◠◝◞◡◟`     | Rotating arc   |
+| `circle` | `◐◓◑◒`       | Filling circle |
+| `bounce` | `⠁⠂⠄⡀⢀⠠⠐⠈`   | Bouncing dots  |
+
+## Styling
+
+```
+Dots:    ⠋ Loading...
+Line:    | Loading...
+Arc:     ◜ Loading...
+Circle:  ◐ Loading...
+Bounce:  ⠁ Loading...
+```
+
+## Notes
+
+- Multiple spinner styles: dots, line, arc, circle, bounce
+- Animation runs automatically when mounted
+- Use with label for context

@@ -1,0 +1,109 @@
+---
+title: Dialog
+description: Modal dialog overlay with ESC to close
+---
+
+# Dialog
+
+Modal dialog overlay with keyboard navigation and ESC to close.
+
+```bash
+hauk add dialog
+```
+
+## Usage
+
+```tsx
+import { Dialog } from "./tui/components/dialog";
+
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setOpen(true)}>Open Dialog</Button>
+
+      <Dialog open={open} onClose={() => setOpen(false)} title="Confirm Action">
+        <Text>Are you sure you want to continue?</Text>
+        <Button onPress={() => setOpen(false)}>Close</Button>
+      </Dialog>
+    </>
+  );
+}
+```
+
+## Examples
+
+### Basic Dialog
+
+```tsx
+<Dialog open={isOpen} onClose={handleClose} title="Dialog Title">
+  <Text>Dialog content goes here.</Text>
+</Dialog>
+```
+
+### With Actions
+
+```tsx
+<Dialog open={isOpen} onClose={handleClose} title="Save Changes?">
+  <Text>You have unsaved changes.</Text>
+  <Box gap={1}>
+    <Button onPress={handleSave}>Save</Button>
+    <Button onPress={handleClose}>Cancel</Button>
+  </Box>
+</Dialog>
+```
+
+### With Description
+
+```tsx
+<Dialog
+  open={isOpen}
+  onClose={handleClose}
+  title="Delete Item"
+  description="This action cannot be undone."
+>
+  <Box gap={1}>
+    <Button onPress={handleDelete}>Delete</Button>
+    <Button onPress={handleClose}>Cancel</Button>
+  </Box>
+</Dialog>
+```
+
+## Props
+
+| Prop          | Type         | Default | Description            |
+| ------------- | ------------ | ------- | ---------------------- |
+| `open`        | `boolean`    | `false` | Whether dialog is open |
+| `onClose`     | `() => void` | -       | Close handler          |
+| `title`       | `string`     | -       | Dialog title           |
+| `description` | `string`     | -       | Description text       |
+| `children`    | `ReactNode`  | -       | Dialog content         |
+
+## Keyboard Shortcuts
+
+| Key      | Action                   |
+| -------- | ------------------------ |
+| `Escape` | Close dialog             |
+| `q`      | Close dialog             |
+| `Tab`    | Navigate between buttons |
+| `Enter`  | Activate focused button  |
+
+## Styling
+
+```
+╔════════════════════════════════╗
+║ Dialog Title                   ║
+║ ────────────────────────────── ║
+║                                ║
+║ Dialog content goes here.     ║
+║                                ║
+║ [ Save ]  [ Cancel ]          ║
+╚════════════════════════════════╝
+```
+
+## Notes
+
+- Press ESC or Q to close when focused
+- Focus is trapped within the dialog
+- Integrates with focus management system

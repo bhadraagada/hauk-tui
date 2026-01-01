@@ -1,0 +1,78 @@
+---
+title: Field
+description: Form field wrapper with label and error handling
+---
+
+# Field
+
+Form field wrapper that combines label, input, and error message display.
+
+```bash
+hauk add field
+```
+
+## Usage
+
+### Basic Field
+
+```tsx
+import { Field } from "./tui/components/field";
+import { TextInput } from "./tui/components/text-input";
+
+<Field label="Username">
+  <TextInput value={username} onChange={setUsername} />
+</Field>;
+```
+
+### With Error
+
+```tsx
+import { Field } from "./tui/components/field";
+import { TextInput } from "./tui/components/text-input";
+
+<Field label="Email" error={emailError} required>
+  <TextInput value={email} onChange={setEmail} placeholder="you@example.com" />
+</Field>;
+```
+
+### With Description
+
+```tsx
+import { Field } from "./tui/components/field";
+import { Textarea } from "./tui/components/textarea";
+
+<Field label="Bio" description="Tell us about yourself">
+  <Textarea value={bio} onChange={setBio} />
+</Field>;
+```
+
+### Inline Layout
+
+```tsx
+import { Field } from "./tui/components/field";
+import { Switch } from "./tui/components/switch";
+
+<Field label="Enable notifications" layout="inline">
+  <Switch checked={notifs} onCheckedChange={setNotifs} />
+</Field>;
+```
+
+## Props
+
+| Prop          | Type                     | Default      | Description                        |
+| ------------- | ------------------------ | ------------ | ---------------------------------- |
+| `label`       | `string`                 | -            | Field label text (required)        |
+| `children`    | `ReactNode`              | -            | Input component to wrap (required) |
+| `error`       | `string`                 | -            | Error message to display           |
+| `description` | `string`                 | -            | Help text below label              |
+| `required`    | `boolean`                | `false`      | Show required indicator            |
+| `layout`      | `'vertical' \| 'inline'` | `'vertical'` | Label/input layout direction       |
+
+## Features
+
+- **Label management** - Automatic label-input association
+- **Error display** - Consistent error message styling
+- **Required indicator** - Shows asterisk for required fields
+- **Help text** - Optional description below label
+- **Flexible layout** - Vertical or inline orientations
+- **Validation state** - Visual error state styling

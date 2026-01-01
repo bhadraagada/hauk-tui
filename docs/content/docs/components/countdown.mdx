@@ -1,0 +1,182 @@
+---
+title: Countdown
+description: Countdown timer with multiple display formats
+---
+
+# Countdown
+
+Countdown timer component that counts down to a target date/time.
+
+```bash
+hauk add countdown
+```
+
+## Usage
+
+```tsx
+import { Countdown } from "./tui/components/countdown";
+
+function App() {
+  const target = new Date("2025-01-01T00:00:00");
+
+  return <Countdown target={target} onComplete={() => console.log("Done!")} />;
+}
+```
+
+## Examples
+
+### Basic Countdown
+
+```tsx
+const newYear = new Date("2025-01-01T00:00:00");
+
+<Countdown target={newYear} />;
+```
+
+Output (full format):
+
+```
+╭─────────────────────────────────╮
+│  05    12    30    45           │
+│ days  hours mins  secs          │
+╰─────────────────────────────────╯
+```
+
+### Compact Format
+
+```tsx
+<Countdown target={target} format="compact" />
+```
+
+Output:
+
+```
+╭───────────────────╮
+│ 5d 12:30:45       │
+╰───────────────────╯
+```
+
+### Minimal Format
+
+```tsx
+<Countdown target={target} format="minimal" />
+```
+
+Output:
+
+```
+╭────────────╮
+│ 132:30:45  │
+╰────────────╯
+```
+
+### Without Labels
+
+```tsx
+<Countdown target={target} showLabels={false} />
+```
+
+Output:
+
+```
+╭────────────────────╮
+│  05  12  30  45    │
+╰────────────────────╯
+```
+
+### With Completion Callback
+
+```tsx
+<Countdown
+  target={target}
+  onComplete={() => {
+    console.log("Countdown complete!");
+  }}
+/>
+```
+
+### Custom Update Interval
+
+```tsx
+// Update every 100ms for smoother display
+<Countdown target={target} interval={100} />
+
+// Update every 5 seconds for less overhead
+<Countdown target={target} interval={5000} />
+```
+
+### Event Countdown
+
+```tsx
+const eventDate = new Date("2025-06-15T14:00:00");
+
+<Countdown
+  target={eventDate}
+  format="full"
+  showLabels={true}
+  onComplete={() => alert("Event started!")}
+/>;
+```
+
+## Props
+
+| Prop         | Type                                   | Default  | Description             |
+| ------------ | -------------------------------------- | -------- | ----------------------- |
+| `target`     | `Date`                                 | -        | Target date/time        |
+| `onComplete` | `() => void`                           | -        | Callback when reaches 0 |
+| `format`     | `"full"` \| `"compact"` \| `"minimal"` | `"full"` | Display format          |
+| `showLabels` | `boolean`                              | `true`   | Show unit labels        |
+| `interval`   | `number`                               | `1000`   | Update interval (ms)    |
+
+## Formats
+
+### Full Format
+
+Shows days, hours, minutes, seconds with labels:
+
+```
+  05      12      30      45
+ days   hours   mins    secs
+```
+
+### Compact Format
+
+Shows days (if any) and time:
+
+```
+5d 12:30:45
+```
+
+### Minimal Format
+
+Shows total hours and time (no days):
+
+```
+132:30:45
+```
+
+## Completion State
+
+When countdown reaches zero:
+
+```
+╭─────────────────╮
+│   Completed!    │
+╰─────────────────╯
+```
+
+Border color changes to success green.
+
+## Features
+
+- **Multiple Formats** - Full, compact, and minimal displays
+- **Labels** - Optional unit labels
+- **Completion Callback** - Execute code when timer ends
+- **Custom Interval** - Control update frequency
+- **Visual Feedback** - Border color changes on completion
+
+## Notes
+
+- Supports full, compact, and minimal formats
+- Automatically stops when target is reached
+- Days only shown when > 0 (except minimal format)

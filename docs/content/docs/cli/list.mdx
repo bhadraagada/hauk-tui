@@ -1,0 +1,138 @@
+---
+title: hauk list
+description: List all available components
+---
+
+# hauk list
+
+Display all available components from the haukTUI registry. Filter by category or search for specific components.
+
+## Usage
+
+```bash
+hauk list [options]
+```
+
+## Options
+
+| Option             | Alias | Description                    |
+| ------------------ | ----- | ------------------------------ |
+| `--category <cat>` | `-c`  | Filter by category             |
+| `--search <query>` | `-s`  | Search components              |
+| `--json`           |       | Output as JSON                 |
+| `--installed`      |       | Show only installed components |
+| `--help`           | `-h`  | Show help                      |
+
+## Examples
+
+### List all components
+
+```bash
+hauk list
+```
+
+Output:
+
+```
+haukTUI Components (57 available)
+
+PRIMITIVE (6)
+  avatar        User avatar with initials generated from name
+  badge         Small status indicator labels
+  button        A focusable button component with keyboard activation
+  kbd           Keyboard shortcut display component
+  label         Form label component with required indicator
+  typography    Text styling with heading, body, code, and quote variants
+
+INPUT (17)
+  calendar      Date calendar with keyboard navigation
+  checkbox      A toggleable checkbox component
+  combobox      Searchable select with autocomplete
+  command       Command palette with search, grouping, and shortcuts
+  ...
+```
+
+### Filter by category
+
+```bash
+hauk list --category input
+```
+
+Available categories:
+
+- `primitive` - Basic building blocks
+- `input` - Form inputs and controls
+- `layout` - Structural components
+- `navigation` - Navigation elements
+- `feedback` - Alerts, dialogs, notifications
+- `display` - Data visualization
+
+### Search components
+
+```bash
+hauk list --search dialog
+```
+
+Output:
+
+```
+Search results for "dialog" (3 matches)
+
+  alert-dialog    Modal alert dialog with confirm/cancel actions
+  confirm-dialog  A confirmation dialog with Yes/No options
+  dialog          Modal dialog overlay with ESC to close
+```
+
+### JSON output
+
+```bash
+hauk list --json
+```
+
+Useful for scripting:
+
+```json
+{
+  "version": "1.0.0",
+  "components": [
+    {
+      "name": "accordion",
+      "description": "Collapsible content sections with keyboard navigation",
+      "category": "layout",
+      "tags": ["accordion", "collapsible", "expandable"]
+    }
+  ]
+}
+```
+
+### Show installed
+
+```bash
+hauk list --installed
+```
+
+Output:
+
+```
+Installed Components (3)
+
+  button   0.0.1  installed 2024-01-15
+  card     0.0.1  installed 2024-01-15
+  dialog   0.0.1  installed 2024-01-16
+```
+
+## Component Categories
+
+| Category   | Count | Description                                                   |
+| ---------- | ----- | ------------------------------------------------------------- |
+| primitive  | 6     | Basic building blocks (button, badge, avatar, etc.)           |
+| input      | 17    | Form inputs and controls (text-input, checkbox, select, etc.) |
+| layout     | 9     | Structural components (card, table, accordion, etc.)          |
+| navigation | 8     | Navigation elements (tabs, sidebar, breadcrumb, etc.)         |
+| feedback   | 14    | Alerts, dialogs, notifications (alert, dialog, toast, etc.)   |
+| display    | 3     | Data visualization (chart, carousel, banner)                  |
+
+## Next Steps
+
+- [Add a component](/docs/cli/add)
+- [Browse component documentation](/docs/components)

@@ -1,0 +1,92 @@
+---
+title: Calendar
+description: Date grid calendar for date selection
+---
+
+# Calendar
+
+Full calendar component with month/year navigation and date selection.
+
+```bash
+hauk add calendar
+```
+
+## Usage
+
+### Basic Calendar
+
+```tsx
+import { Calendar } from "./tui/components/calendar";
+
+<Calendar selectedDate={date} onSelectDate={setDate} />;
+```
+
+### With Range Selection
+
+```tsx
+import { Calendar } from "./tui/components/calendar";
+
+<Calendar
+  mode="range"
+  selectedRange={dateRange}
+  onSelectRange={setDateRange}
+/>;
+```
+
+### Multiple Dates
+
+```tsx
+import { Calendar } from "./tui/components/calendar";
+
+<Calendar mode="multiple" selectedDates={dates} onSelectDates={setDates} />;
+```
+
+### With Disabled Dates
+
+```tsx
+import { Calendar } from "./tui/components/calendar";
+
+const disabledDates = [new Date("2024-12-25"), new Date("2024-01-01")];
+
+<Calendar
+  selectedDate={date}
+  onSelectDate={setDate}
+  disabledDates={disabledDates}
+  minDate={new Date()}
+/>;
+```
+
+## Props
+
+| Prop            | Type                                    | Default    | Description                       |
+| --------------- | --------------------------------------- | ---------- | --------------------------------- |
+| `selectedDate`  | `Date`                                  | -          | Currently selected date (single)  |
+| `onSelectDate`  | `(date: Date) => void`                  | -          | Handler for single date selection |
+| `mode`          | `"single"` \| `"range"` \| `"multiple"` | `"single"` | Selection mode                    |
+| `selectedRange` | `[Date, Date]`                          | -          | Selected date range (range mode)  |
+| `selectedDates` | `Date[]`                                | -          | Selected dates (multiple mode)    |
+| `minDate`       | `Date`                                  | -          | Earliest selectable date          |
+| `maxDate`       | `Date`                                  | -          | Latest selectable date            |
+| `disabledDates` | `Date[]`                                | -          | Array of disabled dates           |
+
+## Keyboard Shortcuts
+
+| Key         | Action         |
+| ----------- | -------------- |
+| `←` `h`     | Previous day   |
+| `→` `l`     | Next day       |
+| `↑` `k`     | Previous week  |
+| `↓` `j`     | Next week      |
+| `Page Up`   | Previous month |
+| `Page Down` | Next month     |
+| `Home`      | Start of month |
+| `End`       | End of month   |
+| `Enter`     | Select date    |
+
+## Features
+
+- **Multiple modes** - Single, range, or multiple date selection
+- **Navigation** - Month/year navigation with keyboard
+- **Date constraints** - Min/max date boundaries
+- **Disabled dates** - Mark specific dates as unavailable
+- **Week start** - Configurable first day of week

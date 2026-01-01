@@ -1,0 +1,105 @@
+---
+title: Typography
+description: Text styling with heading, body, code, and quote variants
+---
+
+# Typography
+
+Text styling component with support for headings, body text, code, and quotes.
+
+```bash
+hauk add typography
+```
+
+## Usage
+
+```tsx
+import { Typography } from "./tui/components/typography";
+
+function App() {
+  return <Typography variant="h1">Welcome</Typography>;
+}
+```
+
+## Examples
+
+### Headings
+
+```tsx
+<Typography variant="h1">Heading 1</Typography>
+<Typography variant="h2">Heading 2</Typography>
+<Typography variant="h3">Heading 3</Typography>
+<Typography variant="h4">Heading 4</Typography>
+```
+
+### Body Text
+
+```tsx
+<Typography variant="body">
+  Regular body text for content.
+</Typography>
+
+<Typography variant="lead">
+  Lead paragraph with emphasis.
+</Typography>
+
+<Typography variant="small">
+  Small text for captions.
+</Typography>
+```
+
+### Code
+
+```tsx
+<Typography variant="code">const x = 42;</Typography>
+```
+
+### Quote
+
+```tsx
+<Typography variant="quote">"The terminal is my IDE."</Typography>
+```
+
+## Props
+
+| Prop       | Type        | Default  | Description         |
+| ---------- | ----------- | -------- | ------------------- |
+| `children` | `ReactNode` | -        | Text content        |
+| `variant`  | `string`    | `"body"` | Typography variant  |
+| `color`    | `string`    | -        | Text color override |
+
+### Variants
+
+| Variant | Style       | Use Case         |
+| ------- | ----------- | ---------------- |
+| `h1`    | Bold, large | Page titles      |
+| `h2`    | Bold        | Section headings |
+| `h3`    | Bold        | Subsections      |
+| `h4`    | Bold, small | Minor headings   |
+| `body`  | Normal      | Regular text     |
+| `lead`  | Emphasized  | Intro paragraphs |
+| `small` | Dimmed      | Captions, hints  |
+| `code`  | Monospace   | Code snippets    |
+| `quote` | Italic      | Quotations       |
+
+## Styling
+
+Typography variants render with appropriate styling:
+
+```
+# Heading 1
+## Heading 2
+### Heading 3
+
+Regular body text
+
+> "Quoted text"
+
+`inline code`
+```
+
+## Notes
+
+- Supports h1-h4, body, small, code, quote, lead variants
+- Use semantic variants for consistent styling
+- Colors can be overridden with the color prop

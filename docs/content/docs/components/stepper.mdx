@@ -1,0 +1,184 @@
+---
+title: Stepper
+description: Wizard-style step indicator with keyboard navigation
+---
+
+# Stepper
+
+Wizard-style step indicator component for multi-step processes with optional keyboard navigation.
+
+```bash
+hauk add stepper
+```
+
+## Usage
+
+```tsx
+import { Stepper } from "./tui/components/stepper";
+
+function App() {
+  const [step, setStep] = useState(1);
+
+  const steps = [
+    { title: "Account" },
+    { title: "Profile" },
+    { title: "Review" },
+  ];
+
+  return <Stepper steps={steps} activeStep={step} />;
+}
+```
+
+## Examples
+
+### Basic Stepper
+
+```tsx
+<Stepper
+  steps={[{ title: "Step 1" }, { title: "Step 2" }, { title: "Step 3" }]}
+  activeStep={1}
+/>
+```
+
+Output:
+
+```
+ ✓ ─── 2 ─── 3
+Step 1  Step 2  Step 3
+```
+
+### With Descriptions
+
+```tsx
+<Stepper
+  steps={[
+    { title: "Account", description: "Create your account" },
+    { title: "Profile", description: "Set up your profile" },
+    { title: "Complete", description: "Review and finish" },
+  ]}
+  activeStep={1}
+/>
+```
+
+### Vertical Stepper
+
+```tsx
+<Stepper
+  orientation="vertical"
+  steps={[
+    { title: "Step 1", description: "First step" },
+    { title: "Step 2", description: "Second step" },
+    { title: "Step 3", description: "Final step" },
+  ]}
+  activeStep={1}
+/>
+```
+
+Output:
+
+```
+ ✓  Step 1
+ │  First step
+ │
+ 2  Step 2
+ │  Second step
+ │
+ 3  Step 3
+    Final step
+```
+
+### Clickable Steps
+
+```tsx
+const [step, setStep] = useState(0);
+
+<Stepper
+  steps={steps}
+  activeStep={step}
+  clickable={true}
+  onStepChange={setStep}
+/>;
+```
+
+### With Optional Steps
+
+```tsx
+<Stepper
+  steps={[
+    { title: "Required" },
+    { title: "Optional", optional: true },
+    { title: "Required" },
+  ]}
+  activeStep={0}
+/>
+```
+
+### Custom Icons
+
+```tsx
+<Stepper
+  steps={[
+    { title: "Cart", icon: "🛒" },
+    { title: "Payment", icon: "💳" },
+    { title: "Confirm", icon: "✅" },
+  ]}
+  activeStep={1}
+/>
+```
+
+## Props
+
+| Prop           | Type                           | Default        | Description                      |
+| -------------- | ------------------------------ | -------------- | -------------------------------- |
+| `steps`        | `Step[]`                       | -              | Steps to display                 |
+| `activeStep`   | `number`                       | -              | Current active step (0-indexed)  |
+| `onStepChange` | `(step: number) => void`       | -              | Callback when step changes       |
+| `orientation`  | `"horizontal"` \| `"vertical"` | `"horizontal"` | Stepper orientation              |
+| `clickable`    | `boolean`                      | `false`        | Allow clicking steps to navigate |
+| `focusId`      | `string`                       | -              | Focus ID for focus management    |
+
+## Step
+
+```tsx
+interface Step {
+  title: string; // Step title
+  description?: string; // Step description
+  icon?: string; // Optional icon
+  optional?: boolean; // Whether step is optional
+}
+```
+
+## Keyboard Shortcuts
+
+When `clickable` is true:
+
+| Key             | Action              |
+| --------------- | ------------------- |
+| `←` / `h`       | Previous step       |
+| `→` / `l`       | Next step           |
+| `↑` / `k`       | Previous (vertical) |
+| `↓` / `j`       | Next (vertical)     |
+| `Enter`/`Space` | Select focused step |
+
+## Step States
+
+| State     | Appearance          |
+| --------- | ------------------- |
+| Completed | Green checkmark (✓) |
+| Active    | Highlighted number  |
+| Upcoming  | Muted number        |
+
+## Features
+
+- **Step States** - Completed, active, and upcoming states
+- **Keyboard Navigation** - Full keyboard support when clickable
+- **Dual Orientation** - Horizontal or vertical layout
+- **Optional Steps** - Mark steps as optional
+- **Custom Icons** - Use custom icons for steps
+- **Descriptions** - Add descriptions to steps
+
+## Notes
+
+- Arrow keys to navigate steps, Enter to select
+- Supports horizontal and vertical orientations
+- Step numbers show 1-indexed (displayed as 1, 2, 3...)

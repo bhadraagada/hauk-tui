@@ -1,0 +1,143 @@
+---
+title: Select
+description: A dropdown/select component with keyboard navigation
+---
+
+# Select
+
+A dropdown select component with keyboard navigation for choosing from a list of options.
+
+```bash
+hauk add select
+```
+
+## Usage
+
+```tsx
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from "./tui/components/select";
+
+function App() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Select value={value} onValueChange={setValue}>
+      <SelectTrigger placeholder="Choose an option" />
+      <SelectContent>
+        <SelectItem value="option1">Option 1</SelectItem>
+        <SelectItem value="option2">Option 2</SelectItem>
+        <SelectItem value="option3">Option 3</SelectItem>
+      </SelectContent>
+    </Select>
+  );
+}
+```
+
+## Examples
+
+### Basic Select
+
+```tsx
+<Select value={color} onValueChange={setColor}>
+  <SelectTrigger placeholder="Select color" />
+  <SelectContent>
+    <SelectItem value="red">Red</SelectItem>
+    <SelectItem value="green">Green</SelectItem>
+    <SelectItem value="blue">Blue</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+### With Default Value
+
+```tsx
+<Select defaultValue="medium">
+  <SelectTrigger />
+  <SelectContent>
+    <SelectItem value="small">Small</SelectItem>
+    <SelectItem value="medium">Medium</SelectItem>
+    <SelectItem value="large">Large</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+### Disabled Options
+
+```tsx
+<Select>
+  <SelectTrigger placeholder="Select plan" />
+  <SelectContent>
+    <SelectItem value="free">Free</SelectItem>
+    <SelectItem value="pro">Pro</SelectItem>
+    <SelectItem value="enterprise" disabled>
+      Enterprise
+    </SelectItem>
+  </SelectContent>
+</Select>
+```
+
+## Props
+
+### Select
+
+| Prop            | Type                      | Default | Description      |
+| --------------- | ------------------------- | ------- | ---------------- |
+| `value`         | `string`                  | -       | Controlled value |
+| `defaultValue`  | `string`                  | -       | Default value    |
+| `onValueChange` | `(value: string) => void` | -       | Change handler   |
+| `disabled`      | `boolean`                 | `false` | Disable select   |
+
+### SelectTrigger
+
+| Prop          | Type     | Default | Description      |
+| ------------- | -------- | ------- | ---------------- |
+| `placeholder` | `string` | -       | Placeholder text |
+
+### SelectItem
+
+| Prop       | Type      | Default | Description  |
+| ---------- | --------- | ------- | ------------ |
+| `value`    | `string`  | -       | Item value   |
+| `disabled` | `boolean` | `false` | Disable item |
+
+## Keyboard Shortcuts
+
+| Key               | Action                    |
+| ----------------- | ------------------------- |
+| `Enter` / `Space` | Open/close dropdown       |
+| `↓` / `j`         | Next option               |
+| `↑` / `k`         | Previous option           |
+| `Enter`           | Select highlighted option |
+| `Escape`          | Close dropdown            |
+
+## Styling
+
+### Closed State
+
+```
+┌─────────────────────────┐
+│ Select color        ▼   │
+└─────────────────────────┘
+```
+
+### Open State
+
+```
+┌─────────────────────────┐
+│ Select color        ▲   │
+├─────────────────────────┤
+│   Red                   │
+│ ▶ Green                 │  (highlighted)
+│   Blue                  │
+└─────────────────────────┘
+```
+
+## Notes
+
+- Supports both controlled and uncontrolled modes
+- Arrow keys or j/k for vim-style navigation
+- Focus indicator shows current selection

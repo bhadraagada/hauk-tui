@@ -1,0 +1,169 @@
+---
+title: Installation
+description: Get started with haukTUI in your terminal application.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+
+# Installation
+
+Get haukTUI set up in your project in under a minute.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- **Node.js** 18 or later
+- A React/Ink project (or we'll help you create one)
+
+## New Project
+
+If you're starting fresh, create a new Ink project first:
+
+```bash
+mkdir my-tui-app && cd my-tui-app
+npm init -y
+npm install react ink
+npm install -D typescript @types/react tsx
+```
+
+## Install the CLI
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">```bash npm install -g @hauktui/cli ```</Tab>
+  <Tab value="pnpm">```bash pnpm add -g @hauktui/cli ```</Tab>
+  <Tab value="yarn">```bash yarn global add @hauktui/cli ```</Tab>
+  <Tab value="bun">```bash bun add -g @hauktui/cli ```</Tab>
+</Tabs>
+
+Or use it directly with `npx`:
+
+```bash
+npx @hauktui/cli <command>
+```
+
+## Initialize Your Project
+
+<Steps>
+  <Step>
+    ### Run the init command ```bash npx @hauktui/cli init ``` This will: -
+    Create a `hauk.config.json` configuration file - Create a `hauk.lock.json`
+    to track installed components - Set up the default component directory
+    (`src/tui/components`)
+  </Step>
+
+  <Step>
+    ### Install core dependencies The CLI will prompt you to install the
+    required packages: ```bash npm install @hauktui/tokens @hauktui/core
+    @hauktui/primitives-ink ```
+  </Step>
+
+  <Step>
+    ### Add your first component ```bash npx @hauktui/cli add button ``` This
+    copies the Button component to your project.
+  </Step>
+</Steps>
+
+## Configuration
+
+After initialization, you'll have a `hauk.config.json`:
+
+```json
+{
+  "componentDir": "src/tui/components",
+  "typescript": true
+}
+```
+
+### Options
+
+| Option         | Type      | Default              | Description                    |
+| -------------- | --------- | -------------------- | ------------------------------ |
+| `componentDir` | `string`  | `src/tui/components` | Where components are installed |
+| `typescript`   | `boolean` | `true`               | Use TypeScript components      |
+
+## Project Structure
+
+After adding some components, your project will look like:
+
+```
+my-tui-app/
+├── src/
+│   ├── tui/
+│   │   ├── components/
+│   │   │   ├── button/
+│   │   │   │   ├── button.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── dialog/
+│   │   │   │   ├── dialog.tsx
+│   │   │   │   └── index.ts
+│   │   │   └── toast/
+│   │   │       ├── toast.tsx
+│   │   │       └── index.ts
+│   │   └── tokens.ts
+│   └── app.tsx
+├── hauk.config.json
+├── hauk.lock.json
+└── package.json
+```
+
+## Basic Usage
+
+Here's a minimal example using haukTUI components:
+
+```tsx
+import React from "react";
+import { render } from "ink";
+import { createTokens } from "@hauktui/tokens";
+import { TokenProvider, FocusGroup } from "@hauktui/primitives-ink";
+import { Button } from "./tui/components/button";
+import { Alert } from "./tui/components/alert";
+
+const tokens = createTokens();
+
+function App() {
+  return (
+    <TokenProvider tokens={tokens}>
+      <FocusGroup>
+        <Alert variant="info" title="Welcome">
+          Press Tab to navigate, Enter to activate
+        </Alert>
+
+        <Button focusId="submit" onPress={() => console.log("Submitted!")}>
+          Submit
+        </Button>
+
+        <Button
+          focusId="cancel"
+          variant="ghost"
+          onPress={() => process.exit(0)}
+        >
+          Cancel
+        </Button>
+      </FocusGroup>
+    </TokenProvider>
+  );
+}
+
+render(<App />);
+```
+
+Run with:
+
+```bash
+npx tsx src/app.tsx
+```
+
+## Next Steps
+
+- [Browse all 57 components](/docs/components)
+- [Learn about the CLI](/docs/cli)
+- [Customize your theme](/docs/theming/tokens)
+- [Understand focus management](/docs/theming/focus)
+
+<Callout type="info" title="Need help?">
+  Check out the [GitHub repository](https://github.com/hauktui/hauktui) for
+  examples and discussions.
+</Callout>

@@ -1,0 +1,101 @@
+---
+title: Radio Group
+description: Mutually exclusive selection group
+---
+
+# Radio Group
+
+Radio button group for selecting a single option from multiple choices.
+
+```bash
+hauk add radio-group
+```
+
+## Usage
+
+### Basic Radio Group
+
+```tsx
+import { RadioGroup } from "./tui/components/radio-group";
+
+<RadioGroup
+  value={selected}
+  onValueChange={setSelected}
+  options={[
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ]}
+/>;
+```
+
+### With Descriptions
+
+```tsx
+import { RadioGroup } from "./tui/components/radio-group";
+
+<RadioGroup
+  value={plan}
+  onValueChange={setPlan}
+  options={[
+    { value: "free", label: "Free", description: "10 requests/day" },
+    { value: "pro", label: "Pro", description: "1,000 requests/day" },
+    { value: "enterprise", label: "Enterprise", description: "Unlimited" },
+  ]}
+/>;
+```
+
+### Horizontal Layout
+
+```tsx
+import { RadioGroup } from "./tui/components/radio-group";
+
+<RadioGroup
+  value={alignment}
+  onValueChange={setAlignment}
+  orientation="horizontal"
+  options={[
+    { value: "left", label: "Left" },
+    { value: "center", label: "Center" },
+    { value: "right", label: "Right" },
+  ]}
+/>;
+```
+
+## Props
+
+| Prop            | Type                           | Default      | Description                    |
+| --------------- | ------------------------------ | ------------ | ------------------------------ |
+| `value`         | `string`                       | -            | Currently selected value       |
+| `onValueChange` | `(value: string) => void`      | -            | Handler when selection changes |
+| `options`       | `RadioOption[]`                | -            | Array of radio options         |
+| `orientation`   | `"vertical"` \| `"horizontal"` | `"vertical"` | Layout direction               |
+| `disabled`      | `boolean`                      | `false`      | Disable all options            |
+
+## Types
+
+```tsx
+interface RadioOption {
+  value: string;
+  label: string;
+  description?: string;
+  disabled?: boolean;
+}
+```
+
+## Keyboard Shortcuts
+
+| Key             | Action                   |
+| --------------- | ------------------------ |
+| `↑` `k`         | Select previous option   |
+| `↓` `j`         | Select next option       |
+| `Space` `Enter` | Activate selected option |
+| `Tab`           | Navigate to next element |
+
+## Features
+
+- **Single selection** - Only one option can be selected at a time
+- **Keyboard navigation** - Arrow keys or vim bindings to navigate
+- **Horizontal/Vertical** - Flexible layout orientation
+- **Optional descriptions** - Additional context per option
+- **Disabled state** - Individual or group-level disable support

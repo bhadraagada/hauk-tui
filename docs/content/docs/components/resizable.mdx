@@ -1,0 +1,129 @@
+---
+title: Resizable
+description: Resizable split panels with drag handles
+---
+
+# Resizable
+
+Resizable panel container with adjustable split panes and keyboard-navigable handles.
+
+```bash
+hauk add resizable
+```
+
+## Usage
+
+### Basic Resizable Panels
+
+```tsx
+import { Resizable } from "./tui/components/resizable";
+
+<Resizable>
+  <Resizable.Panel defaultSize={50}>
+    <Text>Left Panel</Text>
+  </Resizable.Panel>
+
+  <Resizable.Handle />
+
+  <Resizable.Panel defaultSize={50}>
+    <Text>Right Panel</Text>
+  </Resizable.Panel>
+</Resizable>;
+```
+
+### Vertical Split
+
+```tsx
+import { Resizable } from "./tui/components/resizable";
+
+<Resizable direction="vertical">
+  <Resizable.Panel defaultSize={30}>
+    <Text>Top Panel</Text>
+  </Resizable.Panel>
+
+  <Resizable.Handle />
+
+  <Resizable.Panel defaultSize={70}>
+    <Text>Bottom Panel</Text>
+  </Resizable.Panel>
+</Resizable>;
+```
+
+### With Min/Max Constraints
+
+```tsx
+import { Resizable } from "./tui/components/resizable";
+
+<Resizable>
+  <Resizable.Panel defaultSize={30} minSize={20} maxSize={50}>
+    <Text>Sidebar (20-50%)</Text>
+  </Resizable.Panel>
+
+  <Resizable.Handle />
+
+  <Resizable.Panel>
+    <Text>Main Content</Text>
+  </Resizable.Panel>
+</Resizable>;
+```
+
+### Three-Way Split
+
+```tsx
+import { Resizable } from "./tui/components/resizable";
+
+<Resizable>
+  <Resizable.Panel defaultSize={25}>
+    <Text>Sidebar</Text>
+  </Resizable.Panel>
+
+  <Resizable.Handle />
+
+  <Resizable.Panel defaultSize={50}>
+    <Text>Main Content</Text>
+  </Resizable.Panel>
+
+  <Resizable.Handle />
+
+  <Resizable.Panel defaultSize={25}>
+    <Text>Inspector</Text>
+  </Resizable.Panel>
+</Resizable>;
+```
+
+## Props
+
+### Resizable
+
+| Prop        | Type                         | Default        | Description                   |
+| ----------- | ---------------------------- | -------------- | ----------------------------- |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Split direction               |
+| `children`  | `ReactNode`                  | -              | Panels and handles (required) |
+
+### Resizable.Panel
+
+| Prop          | Type        | Default | Description                        |
+| ------------- | ----------- | ------- | ---------------------------------- |
+| `defaultSize` | `number`    | -       | Initial size as percentage (0-100) |
+| `minSize`     | `number`    | -       | Minimum size as percentage         |
+| `maxSize`     | `number`    | -       | Maximum size as percentage         |
+| `children`    | `ReactNode` | -       | Panel content (required)           |
+
+## Keyboard Shortcuts
+
+| Key       | Action                            |
+| --------- | --------------------------------- |
+| `←` / `h` | Resize left (when handle focused) |
+| `→` / `l` | Resize right                      |
+| `↑` / `k` | Resize up                         |
+| `↓` / `j` | Resize down                       |
+| `r`       | Reset to default sizes            |
+| `Tab`     | Navigate between handles          |
+
+## Features
+
+- **Keyboard resizing** - Arrow keys to adjust panel sizes
+- **Size constraints** - Min/max size enforcement
+- **Multiple panels** - Support for 2+ panels
+- **Vertical/Horizontal** - Both split directions
+- **Persistent state** - Remember user adjustments

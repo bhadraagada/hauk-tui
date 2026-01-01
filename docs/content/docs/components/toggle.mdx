@@ -1,0 +1,75 @@
+---
+title: Toggle
+description: Binary on/off switch component
+---
+
+# Toggle
+
+A simple toggle switch for binary states with keyboard support.
+
+```bash
+hauk add toggle
+```
+
+## Usage
+
+### Basic Toggle
+
+```tsx
+import { Toggle } from "./tui/components/toggle";
+
+<Toggle
+  checked={isEnabled}
+  onCheckedChange={setIsEnabled}
+  label="Enable notifications"
+/>;
+```
+
+### Controlled Toggle
+
+```tsx
+import { Toggle } from "./tui/components/toggle";
+
+<Box flexDirection="column" gap={1}>
+  <Toggle checked={darkMode} onCheckedChange={setDarkMode} label="Dark mode" />
+  <Text dimColor>Current theme: {darkMode ? "dark" : "light"}</Text>
+</Box>;
+```
+
+### Disabled State
+
+```tsx
+import { Toggle } from "./tui/components/toggle";
+
+<Toggle
+  checked={false}
+  onCheckedChange={() => {}}
+  label="Feature (coming soon)"
+  disabled
+/>;
+```
+
+## Props
+
+| Prop              | Type                         | Default | Description                     |
+| ----------------- | ---------------------------- | ------- | ------------------------------- |
+| `checked`         | `boolean`                    | -       | Current toggle state (required) |
+| `onCheckedChange` | `(checked: boolean) => void` | -       | Handler when toggle changes     |
+| `label`           | `string`                     | -       | Label text for the toggle       |
+| `disabled`        | `boolean`                    | `false` | Disable interaction             |
+
+## Keyboard Shortcuts
+
+| Key     | Action                   |
+| ------- | ------------------------ |
+| `Space` | Toggle on/off            |
+| `Enter` | Toggle on/off            |
+| `Tab`   | Navigate to next element |
+
+## Features
+
+- **Binary state** - Simple on/off switch
+- **Keyboard accessible** - Space or Enter to toggle
+- **Visual feedback** - Clear on/off indicators
+- **Labeled** - Optional descriptive text
+- **Focusable** - Works with FocusGroup navigation

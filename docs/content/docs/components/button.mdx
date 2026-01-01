@@ -1,0 +1,87 @@
+---
+title: Button
+description: A focusable button component with keyboard activation
+---
+
+# Button
+
+A focusable button component with keyboard activation. Buttons integrate with the focus system and support Enter/Space activation.
+
+```bash
+hauk add button
+```
+
+## Usage
+
+```tsx
+import { Button } from "./tui/components/button";
+
+function App() {
+  return <Button onPress={() => console.log("Pressed!")}>Click me</Button>;
+}
+```
+
+## Examples
+
+### Basic Button
+
+```tsx
+<Button onPress={handleClick}>Submit</Button>
+```
+
+### Disabled Button
+
+```tsx
+<Button disabled>Cannot click</Button>
+```
+
+### With Focus Group
+
+```tsx
+import { FocusGroup } from "@hauktui/core";
+
+<FocusGroup>
+  <Button>First</Button>
+  <Button>Second</Button>
+  <Button>Third</Button>
+</FocusGroup>;
+```
+
+## Props
+
+| Prop        | Type         | Default | Description                     |
+| ----------- | ------------ | ------- | ------------------------------- |
+| `children`  | `ReactNode`  | -       | Button content                  |
+| `onPress`   | `() => void` | -       | Called when button is activated |
+| `disabled`  | `boolean`    | `false` | Disable the button              |
+| `focusId`   | `string`     | auto    | Custom focus ID                 |
+| `autoFocus` | `boolean`    | `false` | Focus on mount                  |
+
+## Keyboard Shortcuts
+
+| Key         | Action                     |
+| ----------- | -------------------------- |
+| `Enter`     | Activate button            |
+| `Space`     | Activate button            |
+| `Tab`       | Move to next focusable     |
+| `Shift+Tab` | Move to previous focusable |
+
+## Styling
+
+The button uses tokens for consistent styling:
+
+```tsx
+// Focused state shows indicator
+▶ [ Submit ]
+
+// Unfocused state
+  [ Submit ]
+
+// Disabled state (dimmed)
+  [ Submit ]
+```
+
+## Notes
+
+- Use with `FocusGroup` for keyboard navigation between multiple buttons
+- Press `Space` or `Enter` to toggle

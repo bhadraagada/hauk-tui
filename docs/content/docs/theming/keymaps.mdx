@@ -1,0 +1,390 @@
+---
+title: Keymaps
+description: Customize keyboard shortcuts and bindings
+---
+
+# Keymaps
+
+haukTUI embraces keyboard-first design with customizable keymaps. Every component supports Vim-style keybindings by default, with the flexibility to customize bindings for your preferences.
+
+## Default Keybindings
+
+### Global Navigation
+
+| Key               | Action                 |
+| ----------------- | ---------------------- |
+| `Tab`             | Focus next element     |
+| `Shift+Tab`       | Focus previous element |
+| `Escape`          | Close modal/cancel     |
+| `Enter` / `Space` | Activate/select        |
+| `Ctrl+C`          | Exit application       |
+
+### Vim-Style Navigation
+
+| Key       | Action      |
+| --------- | ----------- |
+| `j` / `↓` | Move down   |
+| `k` / `↑` | Move up     |
+| `h` / `←` | Move left   |
+| `l` / `→` | Move right  |
+| `g`       | Go to first |
+| `G`       | Go to last  |
+| `Ctrl+d`  | Page down   |
+| `Ctrl+u`  | Page up     |
+
+### List Navigation
+
+| Key               | Action              |
+| ----------------- | ------------------- |
+| `j` / `↓`         | Next item           |
+| `k` / `↑`         | Previous item       |
+| `g` / `Home`      | First item          |
+| `G` / `End`       | Last item           |
+| `Enter` / `Space` | Select item         |
+| `/`               | Search (if enabled) |
+
+### Text Input
+
+| Key         | Action               |
+| ----------- | -------------------- |
+| `←` / `→`   | Move cursor          |
+| `Ctrl+a`    | Beginning of line    |
+| `Ctrl+e`    | End of line          |
+| `Ctrl+w`    | Delete word backward |
+| `Ctrl+u`    | Delete to beginning  |
+| `Ctrl+k`    | Delete to end        |
+| `Backspace` | Delete character     |
+
+## Keymap Configuration
+
+### Using KeymapProvider
+
+```tsx
+import { KeymapProvider } from "@hauktui/core";
+
+const customKeymap = {
+  navigation: {
+    next: ["j", "down", "tab"],
+    prev: ["k", "up", "shift+tab"],
+    first: ["g", "home"],
+    last: ["G", "end"],
+  },
+  actions: {
+    select: ["enter", "space"],
+    cancel: ["escape", "q"],
+    delete: ["d", "delete"],
+  },
+};
+
+function App() {
+  return (
+    <KeymapProvider keymap={customKeymap}>
+      <MyApp />
+    </KeymapProvider>
+  );
+}
+```
+
+### Component-Level Keymaps
+
+Override keymaps for specific components:
+
+```tsx
+<List
+  keymap={{
+    next: ["n"],
+    prev: ["p"],
+    select: ["o"],
+  }}
+>
+  {items}
+</List>
+```
+
+## useKeymap Hook
+
+Access and use keymaps in custom components:
+
+```tsx
+import { useKeymap, useInput } from "@hauktui/core";
+
+function CustomNavigable({ items }) {
+  const keymap = useKeymap();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useInput((input, key) => {
+    if (keymap.matches("navigation.next", input, key)) {
+      setSelectedIndex((i) => Math.min(i + 1, items.length - 1));
+    }
+    if (keymap.matches("navigation.prev", input, key)) {
+      setSelectedIndex((i) => Math.max(i - 1, 0));
+    }
+    if (keymap.matches("actions.select", input, key)) {
+      onSelect(items[selectedIndex]);
+    }
+  });
+
+  return (
+    <Box flexDirection="column">
+      {items.map((item, i) => (
+        <Text key={i} inverse={i === selectedIndex}>
+          {item}
+        </Text>
+      ))}
+    </Box>
+  );
+}
+```
+
+## Key Notation
+
+### Modifier Keys
+
+| Notation | Key                 |
+| -------- | ------------------- |
+| `ctrl+`  | Control key         |
+| `alt+`   | Alt/Option key      |
+| `shift+` | Shift key           |
+| `meta+`  | Command/Windows key |
+
+### Special Keys
+
+| Notation    | Key          |
+| ----------- | ------------ |
+| `enter`     | Enter/Return |
+| `space`     | Spacebar     |
+| `escape`    | Escape       |
+| `tab`       | Tab          |
+| `backspace` | Backspace    |
+| `delete`    | Delete       |
+| `up`        | Arrow Up     |
+| `down`      | Arrow Down   |
+| `left`      | Arrow Left   |
+| `right`     | Arrow Right  |
+| `home`      | Home         |
+| `end`       | End          |
+| `pageup`    | Page Up      |
+| `pagedown`  | Page Down    |
+
+### Examples
+
+```tsx
+const keymap = {
+  save: ["ctrl+s", "meta+s"],
+  quit: ["ctrl+q", "escape"],
+  search: ["/", "ctrl+f"],
+  selectAll: ["ctrl+a"],
+  undo: ["ctrl+z", "u"],
+  redo: ["ctrl+y", "ctrl+shift+z"],
+};
+```
+
+## Component Keybindings
+
+### Button
+
+| Key               | Action          |
+| ----------------- | --------------- |
+| `Enter` / `Space` | Activate button |
+
+### TextInput
+
+| Key         | Action        |
+| ----------- | ------------- |
+| `←` / `→`   | Move cursor   |
+| `Ctrl+a`    | Start of line |
+| `Ctrl+e`    | End of line   |
+| `Ctrl+w`    | Delete word   |
+| `Backspace` | Delete char   |
+
+### Select / Combobox
+
+| Key               | Action          |
+| ----------------- | --------------- |
+| `Enter` / `Space` | Open dropdown   |
+| `j` / `↓`         | Next option     |
+| `k` / `↑`         | Previous option |
+| `Enter`           | Select option   |
+| `Escape`          | Close dropdown  |
+
+### Dialog
+
+| Key            | Action                  |
+| -------------- | ----------------------- |
+| `Escape` / `q` | Close dialog            |
+| `Tab`          | Focus next button       |
+| `Enter`        | Activate focused button |
+| `y`            | Confirm (if applicable) |
+| `n`            | Cancel (if applicable)  |
+
+### Tabs
+
+| Key       | Action        |
+| --------- | ------------- |
+| `h` / `←` | Previous tab  |
+| `l` / `→` | Next tab      |
+| `1-9`     | Jump to tab N |
+
+### Table / DataTable
+
+| Key       | Action           |
+| --------- | ---------------- |
+| `j` / `↓` | Next row         |
+| `k` / `↑` | Previous row     |
+| `g`       | First row        |
+| `G`       | Last row         |
+| `Enter`   | Select row       |
+| `Space`   | Toggle selection |
+| `s`       | Sort column      |
+
+### Slider
+
+| Key         | Action     |
+| ----------- | ---------- |
+| `h` / `←`   | Decrease   |
+| `l` / `→`   | Increase   |
+| `0` / `^`   | Minimum    |
+| `$`         | Maximum    |
+| `Shift+←/→` | Large step |
+
+## Custom Key Handler
+
+Create custom key handling logic:
+
+```tsx
+import { useInput } from "@hauktui/core";
+
+function CustomComponent() {
+  useInput((input, key) => {
+    // Handle raw input
+    if (input === "q") {
+      onQuit();
+    }
+
+    // Handle special keys
+    if (key.escape) {
+      onCancel();
+    }
+
+    // Handle key combinations
+    if (key.ctrl && input === "s") {
+      onSave();
+    }
+
+    // Handle arrow keys
+    if (key.upArrow) {
+      onNavigateUp();
+    }
+  });
+
+  return <Box>{/* ... */}</Box>;
+}
+```
+
+## Keymap Presets
+
+### Vim Preset (Default)
+
+```tsx
+import { vimKeymap } from '@hauktui/core';
+
+<KeymapProvider keymap={vimKeymap}>
+```
+
+### Emacs Preset
+
+```tsx
+import { emacsKeymap } from '@hauktui/core';
+
+<KeymapProvider keymap={emacsKeymap}>
+```
+
+### Arrow-Only Preset
+
+```tsx
+import { arrowKeymap } from '@hauktui/core';
+
+// Disables vim keys, uses only arrows
+<KeymapProvider keymap={arrowKeymap}>
+```
+
+## Displaying Keybindings
+
+Use the `Kbd` component to display keyboard shortcuts:
+
+```tsx
+import { Kbd } from "./tui/components/kbd";
+
+function HelpPanel() {
+  return (
+    <Box flexDirection="column" gap={1}>
+      <Box>
+        <Kbd>j</Kbd>
+        <Text> / </Text>
+        <Kbd>k</Kbd>
+        <Text> - Navigate up/down</Text>
+      </Box>
+      <Box>
+        <Kbd>Enter</Kbd>
+        <Text> - Select item</Text>
+      </Box>
+      <Box>
+        <Kbd>Ctrl</Kbd>
+        <Text>+</Text>
+        <Kbd>c</Kbd>
+        <Text> - Exit</Text>
+      </Box>
+    </Box>
+  );
+}
+```
+
+## Best Practices
+
+### 1. Consistent Bindings
+
+Keep bindings consistent across your application:
+
+```tsx
+// Good - consistent select action
+<List selectKey="enter" />
+<Table selectKey="enter" />
+<Select selectKey="enter" />
+```
+
+### 2. Discoverable Shortcuts
+
+Show available shortcuts in your UI:
+
+```tsx
+function Footer() {
+  return (
+    <Box>
+      <Text dimColor>j/k: navigate | Enter: select | q: quit | ?: help</Text>
+    </Box>
+  );
+}
+```
+
+### 3. Non-Conflicting Bindings
+
+Avoid conflicts with terminal/system shortcuts:
+
+```tsx
+// Avoid - conflicts with terminal
+const badKeymap = {
+  quit: ["ctrl+c"], // Terminal interrupt
+  suspend: ["ctrl+z"], // Terminal suspend
+};
+
+// Good - safe alternatives
+const goodKeymap = {
+  quit: ["q", "escape"],
+  cancel: ["ctrl+g"],
+};
+```
+
+## Next Steps
+
+- [Components](/docs/components) - See keybindings in action
+- [Focus Management](/docs/theming/focus) - Keyboard navigation

@@ -1,0 +1,105 @@
+---
+title: Checkbox
+description: A toggleable checkbox component
+---
+
+# Checkbox
+
+A toggleable checkbox component with keyboard support.
+
+```bash
+hauk add checkbox
+```
+
+## Usage
+
+```tsx
+import { Checkbox } from "./tui/components/checkbox";
+
+function App() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Checkbox checked={checked} onChange={setChecked} label="Accept terms" />
+  );
+}
+```
+
+## Examples
+
+### Basic Checkbox
+
+```tsx
+<Checkbox checked={isChecked} onChange={setIsChecked} />
+```
+
+### With Label
+
+```tsx
+<Checkbox
+  checked={agreed}
+  onChange={setAgreed}
+  label="I agree to the terms and conditions"
+/>
+```
+
+### Disabled
+
+```tsx
+<Checkbox checked disabled label="Cannot change" />
+```
+
+### Multiple Checkboxes
+
+```tsx
+<Box flexDirection="column">
+  <Checkbox
+    checked={options.email}
+    onChange={(v) => setOptions({ ...options, email: v })}
+    label="Email notifications"
+  />
+  <Checkbox
+    checked={options.sms}
+    onChange={(v) => setOptions({ ...options, sms: v })}
+    label="SMS notifications"
+  />
+  <Checkbox
+    checked={options.push}
+    onChange={(v) => setOptions({ ...options, push: v })}
+    label="Push notifications"
+  />
+</Box>
+```
+
+## Props
+
+| Prop       | Type                         | Default | Description      |
+| ---------- | ---------------------------- | ------- | ---------------- |
+| `checked`  | `boolean`                    | `false` | Whether checked  |
+| `onChange` | `(checked: boolean) => void` | -       | Change handler   |
+| `label`    | `string`                     | -       | Label text       |
+| `disabled` | `boolean`                    | `false` | Disable checkbox |
+| `focusId`  | `string`                     | auto    | Custom focus ID  |
+
+## Keyboard Shortcuts
+
+| Key     | Action                 |
+| ------- | ---------------------- |
+| `Space` | Toggle checkbox        |
+| `Enter` | Toggle checkbox        |
+| `Tab`   | Move to next focusable |
+
+## Styling
+
+```
+Unchecked:  [ ] Accept terms
+Checked:    [✓] Accept terms
+Focused:   ▶[✓] Accept terms
+Disabled:   [✓] Accept terms (dimmed)
+```
+
+## Notes
+
+- Press Space or Enter to toggle
+- Works within FocusGroup for keyboard navigation
+- Label is optional but recommended for accessibility

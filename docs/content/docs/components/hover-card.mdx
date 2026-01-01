@@ -1,0 +1,167 @@
+---
+title: HoverCard
+description: Card that appears on hover/focus
+---
+
+# HoverCard
+
+Card that appears when hovering over or focusing on an element.
+
+```bash
+hauk add hover-card
+```
+
+## Usage
+
+```tsx
+import { HoverCard } from "./tui/components/hover-card";
+
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <HoverCard
+      open={open}
+      content={
+        <Box flexDirection="column">
+          <Text bold>John Doe</Text>
+          <Text color="gray">Software Engineer</Text>
+          <Text>john@example.com</Text>
+        </Box>
+      }
+    >
+      <Text onFocus={() => setOpen(true)} onBlur={() => setOpen(false)}>
+        @johndoe
+      </Text>
+    </HoverCard>
+  );
+}
+```
+
+## Examples
+
+### Basic HoverCard
+
+```tsx
+<HoverCard open={isOpen} content={<Text>More info here</Text>}>
+  <Text>Hover target</Text>
+</HoverCard>
+```
+
+### User Profile Card
+
+```tsx
+<HoverCard
+  open={isHovered}
+  width={35}
+  content={
+    <Box flexDirection="column" gap={1}>
+      <Box gap={1}>
+        <Avatar name="Jane Smith" size="sm" />
+        <Box flexDirection="column">
+          <Text bold>Jane Smith</Text>
+          <Text dimColor>@janesmith</Text>
+        </Box>
+      </Box>
+      <Text>Product Designer at Acme Inc.</Text>
+      <Text dimColor>Joined March 2023</Text>
+    </Box>
+  }
+>
+  <Text color="cyan">@janesmith</Text>
+</HoverCard>
+```
+
+### Position Variants
+
+```tsx
+// Bottom (default)
+<HoverCard open position="bottom" content={<Text>Below</Text>}>
+  <Text>Bottom</Text>
+</HoverCard>
+
+// Top
+<HoverCard open position="top" content={<Text>Above</Text>}>
+  <Text>Top</Text>
+</HoverCard>
+
+// Left
+<HoverCard open position="left" content={<Text>Left side</Text>}>
+  <Text>Left</Text>
+</HoverCard>
+
+// Right
+<HoverCard open position="right" content={<Text>Right side</Text>}>
+  <Text>Right</Text>
+</HoverCard>
+```
+
+### Product Preview
+
+```tsx
+<HoverCard
+  open={isHovered}
+  width={40}
+  content={
+    <Box flexDirection="column">
+      <Text bold>Premium Subscription</Text>
+      <Text>$9.99/month</Text>
+      <Box marginTop={1}>
+        <Text dimColor>Includes unlimited access to all features</Text>
+      </Box>
+    </Box>
+  }
+>
+  <Text underline>View details</Text>
+</HoverCard>
+```
+
+## Props
+
+| Prop       | Type                                           | Default    | Description             |
+| ---------- | ---------------------------------------------- | ---------- | ----------------------- |
+| `open`     | `boolean`                                      | -          | Whether card is visible |
+| `content`  | `ReactNode`                                    | -          | Card content            |
+| `children` | `ReactNode`                                    | -          | Trigger element         |
+| `position` | `"top"` \| `"bottom"` \| `"left"` \| `"right"` | `"bottom"` | Card position           |
+| `width`    | `number`                                       | `30`       | Card width              |
+
+## Positioning
+
+### Bottom (default)
+
+```
+@johndoe
+╭────────────────────────────╮
+│ John Doe                   │
+│ Software Engineer          │
+│ john@example.com           │
+╰────────────────────────────╯
+```
+
+### Top
+
+```
+╭────────────────────────────╮
+│ John Doe                   │
+│ Software Engineer          │
+│ john@example.com           │
+╰────────────────────────────╯
+@johndoe
+```
+
+## HoverCard vs Popover vs Tooltip
+
+| Feature  | HoverCard       | Popover        | Tooltip     |
+| -------- | --------------- | -------------- | ----------- |
+| Content  | Rich ReactNode  | Rich ReactNode | Text only   |
+| Title    | No (in content) | Optional title | No          |
+| Use case | Preview cards   | Actions, forms | Brief hints |
+| Trigger  | Hover/focus     | Click          | Focus       |
+
+## Notes
+
+- Use for previewing content without clicking
+- Supports top/bottom/left/right positions
+- Great for user profiles, product previews, link previews
+- Visibility is controlled via `open` prop
