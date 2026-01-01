@@ -1,0 +1,81 @@
+---
+title: Dropdown Menu
+description: Contextual dropdown menu with keyboard navigation
+---
+
+# Dropdown Menu
+
+Dropdown menu component triggered by a button with full keyboard support.
+
+```bash
+hauk add dropdown-menu
+```
+
+## Usage
+
+### Basic Dropdown Menu
+
+```tsx
+import { DropdownMenu } from "./tui/components/dropdown-menu";
+
+<DropdownMenu>
+  <DropdownMenu.Trigger>
+    <Button>Options</Button>
+  </DropdownMenu.Trigger>
+
+  <DropdownMenu.Content>
+    <DropdownMenu.Item onSelect={() => {}}>Edit</DropdownMenu.Item>
+    <DropdownMenu.Item onSelect={() => {}}>Duplicate</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item onSelect={() => {}} variant="danger">
+      Delete
+    </DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu>;
+```
+
+### With Submenus
+
+```tsx
+import { DropdownMenu } from "./tui/components/dropdown-menu";
+
+<DropdownMenu>
+  <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Item>Copy</DropdownMenu.Item>
+    <DropdownMenu.Sub>
+      <DropdownMenu.SubTrigger>Share</DropdownMenu.SubTrigger>
+      <DropdownMenu.SubContent>
+        <DropdownMenu.Item>Email</DropdownMenu.Item>
+        <DropdownMenu.Item>Slack</DropdownMenu.Item>
+      </DropdownMenu.SubContent>
+    </DropdownMenu.Sub>
+  </DropdownMenu.Content>
+</DropdownMenu>;
+```
+
+## Props
+
+| Prop           | Type                      | Default | Description           |
+| -------------- | ------------------------- | ------- | --------------------- |
+| `open`         | `boolean`                 | -       | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | -       | Open state handler    |
+
+## Keyboard Shortcuts
+
+| Key       | Action        |
+| --------- | ------------- |
+| `↑` / `k` | Navigate up   |
+| `↓` / `j` | Navigate down |
+| `→`       | Open submenu  |
+| `←`       | Close submenu |
+| `Enter`   | Select item   |
+| `Esc`     | Close menu    |
+
+## Features
+
+- **Trigger element** - Any component can trigger the menu
+- **Nested submenus** - Multi-level menu support
+- **Keyboard navigation** - Full keyboard support
+- **Danger variant** - Highlight destructive actions
+- **Separators** - Visual grouping of items

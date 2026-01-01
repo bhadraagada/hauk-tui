@@ -1,0 +1,144 @@
+---
+title: Tooltip
+description: Informational tooltip on hover/focus
+---
+
+# Tooltip
+
+Simple informational tooltip that appears near an element.
+
+```bash
+hauk add tooltip
+```
+
+## Usage
+
+```tsx
+import { Tooltip } from "./tui/components/tooltip";
+
+function App() {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <Tooltip visible={showTooltip} content="Save your changes">
+      <Button
+        onFocus={() => setShowTooltip(true)}
+        onBlur={() => setShowTooltip(false)}
+      >
+        Save
+      </Button>
+    </Tooltip>
+  );
+}
+```
+
+## Examples
+
+### Basic Tooltip
+
+```tsx
+<Tooltip visible={isFocused} content="Click to submit">
+  <Button>Submit</Button>
+</Tooltip>
+```
+
+### Position Variants
+
+```tsx
+// Top (default)
+<Tooltip visible position="top" content="Above the button">
+  <Button>Top</Button>
+</Tooltip>
+
+// Bottom
+<Tooltip visible position="bottom" content="Below the button">
+  <Button>Bottom</Button>
+</Tooltip>
+
+// Left
+<Tooltip visible position="left" content="To the left">
+  <Button>Left</Button>
+</Tooltip>
+
+// Right
+<Tooltip visible position="right" content="To the right">
+  <Button>Right</Button>
+</Tooltip>
+```
+
+### Keyboard Shortcut Hints
+
+```tsx
+<Tooltip visible={isFocused} content="Ctrl+S">
+  <Button>Save</Button>
+</Tooltip>
+```
+
+### Help Text
+
+```tsx
+<Tooltip visible={isFocused} content="Enter your email address">
+  <TextInput label="Email" />
+</Tooltip>
+```
+
+## Props
+
+| Prop       | Type                                           | Default | Description                  |
+| ---------- | ---------------------------------------------- | ------- | ---------------------------- |
+| `content`  | `string`                                       | -       | Tooltip text content         |
+| `children` | `ReactNode`                                    | -       | Element to attach tooltip to |
+| `visible`  | `boolean`                                      | `false` | Whether tooltip is visible   |
+| `position` | `"top"` \| `"bottom"` \| `"left"` \| `"right"` | `"top"` | Tooltip position             |
+
+## Positioning
+
+### Top (default)
+
+```
+╭─────────────────╮
+│ Tooltip text    │
+╰─────────────────╯
+    [ Button ]
+```
+
+### Bottom
+
+```
+    [ Button ]
+╭─────────────────╮
+│ Tooltip text    │
+╰─────────────────╯
+```
+
+### Left
+
+```
+╭─────────────╮
+│ Tooltip     │ [ Button ]
+╰─────────────╯
+```
+
+### Right
+
+```
+             ╭─────────────╮
+[ Button ]   │ Tooltip     │
+             ╰─────────────╯
+```
+
+## Tooltip vs Popover
+
+| Feature  | Tooltip     | Popover                  |
+| -------- | ----------- | ------------------------ |
+| Content  | Text only   | Any ReactNode            |
+| Title    | No          | Optional title           |
+| Use case | Brief hints | Detailed info            |
+| Styling  | Simple box  | Box with optional header |
+
+## Notes
+
+- Use for brief hints and keyboard shortcut reminders
+- Supports top/bottom/left/right positions
+- For rich content, use Popover instead
+- Visibility is controlled externally via `visible` prop

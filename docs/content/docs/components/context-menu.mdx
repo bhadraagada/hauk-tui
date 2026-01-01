@@ -1,0 +1,62 @@
+---
+title: Context Menu
+description: Right-click context menu
+---
+
+# Context Menu
+
+Context menu component that appears on right-click or keyboard trigger.
+
+```bash
+hauk add context-menu
+```
+
+## Usage
+
+### Basic Context Menu
+
+```tsx
+import { ContextMenu } from "./tui/components/context-menu";
+
+<ContextMenu>
+  <ContextMenu.Trigger>
+    <Box padding={2} borderStyle="single">
+      Right-click or press Menu key here
+    </Box>
+  </ContextMenu.Trigger>
+
+  <ContextMenu.Content>
+    <ContextMenu.Item onSelect={() => {}}>Cut</ContextMenu.Item>
+    <ContextMenu.Item onSelect={() => {}}>Copy</ContextMenu.Item>
+    <ContextMenu.Item onSelect={() => {}}>Paste</ContextMenu.Item>
+    <ContextMenu.Separator />
+    <ContextMenu.Item onSelect={() => {}} variant="danger">
+      Delete
+    </ContextMenu.Item>
+  </ContextMenu.Content>
+</ContextMenu>;
+```
+
+## Props
+
+| Prop       | Type        | Default | Description                    |
+| ---------- | ----------- | ------- | ------------------------------ |
+| `children` | `ReactNode` | -       | Trigger and content (required) |
+| `disabled` | `boolean`   | `false` | Disable context menu           |
+
+## Keyboard Shortcuts
+
+| Key                  | Action            |
+| -------------------- | ----------------- |
+| `Menu` / `Shift+F10` | Open context menu |
+| `↑` / `↓`            | Navigate items    |
+| `Enter`              | Select item       |
+| `Esc`                | Close menu        |
+
+## Features
+
+- **Right-click trigger** - Standard context menu behavior
+- **Keyboard trigger** - Menu key or Shift+F10
+- **Danger variant** - Highlight destructive actions
+- **Separators** - Visual grouping of items
+- **Keyboard navigation** - Full keyboard support

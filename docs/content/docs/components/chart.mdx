@@ -1,0 +1,210 @@
+---
+title: Chart
+description: ASCII charts for data visualization
+---
+
+# Chart
+
+ASCII chart component for visualizing data in the terminal.
+
+```bash
+hauk add chart
+```
+
+## Usage
+
+```tsx
+import { Chart } from "./tui/components/chart";
+
+function App() {
+  const data = [
+    { label: "Jan", value: 40 },
+    { label: "Feb", value: 65 },
+    { label: "Mar", value: 55 },
+    { label: "Apr", value: 80 },
+    { label: "May", value: 70 },
+  ];
+
+  return <Chart data={data} title="Monthly Sales" />;
+}
+```
+
+## Examples
+
+### Horizontal Bar Chart (default)
+
+```tsx
+<Chart
+  data={[
+    { label: "React", value: 85 },
+    { label: "Vue", value: 60 },
+    { label: "Angular", value: 45 },
+    { label: "Svelte", value: 30 },
+  ]}
+  title="Framework Usage"
+/>
+```
+
+Output:
+
+```
+Framework Usage
+React   █████████████████████████░░░░░ 85
+Vue     ██████████████████░░░░░░░░░░░░ 60
+Angular █████████████░░░░░░░░░░░░░░░░░ 45
+Svelte  █████████░░░░░░░░░░░░░░░░░░░░░ 30
+```
+
+### Vertical Bar Chart
+
+```tsx
+<Chart
+  type="bar"
+  data={[
+    { label: "M", value: 40 },
+    { label: "T", value: 65 },
+    { label: "W", value: 55 },
+    { label: "T", value: 80 },
+    { label: "F", value: 70 },
+  ]}
+  title="Daily Activity"
+/>
+```
+
+Output:
+
+```
+Daily Activity
+        █
+    █   █
+    █   █ █
+█   █ █ █ █
+█   █ █ █ █
+█ █ █ █ █ █
+M T W T F
+```
+
+### Sparkline
+
+```tsx
+<Chart
+  type="sparkline"
+  data={[
+    { label: "1", value: 10 },
+    { label: "2", value: 25 },
+    { label: "3", value: 18 },
+    { label: "4", value: 42 },
+    { label: "5", value: 35 },
+    { label: "6", value: 55 },
+    { label: "7", value: 48 },
+  ]}
+  title="Trend"
+/>
+```
+
+Output:
+
+```
+Trend
+▁▃▂▅▄▇▆
+10    55
+```
+
+### Custom Colors
+
+```tsx
+<Chart
+  data={[
+    { label: "Success", value: 75, color: "green" },
+    { label: "Warning", value: 20, color: "yellow" },
+    { label: "Error", value: 5, color: "red" },
+  ]}
+  title="Status Distribution"
+/>
+```
+
+### Without Labels
+
+```tsx
+<Chart data={data} showLabels={false} showValues={true} />
+```
+
+### Without Values
+
+```tsx
+<Chart data={data} showLabels={true} showValues={false} />
+```
+
+### Custom Width
+
+```tsx
+<Chart data={data} maxWidth={50} title="Wide Chart" />
+```
+
+## Props
+
+| Prop         | Type                                           | Default            | Description          |
+| ------------ | ---------------------------------------------- | ------------------ | -------------------- |
+| `data`       | `ChartDataPoint[]`                             | -                  | Chart data           |
+| `type`       | `"bar"` \| `"horizontal-bar"` \| `"sparkline"` | `"horizontal-bar"` | Chart type           |
+| `title`      | `string`                                       | -                  | Chart title          |
+| `maxWidth`   | `number`                                       | `30`               | Max bar width        |
+| `showValues` | `boolean`                                      | `true`             | Show values          |
+| `showLabels` | `boolean`                                      | `true`             | Show labels          |
+| `height`     | `number`                                       | `1`                | Height for sparkline |
+
+## ChartDataPoint
+
+```tsx
+interface ChartDataPoint {
+  label: string; // Label for data point
+  value: number; // Numeric value
+  color?: string; // Optional color override
+}
+```
+
+## Chart Types
+
+### Horizontal Bar
+
+Best for comparing categories with labels.
+
+```
+Label1  █████████████░░░░░░░░░ 65
+Label2  ████████░░░░░░░░░░░░░░ 40
+Label3  ██████████████████████ 100
+```
+
+### Vertical Bar
+
+Good for time series with compact labels.
+
+```
+    █
+  █ █
+█ █ █ █
+A B C D
+```
+
+### Sparkline
+
+Compact trend visualization.
+
+```
+▁▃▂▅▄▇▆█▅▃
+```
+
+## Sparkline Characters
+
+The sparkline uses 8 levels of block characters:
+
+```
+▁ ▂ ▃ ▄ ▅ ▆ ▇ █
+```
+
+## Notes
+
+- Supports bar, horizontal-bar, and sparkline types
+- Custom colors per data point
+- Automatic scaling based on max value
+- Labels and values can be hidden

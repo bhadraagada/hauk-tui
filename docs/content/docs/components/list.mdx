@@ -1,0 +1,126 @@
+---
+title: List
+description: A scrollable list with keyboard navigation and selection
+---
+
+# List
+
+A scrollable list component with keyboard navigation and item selection.
+
+```bash
+hauk add list
+```
+
+## Usage
+
+```tsx
+import { List, ListItem } from "./tui/components/list";
+
+function App() {
+  const [selected, setSelected] = useState(0);
+
+  return (
+    <List selectedIndex={selected} onSelect={setSelected}>
+      <ListItem>Item 1</ListItem>
+      <ListItem>Item 2</ListItem>
+      <ListItem>Item 3</ListItem>
+    </List>
+  );
+}
+```
+
+## Examples
+
+### Basic List
+
+```tsx
+<List>
+  <ListItem>First item</ListItem>
+  <ListItem>Second item</ListItem>
+  <ListItem>Third item</ListItem>
+</List>
+```
+
+### With Selection Handler
+
+```tsx
+<List
+  selectedIndex={selectedIndex}
+  onSelect={(index) => {
+    setSelectedIndex(index);
+    console.log("Selected:", items[index]);
+  }}
+>
+  {items.map((item, i) => (
+    <ListItem key={i}>{item}</ListItem>
+  ))}
+</List>
+```
+
+### Scrollable List
+
+```tsx
+<List maxHeight={5}>
+  {Array.from({ length: 20 }, (_, i) => (
+    <ListItem key={i}>Item {i + 1}</ListItem>
+  ))}
+</List>
+```
+
+### With Icons
+
+```tsx
+<List>
+  <ListItem icon="📁">Documents</ListItem>
+  <ListItem icon="🖼️">Pictures</ListItem>
+  <ListItem icon="🎵">Music</ListItem>
+</List>
+```
+
+## Props
+
+### List
+
+| Prop            | Type                      | Default | Description             |
+| --------------- | ------------------------- | ------- | ----------------------- |
+| `selectedIndex` | `number`                  | `0`     | Currently selected item |
+| `onSelect`      | `(index: number) => void` | -       | Selection handler       |
+| `maxHeight`     | `number`                  | -       | Max visible items       |
+| `focusId`       | `string`                  | auto    | Custom focus ID         |
+
+### ListItem
+
+| Prop       | Type        | Default | Description   |
+| ---------- | ----------- | ------- | ------------- |
+| `children` | `ReactNode` | -       | Item content  |
+| `icon`     | `string`    | -       | Optional icon |
+| `disabled` | `boolean`   | `false` | Disable item  |
+
+## Keyboard Shortcuts
+
+| Key               | Action        |
+| ----------------- | ------------- |
+| `↓` / `j`         | Next item     |
+| `↑` / `k`         | Previous item |
+| `g` / `Home`      | First item    |
+| `G` / `End`       | Last item     |
+| `Enter` / `Space` | Select item   |
+| `Page Down`       | Scroll down   |
+| `Page Up`         | Scroll up     |
+
+## Styling
+
+```
+▶ Item 1      (selected)
+  Item 2
+  Item 3
+  Item 4
+  Item 5
+  ▼ (scroll indicator)
+```
+
+## Notes
+
+- Supports j/k vim keys, g/G for top/bottom, page up/down
+- Scrollable when maxHeight is set
+- Items can have icons and be disabled

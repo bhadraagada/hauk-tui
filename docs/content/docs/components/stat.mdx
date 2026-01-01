@@ -1,0 +1,179 @@
+---
+title: Stat
+description: Statistics display with delta indicators
+---
+
+# Stat
+
+Statistics display component for showing metrics with optional change indicators.
+
+```bash
+hauk add stat
+```
+
+## Usage
+
+```tsx
+import { Stat, StatGroup } from "./tui/components/stat";
+
+function App() {
+  return (
+    <Stat
+      label="Total Users"
+      value="1,234"
+      delta={{ value: "+12%", type: "increase" }}
+    />
+  );
+}
+```
+
+## Examples
+
+### Basic Stat
+
+```tsx
+<Stat label="Revenue" value="$45,231" />
+```
+
+Output:
+
+```
+Revenue
+$45,231
+```
+
+### With Delta Indicator
+
+```tsx
+<Stat
+  label="Active Users"
+  value="2,345"
+  delta={{ value: "+15%", type: "increase" }}
+/>
+```
+
+Output:
+
+```
+Active Users
+2,345 ↑ +15%
+```
+
+### Decrease Delta
+
+```tsx
+<Stat
+  label="Bounce Rate"
+  value="42%"
+  delta={{ value: "-5%", type: "decrease" }}
+/>
+```
+
+Output:
+
+```
+Bounce Rate
+42% ↓ -5%
+```
+
+### With Icons
+
+```tsx
+<Stat label="Revenue" value="$10,000" icon="💰" />
+<Stat label="Users" value="1,234" icon="👥" />
+<Stat label="Orders" value="567" icon="📦" />
+```
+
+### Different Sizes
+
+```tsx
+<Stat label="Small" value="100" size="sm" />
+<Stat label="Medium" value="1,000" size="md" />
+<Stat label="Large" value="10,000" size="lg" />
+```
+
+### Stat Group
+
+```tsx
+<StatGroup
+  stats={[
+    {
+      label: "Users",
+      value: "1,234",
+      delta: { value: "+5%", type: "increase" },
+    },
+    {
+      label: "Revenue",
+      value: "$45k",
+      delta: { value: "+12%", type: "increase" },
+    },
+    { label: "Orders", value: "567" },
+  ]}
+/>
+```
+
+Output:
+
+```
+Users          │ Revenue        │ Orders
+1,234 ↑ +5%    │ $45k ↑ +12%    │ 567
+```
+
+### Vertical Stat Group
+
+```tsx
+<StatGroup
+  direction="vertical"
+  stats={[
+    { label: "Metric 1", value: "100" },
+    { label: "Metric 2", value: "200" },
+    { label: "Metric 3", value: "300" },
+  ]}
+/>
+```
+
+### Without Dividers
+
+```tsx
+<StatGroup stats={stats} showDividers={false} />
+```
+
+## Stat Props
+
+| Prop    | Type                                           | Default | Description      |
+| ------- | ---------------------------------------------- | ------- | ---------------- |
+| `label` | `string`                                       | -       | Stat label       |
+| `value` | `string` \| `number`                           | -       | Stat value       |
+| `delta` | `{ value: string \| number; type: DeltaType }` | -       | Change indicator |
+| `icon`  | `string`                                       | -       | Optional icon    |
+| `size`  | `"sm"` \| `"md"` \| `"lg"`                     | `"md"`  | Size variant     |
+
+## StatGroup Props
+
+| Prop           | Type                           | Default        | Description      |
+| -------------- | ------------------------------ | -------------- | ---------------- |
+| `stats`        | `StatProps[]`                  | -              | Stats to display |
+| `direction`    | `"horizontal"` \| `"vertical"` | `"horizontal"` | Layout direction |
+| `showDividers` | `boolean`                      | `true`         | Show dividers    |
+
+## Delta Types
+
+| Type       | Symbol | Color |
+| ---------- | ------ | ----- |
+| `increase` | ↑      | green |
+| `decrease` | ↓      | red   |
+| `neutral`  | →      | muted |
+
+## Features
+
+- **Delta Indicators** - Show increases/decreases
+- **Icons** - Add icons to stats
+- **Multiple Sizes** - Small, medium, large variants
+- **Stat Groups** - Display multiple stats together
+- **Dividers** - Visual separation between stats
+
+## Notes
+
+- Includes Stat and StatGroup components
+- Delta shows directional arrows with color coding
+- StatGroup supports horizontal and vertical layouts

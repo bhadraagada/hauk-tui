@@ -1,0 +1,58 @@
+---
+title: Navigation Menu
+description: Accessible navigation menu with submenus
+---
+
+# Navigation Menu
+
+Navigation menu component with support for nested submenus and keyboard navigation.
+
+```bash
+hauk add navigation-menu
+```
+
+## Usage
+
+### Basic Navigation Menu
+
+```tsx
+import { NavigationMenu } from "./tui/components/navigation-menu";
+
+<NavigationMenu>
+  <NavigationMenu.Item>Home</NavigationMenu.Item>
+  <NavigationMenu.Item>About</NavigationMenu.Item>
+  <NavigationMenu.Item>
+    Products
+    <NavigationMenu.Sub>
+      <NavigationMenu.Item>Product A</NavigationMenu.Item>
+      <NavigationMenu.Item>Product B</NavigationMenu.Item>
+    </NavigationMenu.Sub>
+  </NavigationMenu.Item>
+  <NavigationMenu.Item>Contact</NavigationMenu.Item>
+</NavigationMenu>;
+```
+
+## Props
+
+| Prop            | Type                         | Default        | Description           |
+| --------------- | ---------------------------- | -------------- | --------------------- |
+| `orientation`   | `'horizontal' \| 'vertical'` | `'horizontal'` | Menu layout direction |
+| `value`         | `string`                     | -              | Currently active item |
+| `onValueChange` | `(value: string) => void`    | -              | Selection handler     |
+
+## Keyboard Shortcuts
+
+| Key       | Action                              |
+| --------- | ----------------------------------- |
+| `←` / `→` | Navigate items (horizontal)         |
+| `↑` / `↓` | Navigate items (vertical) / submenu |
+| `Enter`   | Select or open submenu              |
+| `Esc`     | Close submenu                       |
+
+## Features
+
+- **Nested submenus** - Multi-level navigation
+- **Horizontal/Vertical** - Flexible orientation
+- **Keyboard navigation** - Full keyboard support
+- **Active state** - Track current selection
+- **Accessible** - Screen reader friendly

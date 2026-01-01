@@ -1,0 +1,142 @@
+---
+title: TagInput
+description: Multi-tag entry with add/remove functionality
+---
+
+# TagInput
+
+Multi-tag input component for entering and managing multiple tags/chips.
+
+```bash
+hauk add tag-input
+```
+
+## Usage
+
+```tsx
+import { TagInput } from "./tui/components/tag-input";
+
+function App() {
+  const [tags, setTags] = useState(["react", "typescript"]);
+
+  return <TagInput value={tags} onChange={setTags} />;
+}
+```
+
+## Examples
+
+### Basic Tag Input
+
+```tsx
+const [tags, setTags] = useState<string[]>([]);
+
+<TagInput value={tags} onChange={setTags} placeholder="Add tags..." />;
+```
+
+Output:
+
+```
+╭──────────────────────────────────────╮
+│ react  typescript  Add tags...█      │
+╰──────────────────────────────────────╯
+```
+
+### With Maximum Tags
+
+```tsx
+<TagInput value={tags} onChange={setTags} maxTags={5} />
+```
+
+Shows count indicator: `(3/5)`
+
+### Outline Variant
+
+```tsx
+<TagInput value={tags} onChange={setTags} variant="outline" />
+```
+
+### Custom Separators
+
+```tsx
+<TagInput value={tags} onChange={setTags} separators={[",", ";", "Enter"]} />
+```
+
+### Pre-filled Tags
+
+```tsx
+<TagInput
+  value={["javascript", "react", "node"]}
+  onChange={setTags}
+  placeholder="Add more..."
+/>
+```
+
+## Props
+
+| Prop          | Type                       | Default               | Description                   |
+| ------------- | -------------------------- | --------------------- | ----------------------------- |
+| `value`       | `string[]`                 | -                     | Current tags                  |
+| `onChange`    | `(tags: string[]) => void` | -                     | Callback when tags change     |
+| `placeholder` | `string`                   | `"Add tag..."`        | Placeholder text              |
+| `maxTags`     | `number`                   | -                     | Maximum number of tags        |
+| `separators`  | `string[]`                 | `[",", " ", "Enter"]` | Tag separator characters      |
+| `variant`     | `"default"` \| `"outline"` | `"default"`           | Tag variant                   |
+| `focusId`     | `string`                   | -                     | Focus ID for focus management |
+
+## Keyboard Shortcuts
+
+### Input Mode
+
+| Key         | Action                             |
+| ----------- | ---------------------------------- |
+| Type        | Add characters to input            |
+| `Enter`     | Add current input as tag           |
+| `,`/`Space` | Add current input as tag (if set)  |
+| `Backspace` | Delete last character or focus tag |
+| `←`         | Focus last tag (when input empty)  |
+
+### Tag Focus Mode
+
+| Key         | Action               |
+| ----------- | -------------------- |
+| `←` / `h`   | Focus previous tag   |
+| `→` / `l`   | Focus next tag/input |
+| `Backspace` | Delete focused tag   |
+| `Delete`    | Delete focused tag   |
+| `x`         | Delete focused tag   |
+| `Escape`    | Return to input mode |
+
+## Variants
+
+### Default
+
+Solid background tags:
+
+```
+ react   typescript   node
+```
+
+### Outline
+
+Border-only tags:
+
+```
+╭──────╮ ╭────────────╮ ╭──────╮
+│react │ │ typescript │ │ node │
+╰──────╯ ╰────────────╯ ╰──────╯
+```
+
+## Features
+
+- **Add/Remove Tags** - Type to add, keyboard to remove
+- **Duplicate Prevention** - Won't add duplicate tags
+- **Max Tags Limit** - Optionally limit number of tags
+- **Tag Navigation** - Navigate between tags with arrow keys
+- **Visual Feedback** - Focused tag shows delete indicator
+- **Custom Separators** - Configure what creates a new tag
+
+## Notes
+
+- Type to add tags, Backspace to remove
+- Press x to delete focused tag
+- Duplicates are automatically prevented

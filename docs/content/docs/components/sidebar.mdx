@@ -1,0 +1,82 @@
+---
+title: Sidebar
+description: Collapsible side navigation panel
+---
+
+# Sidebar
+
+Sidebar component for application navigation with collapsible sections and keyboard support.
+
+```bash
+hauk add sidebar
+```
+
+## Usage
+
+### Basic Sidebar
+
+```tsx
+import { Sidebar } from "./tui/components/sidebar";
+
+<Sidebar>
+  <Sidebar.Header>
+    <Text bold>My App</Text>
+  </Sidebar.Header>
+
+  <Sidebar.Content>
+    <Sidebar.Item icon="📁" active>
+      Dashboard
+    </Sidebar.Item>
+    <Sidebar.Item icon="⚙️">Settings</Sidebar.Item>
+    <Sidebar.Item icon="👤">Profile</Sidebar.Item>
+  </Sidebar.Content>
+
+  <Sidebar.Footer>
+    <Text dimColor>v1.0.0</Text>
+  </Sidebar.Footer>
+</Sidebar>;
+```
+
+### With Collapsible Groups
+
+```tsx
+import { Sidebar } from "./tui/components/sidebar";
+
+<Sidebar>
+  <Sidebar.Group title="Main">
+    <Sidebar.Item>Dashboard</Sidebar.Item>
+    <Sidebar.Item>Analytics</Sidebar.Item>
+  </Sidebar.Group>
+
+  <Sidebar.Group title="Settings" collapsible>
+    <Sidebar.Item>General</Sidebar.Item>
+    <Sidebar.Item>Security</Sidebar.Item>
+  </Sidebar.Group>
+</Sidebar>;
+```
+
+## Props
+
+| Prop                | Type                           | Default | Description              |
+| ------------------- | ------------------------------ | ------- | ------------------------ |
+| `collapsed`         | `boolean`                      | `false` | Collapse to icons only   |
+| `onCollapsedChange` | `(collapsed: boolean) => void` | -       | Collapse state handler   |
+| `width`             | `number`                       | `24`    | Sidebar width in columns |
+
+## Keyboard Shortcuts
+
+| Key       | Action           |
+| --------- | ---------------- |
+| `↑` / `k` | Navigate up      |
+| `↓` / `j` | Navigate down    |
+| `Enter`   | Select item      |
+| `[`       | Collapse sidebar |
+| `]`       | Expand sidebar   |
+
+## Features
+
+- **Collapsible** - Expand or collapse to save space
+- **Groups** - Organize items into logical sections
+- **Icons** - Visual indicators for each item
+- **Active state** - Highlight current selection
+- **Keyboard navigation** - Full keyboard support

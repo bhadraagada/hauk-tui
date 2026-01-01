@@ -1,0 +1,134 @@
+---
+title: AlertDialog
+description: Modal alert dialog with confirm/cancel actions
+---
+
+# AlertDialog
+
+Modal alert dialog with confirm/cancel actions and keyboard shortcuts.
+
+```bash
+hauk add alert-dialog
+```
+
+## Usage
+
+```tsx
+import { AlertDialog } from "./tui/components/alert-dialog";
+
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setOpen(true)}>Delete Item</Button>
+
+      <AlertDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Delete Item"
+        description="Are you sure you want to delete this item? This action cannot be undone."
+        onConfirm={() => {
+          deleteItem();
+          setOpen(false);
+        }}
+      />
+    </>
+  );
+}
+```
+
+## Examples
+
+### Basic Alert Dialog
+
+```tsx
+<AlertDialog
+  open={isOpen}
+  onClose={handleClose}
+  title="Confirm Action"
+  description="Are you sure you want to proceed?"
+  onConfirm={handleConfirm}
+/>
+```
+
+### Destructive Variant
+
+```tsx
+<AlertDialog
+  open={isOpen}
+  onClose={handleClose}
+  title="Delete Account"
+  description="This will permanently delete your account and all associated data."
+  variant="destructive"
+  confirmLabel="Delete"
+  cancelLabel="Keep Account"
+  onConfirm={handleDelete}
+/>
+```
+
+### Custom Labels
+
+```tsx
+<AlertDialog
+  open={isOpen}
+  onClose={handleClose}
+  title="Unsaved Changes"
+  description="You have unsaved changes. Would you like to save before closing?"
+  confirmLabel="Save & Close"
+  cancelLabel="Discard"
+  onConfirm={handleSaveAndClose}
+  onCancel={handleDiscard}
+/>
+```
+
+## Props
+
+| Prop           | Type                           | Default      | Description                   |
+| -------------- | ------------------------------ | ------------ | ----------------------------- |
+| `open`         | `boolean`                      | -            | Whether dialog is open        |
+| `onClose`      | `() => void`                   | -            | Close handler                 |
+| `title`        | `string`                       | -            | Dialog title                  |
+| `description`  | `string`                       | -            | Dialog description/message    |
+| `onConfirm`    | `() => void`                   | -            | Confirm callback              |
+| `onCancel`     | `() => void`                   | -            | Cancel callback               |
+| `confirmLabel` | `string`                       | `"Continue"` | Confirm button label          |
+| `cancelLabel`  | `string`                       | `"Cancel"`   | Cancel button label           |
+| `variant`      | `"default"` \| `"destructive"` | `"default"`  | Dialog variant                |
+| `focusId`      | `string`                       | -            | Focus ID for focus management |
+
+## Keyboard Shortcuts
+
+| Key      | Action                  |
+| -------- | ----------------------- |
+| `Y`      | Quick confirm           |
+| `N`      | Quick cancel            |
+| `←` `→`  | Switch between buttons  |
+| `h` `l`  | Switch between buttons  |
+| `Tab`    | Switch between buttons  |
+| `Enter`  | Activate focused button |
+| `Escape` | Cancel and close        |
+
+## Styling
+
+```
+╭──────────────────────────────────────────────────╮
+│ ⚠ Delete Item                                    │
+│                                                  │
+│ Are you sure you want to delete this item?       │
+│ This action cannot be undone.                    │
+│ ──────────────────────────────────────────────── │
+│                     ╭────────╮  ╭────────╮       │
+│                     │ Cancel │  │ Delete │       │
+│                     ╰────────╯  ╰────────╯       │
+│                                                  │
+│ Y/N to respond • Tab to switch • Enter to confirm│
+╰──────────────────────────────────────────────────╯
+```
+
+## Notes
+
+- Supports destructive variant for dangerous actions (shows in red)
+- Press Y/N for quick selection without navigating
+- Integrates with focus management system
+- Tab or arrow keys to switch between buttons

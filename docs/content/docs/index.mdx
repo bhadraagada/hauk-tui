@@ -1,0 +1,145 @@
+---
+title: Introduction
+description: A shadcn-like component registry for beautiful Terminal UIs built with React and Ink.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { Card, Cards } from "fumadocs-ui/components/card";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+
+# Introduction
+
+**haukTUI** is a component registry for Terminal User Interfaces. Like [shadcn/ui](https://ui.shadcn.com) for the web,
+haukTUI provides beautifully designed, accessible, keyboard-navigable components that you copy directly into your project.
+
+```bash
+npx @hauktui/cli add button dialog toast
+```
+
+<Callout title="Not a package dependency">
+  Components are copied into your project as source files. You own the code -
+  customize, extend, and modify as needed. No runtime dependencies, no version
+  conflicts.
+</Callout>
+
+## Why haukTUI?
+
+Building terminal applications with good UX is hard. You need to handle:
+
+- **Keyboard navigation** - Tab, arrows, vim bindings, shortcuts
+- **Focus management** - Which element is active? How do users navigate?
+- **Color support** - True color? 256? 16? Monochrome?
+- **Consistent design** - Borders, spacing, typography
+
+haukTUI solves all of this with **57+ production-ready components**.
+
+## Features
+
+<Cards>
+  <Card title="Terminal Native" href="/docs/components">
+    Components designed for terminal environments using React and Ink. Pure
+    terminal rendering.
+  </Card>
+  <Card title="Keyboard First" href="/docs/theming/focus">
+    Full keyboard navigation with vim-style bindings and customizable keymaps.
+  </Card>
+  <Card title="Design Tokens" href="/docs/theming/tokens">
+    Automatic terminal color detection with graceful fallbacks and theming.
+  </Card>
+  <Card title="TypeScript" href="/docs/components">
+    Full TypeScript support with excellent autocomplete and type checking.
+  </Card>
+</Cards>
+
+## Quick Start
+
+<Steps>
+  <Step>
+    ### Install the CLI
+    
+    ```bash
+    npm install -g @hauktui/cli
+    ```
+  </Step>
+  
+  <Step>
+    ### Initialize your project
+    
+    ```bash
+    npx @hauktui/cli init
+    ```
+    
+    This creates a `hauk.config.json` and sets up the component directory.
+  </Step>
+  
+  <Step>
+    ### Add components
+    
+    ```bash
+    npx @hauktui/cli add button dialog toast
+    ```
+    
+    Components are copied to `src/tui/components/` by default.
+  </Step>
+  
+  <Step>
+    ### Use in your app
+    
+    ```tsx
+    import { Button } from './tui/components/button';
+    import { Dialog } from './tui/components/dialog';
+    
+    function App() {
+      return (
+        <FocusGroup>
+          <Button onPress={() => console.log('clicked!')}>
+            Press Me
+          </Button>
+        </FocusGroup>
+      );
+    }
+    ```
+  </Step>
+</Steps>
+
+## Component Categories
+
+| Category       | Count | Description                                                          |
+| -------------- | ----- | -------------------------------------------------------------------- |
+| **Primitive**  | 6     | Basic building blocks: Button, Badge, Avatar, Kbd, Label, Typography |
+| **Input**      | 17    | Form controls: TextInput, Select, Checkbox, DatePicker, Form, etc.   |
+| **Layout**     | 9     | Structure: Card, Table, Accordion, Resizable, DataTable, etc.        |
+| **Navigation** | 8     | Movement: Tabs, Breadcrumb, Sidebar, Menubar, Pagination             |
+| **Feedback**   | 14    | Responses: Dialog, Toast, Alert, Progress, Spinner, Drawer           |
+| **Display**    | 3     | Visualization: Banner, Chart, Carousel                               |
+
+## Architecture
+
+haukTUI is built on three core packages:
+
+```
+@hauktui/tokens       → Design tokens & terminal detection
+@hauktui/core         → Focus management & keyboard handling
+@hauktui/primitives-ink → React/Ink context providers
+```
+
+Components use these packages but they're installed as dependencies when you init.
+
+## Requirements
+
+- **Node.js** 18+
+- **React** 18+
+- **Ink** 4+ (terminal React renderer)
+
+## Philosophy
+
+1. **Copy, don't install** - Full ownership of component code
+2. **Keyboard first** - Every component is fully keyboard accessible
+3. **Terminal native** - Built for terminals, not adapted from web
+4. **Minimal dependencies** - Only what's necessary
+5. **TypeScript native** - Types are first-class citizens
+
+---
+
+Ready to get started? Check out the [Installation Guide](/docs/installation) or browse the [Components](/docs/components).

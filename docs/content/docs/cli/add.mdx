@@ -1,0 +1,175 @@
+---
+title: hauk add
+description: Add components to your project
+---
+
+# hauk add
+
+Add components from the haukTUI registry to your project. Components are copied to your project, giving you full ownership and customization ability.
+
+## Usage
+
+```bash
+hauk add <component> [components...] [options]
+```
+
+## Options
+
+| Option                | Alias | Description                   |
+| --------------------- | ----- | ----------------------------- |
+| `--output-dir <path>` | `-o`  | Override output directory     |
+| `--overwrite`         |       | Overwrite existing components |
+| `--dry-run`           |       | Preview without writing files |
+| `--help`              | `-h`  | Show help                     |
+
+## Examples
+
+### Add a single component
+
+```bash
+hauk add button
+```
+
+Output:
+
+```
+✓ Added button to src/tui/components/button
+  └── button.tsx
+  └── index.ts
+```
+
+### Add multiple components
+
+```bash
+hauk add button card dialog tabs
+```
+
+### Preview changes (dry run)
+
+```bash
+hauk add button --dry-run
+```
+
+Output:
+
+```
+Would add button to src/tui/components/button:
+  └── button.tsx
+  └── index.ts
+```
+
+### Custom output directory
+
+```bash
+hauk add button --output-dir lib/components
+```
+
+### Overwrite existing
+
+```bash
+hauk add button --overwrite
+```
+
+## What happens
+
+When you add a component:
+
+1. **Downloads files** from the registry
+2. **Resolves dependencies** (both npm and haukTUI)
+3. **Copies to your project** in the configured directory
+4. **Updates lock file** with version info
+
+### File structure
+
+Each component creates its own directory:
+
+```
+src/tui/components/
+├── button/
+│   ├── button.tsx      # Component implementation
+│   └── index.ts        # Public exports
+├── card/
+│   ├── card.tsx
+│   └── index.ts
+└── dialog/
+    ├── dialog.tsx
+    └── index.ts
+```
+
+## Dependencies
+
+### hauktui dependencies
+
+Many components depend on core packages:
+
+```bash
+npm install @hauktui/core @hauktui/tokens @hauktui/primitives-ink
+```
+
+The CLI will remind you if dependencies are missing.
+
+### Component dependencies
+
+Some components depend on other components. When you add a component, its dependencies are automatically added:
+
+```bash
+hauk add combobox
+```
+
+Output:
+
+```
+✓ Added combobox to src/tui/components/combobox
+  Dependencies: text-input (already installed)
+```
+
+## Importing components
+
+After adding, import components like this:
+
+```tsx
+import { Button } from "./tui/components/button";
+import { Card } from "./tui/components/card";
+import { Dialog } from "./tui/components/dialog";
+```
+
+## Updating components
+
+To update a component to the latest version:
+
+```bash
+hauk add button --overwrite
+```
+
+This downloads the latest version and replaces your files.
+
+<Callout type="warn">
+  Using `--overwrite` will replace your customizations. Back up any changes
+  before updating.
+</Callout>
+
+## Troubleshooting
+
+### Component not found
+
+```bash
+hauk add unknown-component
+# Error: Component "unknown-component" not found in registry
+```
+
+Use `hauk list` to see available components.
+
+### Missing config
+
+```bash
+hauk add button
+# Error: No hauk.config.json found. Run 'hauk init' first.
+```
+
+Initialize your project first with `hauk init`.
+
+## Next Steps
+
+- [List available components](/docs/cli/list)
+- [Browse component documentation](/docs/components)
+- [Configure theming](/docs/theming)

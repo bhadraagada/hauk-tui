@@ -1,0 +1,173 @@
+---
+title: Timeline
+description: Vertical/horizontal timeline with status indicators
+---
+
+# Timeline
+
+Timeline component for displaying events, steps, or history with visual status indicators.
+
+```bash
+hauk add timeline
+```
+
+## Usage
+
+```tsx
+import { Timeline } from "./tui/components/timeline";
+
+function App() {
+  const items = [
+    { id: "1", title: "Order Placed", status: "completed", date: "Dec 20" },
+    { id: "2", title: "Processing", status: "completed", date: "Dec 21" },
+    { id: "3", title: "Shipped", status: "current", date: "Dec 23" },
+    { id: "4", title: "Delivered", status: "upcoming", date: "Dec 25" },
+  ];
+
+  return <Timeline items={items} />;
+}
+```
+
+## Examples
+
+### Vertical Timeline (default)
+
+```tsx
+<Timeline
+  items={[
+    { id: "1", title: "Created", status: "completed", date: "9:00 AM" },
+    { id: "2", title: "In Review", status: "current", date: "10:30 AM" },
+    { id: "3", title: "Approved", status: "upcoming" },
+  ]}
+/>
+```
+
+Output:
+
+```
+✓ 9:00 AM
+│ Created
+│
+● 10:30 AM
+│ In Review
+│
+○ Approved
+```
+
+### Horizontal Timeline
+
+```tsx
+<Timeline
+  orientation="horizontal"
+  items={[
+    { id: "1", title: "Step 1", status: "completed" },
+    { id: "2", title: "Step 2", status: "current" },
+    { id: "3", title: "Step 3", status: "upcoming" },
+  ]}
+/>
+```
+
+Output:
+
+```
+✓───●───○
+Step 1  Step 2  Step 3
+```
+
+### With Descriptions
+
+```tsx
+<Timeline
+  items={[
+    {
+      id: "1",
+      title: "Order Confirmed",
+      description: "Your order has been confirmed",
+      status: "completed",
+      date: "Dec 20, 2024",
+    },
+    {
+      id: "2",
+      title: "Processing",
+      description: "We are preparing your order",
+      status: "current",
+      date: "Dec 21, 2024",
+    },
+  ]}
+/>
+```
+
+### With Error Status
+
+```tsx
+<Timeline
+  items={[
+    { id: "1", title: "Started", status: "completed" },
+    { id: "2", title: "Building", status: "error" },
+    { id: "3", title: "Deploy", status: "upcoming" },
+  ]}
+/>
+```
+
+### Custom Icons
+
+```tsx
+<Timeline
+  items={[
+    { id: "1", title: "Created", status: "completed", icon: "📝" },
+    { id: "2", title: "Review", status: "current", icon: "👀" },
+    { id: "3", title: "Published", status: "upcoming", icon: "🚀" },
+  ]}
+/>
+```
+
+### Without Connecting Lines
+
+```tsx
+<Timeline items={items} showLines={false} />
+```
+
+## Props
+
+| Prop          | Type                           | Default      | Description           |
+| ------------- | ------------------------------ | ------------ | --------------------- |
+| `items`       | `TimelineItem[]`               | -            | Timeline items        |
+| `orientation` | `"vertical"` \| `"horizontal"` | `"vertical"` | Timeline orientation  |
+| `showLines`   | `boolean`                      | `true`       | Show connecting lines |
+
+## TimelineItem
+
+```tsx
+interface TimelineItem {
+  id: string; // Unique identifier
+  title: string; // Item title
+  description?: string; // Item description
+  date?: string; // Timestamp or date label
+  status?: "completed" | "current" | "upcoming" | "error";
+  icon?: string; // Custom icon
+}
+```
+
+## Status Icons
+
+| Status      | Icon | Color  |
+| ----------- | ---- | ------ |
+| `completed` | ✓    | green  |
+| `current`   | ●    | accent |
+| `upcoming`  | ○    | muted  |
+| `error`     | ✗    | red    |
+
+## Features
+
+- **Status Indicators** - Visual icons for each status
+- **Connecting Lines** - Lines connecting timeline items
+- **Dual Orientation** - Vertical or horizontal layout
+- **Custom Icons** - Override default status icons
+- **Descriptions** - Optional descriptions for each item
+- **Date Labels** - Show timestamps or dates
+
+## Notes
+
+- Supports completed, current, upcoming, and error statuses
+- Vertical orientation is best for detailed timelines
+- Horizontal is good for compact step indicators

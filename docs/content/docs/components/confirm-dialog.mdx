@@ -1,0 +1,139 @@
+---
+title: ConfirmDialog
+description: A confirmation dialog with Yes/No options
+---
+
+# ConfirmDialog
+
+A simple confirmation dialog with Yes/No options and keyboard shortcuts.
+
+```bash
+hauk add confirm-dialog
+```
+
+## Usage
+
+```tsx
+import { ConfirmDialog } from "./tui/components/confirm-dialog";
+
+function App() {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setShowConfirm(true)}>Submit Form</Button>
+
+      <ConfirmDialog
+        isOpen={showConfirm}
+        title="Submit Form"
+        message="Are you sure you want to submit this form?"
+        onConfirm={() => {
+          submitForm();
+          setShowConfirm(false);
+        }}
+        onCancel={() => setShowConfirm(false)}
+      />
+    </>
+  );
+}
+```
+
+## Examples
+
+### Basic Confirmation
+
+```tsx
+<ConfirmDialog
+  isOpen={isOpen}
+  message="Do you want to proceed?"
+  onConfirm={handleConfirm}
+  onCancel={handleCancel}
+/>
+```
+
+### With Title
+
+```tsx
+<ConfirmDialog
+  isOpen={isOpen}
+  title="Confirm Action"
+  message="This will update all records. Continue?"
+  onConfirm={handleConfirm}
+  onCancel={handleCancel}
+/>
+```
+
+### Destructive Action
+
+```tsx
+<ConfirmDialog
+  isOpen={isOpen}
+  title="Delete File"
+  message="This file will be permanently deleted."
+  destructive={true}
+  confirmLabel="Delete"
+  cancelLabel="Keep"
+  onConfirm={handleDelete}
+  onCancel={handleCancel}
+/>
+```
+
+### Custom Labels
+
+```tsx
+<ConfirmDialog
+  isOpen={isOpen}
+  message="Save changes before closing?"
+  confirmLabel="Save"
+  cancelLabel="Discard"
+  onConfirm={handleSave}
+  onCancel={handleDiscard}
+/>
+```
+
+## Props
+
+| Prop           | Type         | Default     | Description                         |
+| -------------- | ------------ | ----------- | ----------------------------------- |
+| `isOpen`       | `boolean`    | `true`      | Whether dialog is visible           |
+| `title`        | `string`     | -           | Optional dialog title               |
+| `message`      | `string`     | -           | Dialog message (required)           |
+| `onConfirm`    | `() => void` | -           | Confirm callback                    |
+| `onCancel`     | `() => void` | -           | Cancel callback                     |
+| `confirmLabel` | `string`     | `"Confirm"` | Confirm button label                |
+| `cancelLabel`  | `string`     | `"Cancel"`  | Cancel button label                 |
+| `destructive`  | `boolean`    | `false`     | Show confirm button in danger color |
+
+## Keyboard Shortcuts
+
+| Key      | Action                   |
+| -------- | ------------------------ |
+| `Y`      | Quick confirm            |
+| `N`      | Quick cancel             |
+| `←` `→`  | Switch between buttons   |
+| `Tab`    | Switch between buttons   |
+| `Enter`  | Activate selected button |
+| `Escape` | Cancel and close         |
+
+## Styling
+
+```
+╭────────────────────────────────────╮
+│ Confirm Action                     │
+│                                    │
+│ Are you sure you want to proceed?  │
+│                                    │
+│ ╭─────────╮  Cancel                │
+│ │ Confirm │                        │
+│ ╰─────────╯                        │
+│                                    │
+│ Press Y/N or Enter to select       │
+╰────────────────────────────────────╯
+```
+
+## Notes
+
+- Press Y/N for quick selection
+- Simpler alternative to AlertDialog
+- Destructive mode shows confirm in danger color
+- Tab or arrow keys to switch between buttons

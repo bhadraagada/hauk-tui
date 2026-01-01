@@ -1,0 +1,98 @@
+---
+title: Command
+description: Command palette for searchable actions
+---
+
+# Command
+
+Command palette component for quickly finding and executing actions with keyboard search.
+
+```bash
+hauk add command
+```
+
+## Usage
+
+### Basic Command Palette
+
+```tsx
+import { Command } from "./tui/components/command";
+
+<Command
+  open={showCommand}
+  onOpenChange={setShowCommand}
+  onSelect={(value) => {
+    executeCommand(value);
+    setShowCommand(false);
+  }}
+>
+  <Command.Input placeholder="Type a command..." />
+  <Command.List>
+    <Command.Group heading="File">
+      <Command.Item value="new">New File</Command.Item>
+      <Command.Item value="open">Open File</Command.Item>
+      <Command.Item value="save">Save</Command.Item>
+    </Command.Group>
+    <Command.Group heading="Edit">
+      <Command.Item value="undo">Undo</Command.Item>
+      <Command.Item value="redo">Redo</Command.Item>
+    </Command.Group>
+  </Command.List>
+</Command>;
+```
+
+### With Icons and Shortcuts
+
+```tsx
+import { Command } from "./tui/components/command";
+
+<Command open={open} onOpenChange={setOpen} onSelect={handleSelect}>
+  <Command.Input placeholder="Search commands..." />
+  <Command.List>
+    <Command.Item value="copy" keywords={["duplicate"]}>
+      <Text>Copy</Text>
+      <Text dimColor>Ctrl+C</Text>
+    </Command.Item>
+    <Command.Item value="paste">
+      <Text>Paste</Text>
+      <Text dimColor>Ctrl+V</Text>
+    </Command.Item>
+  </Command.List>
+</Command>;
+```
+
+## Props
+
+### Command
+
+| Prop           | Type                      | Default | Description                    |
+| -------------- | ------------------------- | ------- | ------------------------------ |
+| `open`         | `boolean`                 | -       | Control palette visibility     |
+| `onOpenChange` | `(open: boolean) => void` | -       | Handler for open state changes |
+| `onSelect`     | `(value: string) => void` | -       | Handler when item selected     |
+
+### Command.Item
+
+| Prop       | Type       | Default | Description                |
+| ---------- | ---------- | ------- | -------------------------- |
+| `value`    | `string`   | -       | Unique item identifier     |
+| `keywords` | `string[]` | -       | Additional search keywords |
+| `disabled` | `boolean`  | `false` | Disable item               |
+
+## Keyboard Shortcuts
+
+| Key      | Action          |
+| -------- | --------------- |
+| `Type`   | Filter commands |
+| `↑` `k`  | Navigate up     |
+| `↓` `j`  | Navigate down   |
+| `Enter`  | Execute command |
+| `Escape` | Close palette   |
+
+## Features
+
+- **Fuzzy search** - Instant command filtering
+- **Grouped commands** - Organize by category
+- **Keyboard shortcuts** - Display shortcuts with commands
+- **Custom keywords** - Add search aliases
+- **Nested commands** - Support for sub-menus

@@ -1,0 +1,89 @@
+---
+title: Textarea
+description: Multi-line text input with cursor navigation
+---
+
+# Textarea
+
+Multi-line text input component with arrow key navigation and automatic line wrapping.
+
+```bash
+hauk add textarea
+```
+
+## Usage
+
+### Basic Textarea
+
+```tsx
+import { Textarea } from "./tui/components/textarea";
+
+<Textarea
+  value={text}
+  onChange={setText}
+  placeholder="Enter multiple lines..."
+/>;
+```
+
+### With Label
+
+```tsx
+import { Textarea } from "./tui/components/textarea";
+
+<Box flexDirection="column" gap={1}>
+  <Text color="cyan">Description:</Text>
+  <Textarea
+    value={description}
+    onChange={setDescription}
+    placeholder="Enter description..."
+    rows={5}
+  />
+</Box>;
+```
+
+### Character Limit
+
+```tsx
+import { Textarea } from "./tui/components/textarea";
+
+<Box flexDirection="column">
+  <Textarea
+    value={bio}
+    onChange={setBio}
+    placeholder="Tell us about yourself (max 200 chars)"
+    maxLength={200}
+  />
+  <Text dimColor>{bio.length}/200 characters</Text>
+</Box>;
+```
+
+## Props
+
+| Prop          | Type                      | Default | Description                   |
+| ------------- | ------------------------- | ------- | ----------------------------- |
+| `value`       | `string`                  | -       | Current text value (required) |
+| `onChange`    | `(value: string) => void` | -       | Handler when text changes     |
+| `placeholder` | `string`                  | -       | Placeholder text when empty   |
+| `rows`        | `number`                  | `3`     | Number of visible rows        |
+| `maxLength`   | `number`                  | -       | Maximum character length      |
+| `disabled`    | `boolean`                 | `false` | Disable input                 |
+
+## Keyboard Shortcuts
+
+| Key         | Action                    |
+| ----------- | ------------------------- |
+| `↑` `↓`     | Navigate lines            |
+| `←` `→`     | Move cursor horizontally  |
+| `Enter`     | Insert new line           |
+| `Backspace` | Delete previous character |
+| `Delete`    | Delete next character     |
+| `Home`      | Move to start of line     |
+| `End`       | Move to end of line       |
+
+## Features
+
+- **Multi-line editing** - Arrow keys to navigate, Enter for new lines
+- **Auto-wrapping** - Text wraps at terminal width
+- **Character limits** - Optional `maxLength` enforcement
+- **Placeholder** - Shows hint text when empty
+- **Keyboard-first** - Full cursor navigation support

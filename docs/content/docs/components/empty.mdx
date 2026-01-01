@@ -1,0 +1,150 @@
+---
+title: Empty
+description: Empty state placeholder with icon, title, and description
+---
+
+# Empty
+
+Empty state placeholder to display when there is no data or content.
+
+```bash
+hauk add empty
+```
+
+## Usage
+
+```tsx
+import { Empty } from "./tui/components/empty";
+
+function App() {
+  const items = [];
+
+  if (items.length === 0) {
+    return (
+      <Empty
+        title="No items found"
+        description="Try adding some items to get started"
+      />
+    );
+  }
+
+  return <List items={items} />;
+}
+```
+
+## Examples
+
+### Basic Empty State
+
+```tsx
+<Empty title="No data" />
+```
+
+### With Description
+
+```tsx
+<Empty title="No results found" description="Try adjusting your search terms" />
+```
+
+### With Custom Icon
+
+```tsx
+<Empty
+  icon="🔍"
+  title="No search results"
+  description="Try a different search query"
+/>
+```
+
+### With Action
+
+```tsx
+<Empty
+  icon="📁"
+  title="No files"
+  description="Upload a file to get started"
+  action={<Button onPress={handleUpload}>Upload File</Button>}
+/>
+```
+
+### Size Variants
+
+```tsx
+// Small
+<Empty size="sm" title="Empty" />
+
+// Medium (default)
+<Empty size="md" title="No items" description="Add items to see them here" />
+
+// Large with ASCII art
+<Empty
+  size="lg"
+  icon="📭"
+  title="Inbox Zero!"
+  description="You've processed all your messages"
+/>
+```
+
+## Props
+
+| Prop          | Type                       | Default     | Description              |
+| ------------- | -------------------------- | ----------- | ------------------------ |
+| `title`       | `string`                   | `"No data"` | Main title/message       |
+| `description` | `string`                   | -           | Description text         |
+| `icon`        | `string`                   | `"📭"`      | Icon or emoji to display |
+| `action`      | `ReactNode`                | -           | Action element (button)  |
+| `size`        | `"sm"` \| `"md"` \| `"lg"` | `"md"`      | Size variant             |
+
+## Built-in Icons
+
+You can use emoji icons or ASCII art. Common icons include:
+
+| Icon | Meaning     |
+| ---- | ----------- |
+| 📭   | Empty/inbox |
+| 🔍   | Search      |
+| ❌   | Error       |
+| 📁   | Folder      |
+| 📄   | File        |
+| 📥   | Inbox       |
+
+## Size Comparison
+
+### Small (`sm`)
+
+```
+📭
+Empty
+```
+
+### Medium (`md`)
+
+```
+📭
+
+No items found
+
+Add items to see them here
+```
+
+### Large (`lg`)
+
+```
+┌─────────┐
+│  EMPTY  │
+└────┬────┘
+     │
+
+No items found
+
+Add items to see them here
+
+[ Add Item ]
+```
+
+## Notes
+
+- Use to indicate empty states in lists, tables, or search results
+- Large size shows ASCII art icons
+- Include an action button to guide users on what to do next
+- Supports sm/md/lg sizes

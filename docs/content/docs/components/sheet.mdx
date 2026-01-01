@@ -1,0 +1,149 @@
+---
+title: Sheet
+description: Modal sheet overlay from screen edge
+---
+
+# Sheet
+
+Modal sheet overlay that slides in from any edge of the screen with title and description.
+
+```bash
+hauk add sheet
+```
+
+## Usage
+
+```tsx
+import { Sheet } from "./tui/components/sheet";
+
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setOpen(true)}>Edit Profile</Button>
+
+      <Sheet
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Edit Profile"
+        description="Make changes to your profile here."
+      >
+        <Form>
+          <TextInput label="Name" />
+          <TextInput label="Email" />
+        </Form>
+      </Sheet>
+    </>
+  );
+}
+```
+
+## Examples
+
+### Basic Sheet
+
+```tsx
+<Sheet open={isOpen} onClose={handleClose}>
+  <Text>Sheet content</Text>
+</Sheet>
+```
+
+### With Title and Description
+
+```tsx
+<Sheet
+  open={isOpen}
+  onClose={handleClose}
+  title="Settings"
+  description="Manage your application settings."
+>
+  <SettingsForm />
+</Sheet>
+```
+
+### Left Side Sheet
+
+```tsx
+<Sheet open={isOpen} onClose={handleClose} side="left" title="Navigation">
+  <NavigationMenu />
+</Sheet>
+```
+
+### Top Sheet
+
+```tsx
+<Sheet open={isOpen} onClose={handleClose} side="top" size={15}>
+  <SearchBar />
+</Sheet>
+```
+
+### Bottom Sheet
+
+```tsx
+<Sheet open={isOpen} onClose={handleClose} side="bottom" title="Actions">
+  <ActionButtons />
+</Sheet>
+```
+
+### Custom Size
+
+```tsx
+<Sheet open={isOpen} onClose={handleClose} size={70} title="Large Panel">
+  <DetailedContent />
+</Sheet>
+```
+
+## Props
+
+| Prop          | Type                                           | Default   | Description                   |
+| ------------- | ---------------------------------------------- | --------- | ----------------------------- |
+| `open`        | `boolean`                                      | -         | Whether sheet is open         |
+| `onClose`     | `() => void`                                   | -         | Close handler                 |
+| `children`    | `ReactNode`                                    | -         | Sheet content                 |
+| `side`        | `"left"` \| `"right"` \| `"top"` \| `"bottom"` | `"right"` | Side to open from             |
+| `title`       | `string`                                       | -         | Sheet title                   |
+| `description` | `string`                                       | -         | Sheet description             |
+| `size`        | `number`                                       | `50`      | Width (left/right) or height  |
+| `overlay`     | `boolean`                                      | `true`    | Show overlay effect           |
+| `focusId`     | `string`                                       | -         | Focus ID for focus management |
+
+## Keyboard Shortcuts
+
+| Key      | Action      |
+| -------- | ----------- |
+| `Escape` | Close sheet |
+| `q`      | Close sheet |
+
+## Styling
+
+```
+╭──────────────────────────────────────────────╮
+│ Edit Profile                                 │
+│ Make changes to your profile here.           │
+│ ──────────────────────────────────────────── │
+│                                              │
+│ Name: ████████████████                       │
+│                                              │
+│ Email: ███████████████                       │
+│                                              │
+│                                              │
+│ ESC to close                                 │
+╰──────────────────────────────────────────────╯
+```
+
+## Sheet vs Drawer
+
+| Feature  | Sheet                   | Drawer              |
+| -------- | ----------------------- | ------------------- |
+| Border   | Rounded, full border    | Single edge border  |
+| Header   | Title + description     | Optional title only |
+| Overlay  | Optional overlay effect | No overlay          |
+| Use case | Forms, detail views     | Navigation, menus   |
+
+## Notes
+
+- More styled than Drawer with rounded borders
+- Supports title and description
+- Press ESC or Q to close when focused
+- Supports left/right/top/bottom positions

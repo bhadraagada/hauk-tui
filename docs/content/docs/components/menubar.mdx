@@ -1,0 +1,72 @@
+---
+title: Menubar
+description: Horizontal menu bar with dropdown menus
+---
+
+# Menubar
+
+Application menu bar with keyboard-navigable dropdown menus.
+
+```bash
+hauk add menubar
+```
+
+## Usage
+
+### Basic Menubar
+
+```tsx
+import { Menubar } from "./tui/components/menubar";
+
+<Menubar>
+  <Menubar.Menu trigger="File">
+    <Menubar.Item onSelect={() => {}}>New</Menubar.Item>
+    <Menubar.Item onSelect={() => {}}>Open</Menubar.Item>
+    <Menubar.Separator />
+    <Menubar.Item onSelect={() => {}}>Save</Menubar.Item>
+    <Menubar.Item onSelect={() => {}}>Exit</Menubar.Item>
+  </Menubar.Menu>
+
+  <Menubar.Menu trigger="Edit">
+    <Menubar.Item onSelect={() => {}}>Undo</Menubar.Item>
+    <Menubar.Item onSelect={() => {}}>Redo</Menubar.Item>
+  </Menubar.Menu>
+</Menubar>;
+```
+
+### With Shortcuts
+
+```tsx
+import { Menubar } from "./tui/components/menubar";
+
+<Menubar>
+  <Menubar.Menu trigger="File">
+    <Menubar.Item shortcut="Ctrl+N">New</Menubar.Item>
+    <Menubar.Item shortcut="Ctrl+O">Open</Menubar.Item>
+    <Menubar.Item shortcut="Ctrl+S">Save</Menubar.Item>
+  </Menubar.Menu>
+</Menubar>;
+```
+
+## Props
+
+| Prop       | Type        | Default | Description           |
+| ---------- | ----------- | ------- | --------------------- |
+| `children` | `ReactNode` | -       | Menu items (required) |
+
+## Keyboard Shortcuts
+
+| Key       | Action                 |
+| --------- | ---------------------- |
+| `←` / `→` | Navigate between menus |
+| `↑` / `↓` | Navigate menu items    |
+| `Enter`   | Select item            |
+| `Esc`     | Close menu             |
+
+## Features
+
+- **Dropdown menus** - Expandable menu options
+- **Keyboard shortcuts** - Display shortcut hints
+- **Separators** - Visual grouping of items
+- **Keyboard navigation** - Full keyboard support
+- **Accessible** - Screen reader friendly

@@ -1,0 +1,157 @@
+---
+title: Banner
+description: ASCII art banner with multiple fonts and gradient support
+---
+
+# Banner
+
+ASCII art banner component for displaying stylized text headers and logos.
+
+```bash
+hauk add banner
+```
+
+## Usage
+
+```tsx
+import { Banner } from "./tui/components/banner";
+
+function App() {
+  return <Banner text="HELLO" font="block" subtitle="Welcome to the app" />;
+}
+```
+
+## Examples
+
+### Basic Banner
+
+```tsx
+<Banner text="HELLO" />
+```
+
+### With Subtitle
+
+```tsx
+<Banner text="MY APP" subtitle="Version 1.0.0" />
+```
+
+### Font Variants
+
+```tsx
+// Block font (default) - Large ASCII art
+<Banner text="BLOCK" font="block" />
+
+// Slant font - Italic style
+<Banner text="SLANT" font="slant" />
+
+// Small font - Compact block
+<Banner text="SMALL" font="small" />
+
+// Mini font - Very compact
+<Banner text="MINI" font="mini" />
+
+// Simple font - Just bold text
+<Banner text="Simple" font="simple" />
+```
+
+### Custom Color
+
+```tsx
+<Banner text="HAUK" color="#00d4aa" />
+```
+
+### Gradient Effect
+
+```tsx
+<Banner text="GRADIENT" color="#00d4aa" gradientTo="#ff6b6b" />
+```
+
+### Box Variant
+
+```tsx
+<Banner text="BOXED" variant="box" subtitle="With border" />
+```
+
+### Minimal Variant
+
+```tsx
+<Banner text="Minimal" variant="minimal" subtitle="Simple bold text" />
+```
+
+### Left Aligned
+
+```tsx
+<Banner text="LEFT" center={false} />
+```
+
+## Props
+
+| Prop         | Type                                                          | Default     | Description          |
+| ------------ | ------------------------------------------------------------- | ----------- | -------------------- |
+| `text`       | `string`                                                      | -           | Text to display      |
+| `font`       | `"block"` \| `"slant"` \| `"small"` \| `"mini"` \| `"simple"` | `"block"`   | ASCII art font style |
+| `color`      | `string`                                                      | accent      | Text color           |
+| `gradientTo` | `string`                                                      | -           | Gradient end color   |
+| `variant`    | `"default"` \| `"gradient"` \| `"box"` \| `"minimal"`         | `"default"` | Banner variant       |
+| `center`     | `boolean`                                                     | `true`      | Center align banner  |
+| `subtitle`   | `string`                                                      | -           | Subtitle text        |
+
+## Font Examples
+
+### Block Font
+
+```
+██╗  ██╗ █████╗ ██╗   ██╗██╗  ██╗
+██║  ██║██╔══██╗██║   ██║██║ ██╔╝
+███████║███████║██║   ██║█████╔╝
+██╔══██║██╔══██║██║   ██║██╔═██╗
+██║  ██║██║  ██║╚██████╔╝██║  ██╗
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+```
+
+### Small Font
+
+```
+█ █ ▄▀█ █ █ █▄▀
+█▀█ █▀█ █▄█ █ █
+```
+
+### Mini Font
+
+```
+█ █ █▀█ █ █ █▀▄
+█▀█ █▀█ █▄█ █ █
+```
+
+## Variants
+
+### Default
+
+Plain ASCII art text.
+
+### Box
+
+```
+╭──────────────────────────────────────────╮
+│  ██╗  ██╗ █████╗ ██╗   ██╗██╗  ██╗       │
+│  ██║  ██║██╔══██╗██║   ██║██║ ██╔╝       │
+│  ███████║███████║██║   ██║█████╔╝        │
+│  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝       │
+│                                          │
+│            Terminal UI Library           │
+╰──────────────────────────────────────────╯
+```
+
+### Minimal
+
+```
+HAUK
+Terminal UI Library
+```
+
+## Notes
+
+- Supports block, slant, small, mini, and simple fonts
+- Gradient colors transition from top to bottom
+- Great for CLI app headers and splash screens
+- Use minimal variant for simpler output

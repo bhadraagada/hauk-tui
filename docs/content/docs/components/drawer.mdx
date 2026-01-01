@@ -1,0 +1,148 @@
+---
+title: Drawer
+description: Slide-out panel from screen edge
+---
+
+# Drawer
+
+Slide-out panel that appears from any edge of the screen.
+
+```bash
+hauk add drawer
+```
+
+## Usage
+
+```tsx
+import { Drawer } from "./tui/components/drawer";
+
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setOpen(true)}>Open Settings</Button>
+
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Settings"
+        side="right"
+      >
+        <Text>Drawer content goes here</Text>
+      </Drawer>
+    </>
+  );
+}
+```
+
+## Examples
+
+### Basic Drawer
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose}>
+  <Text>Drawer content</Text>
+</Drawer>
+```
+
+### With Title
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose} title="Navigation">
+  <List items={menuItems} />
+</Drawer>
+```
+
+### Left Side
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose} side="left" title="Menu">
+  <List items={menuItems} />
+</Drawer>
+```
+
+### Top Drawer
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose} side="top" size={10}>
+  <Text>Notification area</Text>
+</Drawer>
+```
+
+### Bottom Drawer
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose} side="bottom" size={15}>
+  <Text>Quick actions panel</Text>
+</Drawer>
+```
+
+### Custom Size
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose} size={60}>
+  <Text>Wide drawer content</Text>
+</Drawer>
+```
+
+### Without Close Hint
+
+```tsx
+<Drawer open={isOpen} onClose={handleClose} showCloseHint={false}>
+  <Text>Clean drawer without hint</Text>
+</Drawer>
+```
+
+## Props
+
+| Prop            | Type                                           | Default   | Description                   |
+| --------------- | ---------------------------------------------- | --------- | ----------------------------- |
+| `open`          | `boolean`                                      | -         | Whether drawer is open        |
+| `onClose`       | `() => void`                                   | -         | Close handler                 |
+| `children`      | `ReactNode`                                    | -         | Drawer content                |
+| `side`          | `"left"` \| `"right"` \| `"top"` \| `"bottom"` | `"right"` | Side to open from             |
+| `title`         | `string`                                       | -         | Drawer title                  |
+| `size`          | `number`                                       | `40`      | Width (left/right) or height  |
+| `showCloseHint` | `boolean`                                      | `true`    | Show close hint               |
+| `focusId`       | `string`                                       | -         | Focus ID for focus management |
+
+## Keyboard Shortcuts
+
+| Key      | Action       |
+| -------- | ------------ |
+| `Escape` | Close drawer |
+| `q`      | Close drawer |
+
+## Styling
+
+### Right Drawer (default)
+
+```
+                        │ Settings
+                        │ ─────────────────
+                        │
+                        │ Drawer content
+                        │ goes here...
+                        │
+                        │ Press ESC or Q to close
+```
+
+### Left Drawer
+
+```
+Menu                    │
+─────────────────       │
+                        │
+Drawer content          │
+goes here...            │
+                        │
+Press ESC or Q to close │
+```
+
+## Notes
+
+- Supports left/right/top/bottom positions
+- Press ESC or Q to close when focused
+- Integrates with focus management system
+- Size prop controls width for horizontal or height for vertical drawers

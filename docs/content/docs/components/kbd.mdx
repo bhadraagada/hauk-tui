@@ -1,0 +1,109 @@
+---
+title: Kbd
+description: Keyboard shortcut display component
+---
+
+# Kbd
+
+Display keyboard shortcuts with styled formatting. Use to show keybindings in help text or UI hints.
+
+```bash
+hauk add kbd
+```
+
+## Usage
+
+```tsx
+import { Kbd } from "./tui/components/kbd";
+
+function App() {
+  return (
+    <Box>
+      <Text>Press </Text>
+      <Kbd>Enter</Kbd>
+      <Text> to continue</Text>
+    </Box>
+  );
+}
+```
+
+## Examples
+
+### Single Key
+
+```tsx
+<Kbd>Enter</Kbd>
+<Kbd>Esc</Kbd>
+<Kbd>Tab</Kbd>
+```
+
+### Key Combinations
+
+```tsx
+<Box>
+  <Kbd>Ctrl</Kbd>
+  <Text>+</Text>
+  <Kbd>C</Kbd>
+</Box>
+```
+
+### In Help Text
+
+```tsx
+<Box flexDirection="column">
+  <Box>
+    <Kbd>j</Kbd>
+    <Kbd>k</Kbd>
+    <Text> - Navigate</Text>
+  </Box>
+  <Box>
+    <Kbd>Enter</Kbd>
+    <Text> - Select</Text>
+  </Box>
+  <Box>
+    <Kbd>q</Kbd>
+    <Text> - Quit</Text>
+  </Box>
+</Box>
+```
+
+### Footer Hints
+
+```tsx
+function Footer() {
+  return (
+    <Box>
+      <Kbd>↑</Kbd>
+      <Kbd>↓</Kbd>
+      <Text> navigate </Text>
+      <Kbd>Enter</Kbd>
+      <Text> select </Text>
+      <Kbd>q</Kbd>
+      <Text> quit</Text>
+    </Box>
+  );
+}
+```
+
+## Props
+
+| Prop       | Type        | Default | Description          |
+| ---------- | ----------- | ------- | -------------------- |
+| `children` | `ReactNode` | -       | Key label to display |
+
+## Styling
+
+Kbd components display with a distinctive background:
+
+```
+Press [Enter] to continue
+
+[Ctrl]+[S] - Save
+[Ctrl]+[Q] - Quit
+```
+
+## Notes
+
+- Displays keyboard shortcuts with styled background
+- Use for help text and UI hints
+- Combine with `+` for key combinations

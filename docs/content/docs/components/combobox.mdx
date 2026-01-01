@@ -1,0 +1,93 @@
+---
+title: Combobox
+description: Searchable select dropdown with autocomplete
+---
+
+# Combobox
+
+Combobox combines a text input with a dropdown list, enabling search and selection from a large list of options.
+
+```bash
+hauk add combobox
+```
+
+## Usage
+
+### Basic Combobox
+
+```tsx
+import { Combobox } from "./tui/components/combobox";
+
+const languages = [
+  { value: "javascript", label: "JavaScript" },
+  { value: "typescript", label: "TypeScript" },
+  { value: "python", label: "Python" },
+  { value: "rust", label: "Rust" },
+];
+
+<Combobox
+  value={selectedLang}
+  onValueChange={setSelectedLang}
+  options={languages}
+  placeholder="Select language..."
+/>;
+```
+
+### With Search Filter
+
+```tsx
+import { Combobox } from "./tui/components/combobox";
+
+<Combobox
+  value={country}
+  onValueChange={setCountry}
+  options={countries}
+  placeholder="Search countries..."
+  searchable
+/>;
+```
+
+### Multiple Selection
+
+```tsx
+import { Combobox } from "./tui/components/combobox";
+
+<Combobox
+  value={selectedTags}
+  onValueChange={setSelectedTags}
+  options={availableTags}
+  multiple
+  placeholder="Select tags..."
+/>;
+```
+
+## Props
+
+| Prop            | Type                                  | Default | Description                    |
+| --------------- | ------------------------------------- | ------- | ------------------------------ |
+| `value`         | `string` \| `string[]`                | -       | Selected value(s)              |
+| `onValueChange` | `(value: string \| string[]) => void` | -       | Handler when selection changes |
+| `options`       | `ComboboxOption[]`                    | -       | Array of selectable options    |
+| `placeholder`   | `string`                              | -       | Placeholder text               |
+| `searchable`    | `boolean`                             | `true`  | Enable search filtering        |
+| `multiple`      | `boolean`                             | `false` | Allow multiple selections      |
+| `disabled`      | `boolean`                             | `false` | Disable interaction            |
+
+## Keyboard Shortcuts
+
+| Key         | Action                                |
+| ----------- | ------------------------------------- |
+| `↑` `k`     | Navigate up in dropdown               |
+| `↓` `j`     | Navigate down in dropdown             |
+| `Enter`     | Select highlighted option             |
+| `Escape`    | Close dropdown                        |
+| `Backspace` | Clear search or remove last selection |
+| `Type`      | Filter options by search              |
+
+## Features
+
+- **Searchable** - Type to filter options
+- **Keyboard navigation** - Arrow keys or vim bindings
+- **Multiple selection** - Select multiple values
+- **Custom filtering** - Override default search logic
+- **Large lists** - Efficiently handles thousands of options

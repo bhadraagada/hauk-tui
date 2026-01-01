@@ -1,0 +1,143 @@
+---
+title: Table
+description: A data table with row selection and scrolling
+---
+
+# Table
+
+A data table component with row selection, keyboard navigation, and scrolling support.
+
+```bash
+hauk add table
+```
+
+## Usage
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "./tui/components/table";
+
+function App() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead>Role</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>John Doe</TableCell>
+          <TableCell>john@example.com</TableCell>
+          <TableCell>Admin</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jane Smith</TableCell>
+          <TableCell>jane@example.com</TableCell>
+          <TableCell>User</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+## Examples
+
+### Basic Table
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Column 1</TableHead>
+      <TableHead>Column 2</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Data 1</TableCell>
+      <TableCell>Data 2</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### With Selection
+
+```tsx
+<Table selectable selectedRow={selected} onSelectRow={setSelected}>
+  ...
+</Table>
+```
+
+### Column Widths
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead width={20}>Name</TableHead>
+      <TableHead width={30}>Email</TableHead>
+      <TableHead width={10}>Role</TableHead>
+    </TableRow>
+  </TableHeader>
+  ...
+</Table>
+```
+
+## Props
+
+### Table
+
+| Prop          | Type                      | Default | Description                   |
+| ------------- | ------------------------- | ------- | ----------------------------- |
+| `selectable`  | `boolean`                 | `false` | Enable row selection          |
+| `selectedRow` | `number`                  | -       | Currently selected row index  |
+| `onSelectRow` | `(index: number) => void` | -       | Selection handler             |
+| `maxHeight`   | `number`                  | -       | Max visible rows (scrollable) |
+
+### TableHead
+
+| Prop    | Type                            | Default  | Description                |
+| ------- | ------------------------------- | -------- | -------------------------- |
+| `width` | `number`                        | auto     | Column width in characters |
+| `align` | `"left" \| "center" \| "right"` | `"left"` | Text alignment             |
+
+## Keyboard Shortcuts
+
+| Key         | Action       |
+| ----------- | ------------ |
+| `↓` / `j`   | Next row     |
+| `↑` / `k`   | Previous row |
+| `g`         | First row    |
+| `G`         | Last row     |
+| `Enter`     | Select row   |
+| `Page Down` | Scroll down  |
+| `Page Up`   | Scroll up    |
+
+## Styling
+
+```
+┌──────────────┬─────────────────────┬────────┐
+│ Name         │ Email               │ Role   │
+├──────────────┼─────────────────────┼────────┤
+│ John Doe     │ john@example.com    │ Admin  │
+│▶Jane Smith   │ jane@example.com    │ User   │  (selected)
+│ Bob Wilson   │ bob@example.com     │ User   │
+└──────────────┴─────────────────────┴────────┘
+```
+
+## Notes
+
+- Supports column definitions with custom widths
+- Vim-style navigation (j/k for up/down)
+- Can be scrollable with maxHeight prop

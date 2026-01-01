@@ -1,0 +1,82 @@
+---
+title: Badge
+description: Small status indicator labels
+---
+
+# Badge
+
+Small status indicator labels for displaying tags, counts, or status.
+
+```bash
+hauk add badge
+```
+
+## Usage
+
+```tsx
+import { Badge } from "./tui/components/badge";
+
+function App() {
+  return <Badge variant="success">Active</Badge>;
+}
+```
+
+## Examples
+
+### Variants
+
+```tsx
+<Badge variant="default">Default</Badge>
+<Badge variant="primary">Primary</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="error">Error</Badge>
+```
+
+### With Count
+
+```tsx
+<Badge variant="primary">99+</Badge>
+<Badge variant="error">3</Badge>
+```
+
+### In Lists
+
+```tsx
+<Box>
+  <Text>Notifications</Text>
+  <Badge variant="error">5</Badge>
+</Box>
+```
+
+## Props
+
+| Prop       | Type        | Default     | Description   |
+| ---------- | ----------- | ----------- | ------------- |
+| `children` | `ReactNode` | -           | Badge content |
+| `variant`  | `string`    | `"default"` | Color variant |
+
+### Variants
+
+| Variant     | Color   | Use Case        |
+| ----------- | ------- | --------------- |
+| `default`   | gray    | Neutral status  |
+| `primary`   | magenta | Primary actions |
+| `secondary` | cyan    | Secondary info  |
+| `success`   | green   | Success states  |
+| `warning`   | yellow  | Warnings        |
+| `error`     | red     | Errors, alerts  |
+
+## Styling
+
+Badges display as inline labels:
+
+```
+[Active] [Warning] [3]
+```
+
+## Notes
+
+- Multiple color variants available
+- Use for status indicators, counts, or tags

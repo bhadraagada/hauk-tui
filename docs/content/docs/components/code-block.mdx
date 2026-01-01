@@ -1,0 +1,162 @@
+---
+title: CodeBlock
+description: Code display with line numbers and syntax highlighting
+---
+
+# CodeBlock
+
+Code display component with line numbers and basic syntax highlighting for the terminal.
+
+```bash
+hauk add code-block
+```
+
+## Usage
+
+```tsx
+import { CodeBlock } from "./tui/components/code-block";
+
+function App() {
+  const code = `function greet(name) {
+  return "Hello, " + name;
+}`;
+
+  return <CodeBlock language="javascript">{code}</CodeBlock>;
+}
+```
+
+## Examples
+
+### Basic Code Block
+
+```tsx
+<CodeBlock>
+  {`const x = 42;
+console.log(x);`}
+</CodeBlock>
+```
+
+### With Title
+
+```tsx
+<CodeBlock title="app.ts" language="typescript">
+  {`import { render } from "ink";
+import App from "./app";
+
+render(<App />);`}
+</CodeBlock>
+```
+
+### With Line Numbers
+
+```tsx
+<CodeBlock showLineNumbers={true} startLine={1}>
+  {`const a = 1;
+const b = 2;
+const c = a + b;`}
+</CodeBlock>
+```
+
+Output:
+
+```
+╭──────────────────────────╮
+│ 1 │ const a = 1;         │
+│ 2 │ const b = 2;         │
+│ 3 │ const c = a + b;     │
+╰──────────────────────────╯
+```
+
+### Highlight Specific Lines
+
+```tsx
+<CodeBlock showLineNumbers={true} highlightLines={[2, 4]}>
+  {`function add(a, b) {
+  // This line is highlighted
+  const result = a + b;
+  return result; // Also highlighted
+}`}
+</CodeBlock>
+```
+
+### Different Languages
+
+```tsx
+// Python
+<CodeBlock language="python" title="script.py">
+  {`def greet(name):
+    return f"Hello, {name}"`}
+</CodeBlock>
+
+// JSON
+<CodeBlock language="json" title="config.json">
+  {`{
+  "name": "my-app",
+  "version": "1.0.0"
+}`}
+</CodeBlock>
+
+// Bash
+<CodeBlock language="bash" title="install.sh">
+  {`#!/bin/bash
+npm install
+npm start`}
+</CodeBlock>
+```
+
+### Without Line Numbers
+
+```tsx
+<CodeBlock showLineNumbers={false}>{`const x = 42;`}</CodeBlock>
+```
+
+### Custom Start Line
+
+```tsx
+<CodeBlock showLineNumbers={true} startLine={10}>
+  {`// This starts at line 10
+const config = {};`}
+</CodeBlock>
+```
+
+### Max Width
+
+```tsx
+<CodeBlock maxWidth={60} title="Wide Code">
+  {code}
+</CodeBlock>
+```
+
+## Props
+
+| Prop              | Type       | Default  | Description                    |
+| ----------------- | ---------- | -------- | ------------------------------ |
+| `children`        | `string`   | -        | Code content                   |
+| `language`        | `string`   | `"text"` | Programming language           |
+| `showLineNumbers` | `boolean`  | `true`   | Show line numbers              |
+| `startLine`       | `number`   | `1`      | Starting line number           |
+| `highlightLines`  | `number[]` | `[]`     | Lines to highlight (1-indexed) |
+| `title`           | `string`   | -        | Title/filename to display      |
+| `maxWidth`        | `number`   | -        | Maximum width                  |
+
+## Supported Languages
+
+- `javascript` / `typescript`
+- `python`
+- `bash`
+- `json`
+- `text` (default, no highlighting)
+
+## Features
+
+- **Line Numbers** - Optional line numbers with custom start
+- **Syntax Highlighting** - Basic highlighting for keywords, strings, comments
+- **Line Highlighting** - Highlight specific lines
+- **Title Bar** - Display filename or title
+- **Multiple Languages** - Support for common languages
+
+## Notes
+
+- Supports multiple languages with line highlighting
+- Line numbers are optional and customizable
+- Title bar shows filename and language

@@ -1,0 +1,630 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* ============================================
+   haukTUI — Terminal-themed Design System
+   Accent: Cyan/Teal for a modern terminal vibe
+   ============================================ */
+
+@theme {
+  /* Monospace font for terminal feel */
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Consolas", monospace;
+
+  /* Layout */
+  --fd-layout-width: 1400px;
+
+  /* Accent color tokens (cyan/teal) */
+  --color-accent: hsl(175, 70%, 45%);
+  --color-accent-hover: hsl(175, 70%, 38%);
+  --color-accent-muted: hsla(175, 70%, 45%, 0.15);
+}
+
+/* ============================================
+   Light Mode (minimal — focus is dark mode)
+   ============================================ */
+:root {
+  --color-fd-background: hsl(220, 14%, 96%);
+  --color-fd-foreground: hsl(220, 14%, 10%);
+  --color-fd-muted: hsl(220, 12%, 92%);
+  --color-fd-muted-foreground: hsl(220, 10%, 42%);
+  --color-fd-popover: hsl(0, 0%, 100%);
+  --color-fd-popover-foreground: hsl(220, 14%, 12%);
+  --color-fd-card: hsl(220, 14%, 94%);
+  --color-fd-card-foreground: hsl(220, 14%, 10%);
+  --color-fd-border: hsla(220, 14%, 80%, 0.5);
+  --color-fd-primary: hsl(175, 70%, 40%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-secondary: hsl(220, 12%, 90%);
+  --color-fd-secondary-foreground: hsl(220, 14%, 10%);
+  --color-fd-accent: hsla(175, 60%, 92%, 0.6);
+  --color-fd-accent-foreground: hsl(175, 70%, 32%);
+  --color-fd-ring: hsl(175, 70%, 45%);
+}
+
+/* ============================================
+   Dark Mode — Terminal Aesthetic
+   ============================================ */
+.dark {
+  --color-fd-background: hsl(225, 25%, 5%);
+  --color-fd-foreground: hsl(220, 15%, 88%);
+  --color-fd-muted: hsl(225, 20%, 10%);
+  --color-fd-muted-foreground: hsla(220, 12%, 58%, 0.95);
+  --color-fd-popover: hsl(225, 22%, 8%);
+  --color-fd-popover-foreground: hsl(220, 12%, 85%);
+  --color-fd-card: hsl(225, 22%, 7%);
+  --color-fd-card-foreground: hsl(220, 12%, 95%);
+  --color-fd-border: hsla(220, 25%, 22%, 0.45);
+  --color-fd-primary: hsl(175, 70%, 45%);
+  --color-fd-primary-foreground: hsl(225, 25%, 5%);
+  --color-fd-secondary: hsl(225, 18%, 12%);
+  --color-fd-secondary-foreground: hsl(220, 12%, 88%);
+  --color-fd-accent: hsla(175, 65%, 45%, 0.18);
+  --color-fd-accent-foreground: hsl(175, 70%, 60%);
+  --color-fd-ring: hsl(175, 70%, 45%);
+}
+
+/* ============================================
+   Global Typography & Base Styles
+   ============================================ */
+html {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+
+/* Monospace for code elements */
+code,
+pre,
+kbd,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   Scrollbar — Sleek & Minimal
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(175, 50%, 45%, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(175, 50%, 45%, 0.45);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(175, 50%, 45%, 0.25) transparent;
+}
+
+/* ============================================
+   Terminal Cursor Blink
+   ============================================ */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--color-accent);
+}
+
+/* ============================================
+   Terminal Glow Effect
+   ============================================ */
+.terminal-glow {
+  box-shadow:
+    0 0 20px hsla(175, 70%, 45%, 0.15),
+    0 0 40px hsla(175, 70%, 45%, 0.08);
+}
+
+/* ============================================
+   Code Blocks — Syntax Highlighting Ready
+   ============================================ */
+
+/* Reset ALL code block wrappers from Fumadocs */
+figure,
+figure[data-rehype-pretty-code-figure],
+[data-rehype-pretty-code-fragment],
+div[data-rehype-pretty-code-fragment],
+.prose pre,
+.mdx pre,
+.prose pre code,
+.mdx pre code {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+pre {
+  border: 1px solid var(--color-fd-border) !important;
+  background: hsl(225, 28%, 6%) !important;
+  border-radius: 0.4rem !important;
+  font-size: 0.8rem !important;
+  line-height: 1.35 !important;
+  padding: 0.5rem 0.75rem !important;
+  margin: 0.75rem 0 !important;
+  overflow-x: auto;
+}
+
+pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  display: block;
+  white-space: pre;
+}
+
+/* Kill all extra spacing inside code blocks */
+pre code span,
+pre span {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: inherit !important;
+}
+
+pre [data-line],
+pre code [data-line] {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline !important;
+}
+
+/* Fumadocs code block specific overrides */
+.fd-codeblock,
+[class*="codeblock"],
+[class*="CodeBlock"] {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.fd-codeblock pre,
+[class*="codeblock"] pre,
+[class*="CodeBlock"] pre {
+  margin: 0 !important;
+}
+
+/* Copy button positioning fix */
+pre + button,
+pre ~ button,
+figure button,
+[data-rehype-pretty-code-figure] button {
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+}
+
+/* Inline code */
+:not(pre) > code {
+  padding: 0.1em 0.3em;
+  font-size: 0.85em;
+  background: hsla(175, 40%, 45%, 0.1);
+  border: 1px solid hsla(175, 40%, 45%, 0.15);
+  border-radius: 0.25rem;
+  color: hsl(175, 60%, 55%);
+  white-space: nowrap;
+}
+
+.dark :not(pre) > code {
+  background: hsla(175, 40%, 45%, 0.12);
+  border-color: hsla(175, 40%, 45%, 0.18);
+  color: hsl(175, 65%, 60%);
+}
+
+/* ============================================
+   Syntax Highlighting Tokens (Shiki/Rehype)
+   ============================================ */
+.dark pre {
+  --shiki-color-text: hsl(220, 15%, 88%);
+  --shiki-color-background: hsl(225, 28%, 6%);
+  --shiki-token-constant: hsl(175, 70%, 55%);
+  --shiki-token-string: hsl(140, 60%, 55%);
+  --shiki-token-comment: hsl(220, 12%, 45%);
+  --shiki-token-keyword: hsl(280, 70%, 70%);
+  --shiki-token-parameter: hsl(35, 90%, 65%);
+  --shiki-token-function: hsl(195, 80%, 65%);
+  --shiki-token-string-expression: hsl(140, 60%, 55%);
+  --shiki-token-punctuation: hsl(220, 12%, 60%);
+  --shiki-token-link: hsl(175, 70%, 55%);
+}
+
+/* Manual syntax highlighting classes */
+.token-keyword {
+  color: hsl(280, 70%, 70%);
+}
+.token-string {
+  color: hsl(140, 60%, 55%);
+}
+.token-function {
+  color: hsl(195, 80%, 65%);
+}
+.token-constant {
+  color: hsl(175, 70%, 55%);
+}
+.token-parameter {
+  color: hsl(35, 90%, 65%);
+}
+.token-comment {
+  color: hsl(220, 12%, 45%);
+  font-style: italic;
+}
+.token-punctuation {
+  color: hsl(220, 12%, 60%);
+}
+.token-tag {
+  color: hsl(195, 80%, 65%);
+}
+.token-attr-name {
+  color: hsl(35, 90%, 65%);
+}
+.token-attr-value {
+  color: hsl(140, 60%, 55%);
+}
+
+/* ============================================
+   Terminal Prompt Styling
+   ============================================ */
+.terminal-prompt::before {
+  content: "$ ";
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ============================================
+   ASCII Art
+   ============================================ */
+.ascii-art {
+  font-family: var(--font-mono);
+  line-height: 1.15;
+  white-space: pre;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================
+   Component Preview Box
+   ============================================ */
+.component-preview {
+  background: hsl(225, 25%, 6%);
+  border: 1px solid hsla(220, 25%, 22%, 0.5);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   Keyboard Key Styling
+   ============================================ */
+.kbd,
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: hsla(220, 18%, 18%, 0.9);
+  border: 1px solid hsla(220, 20%, 28%, 0.7);
+  border-radius: 0.375rem;
+  box-shadow:
+    0 1px 0 1px hsla(0, 0%, 0%, 0.3),
+    inset 0 1px 0 hsla(220, 20%, 40%, 0.1);
+  color: hsl(220, 12%, 75%);
+}
+
+/* ============================================
+   Badge Colors for Component Categories
+   ============================================ */
+.badge-primitive {
+  background: hsla(200, 75%, 50%, 0.15);
+  color: hsl(200, 75%, 60%);
+  border: 1px solid hsla(200, 75%, 50%, 0.25);
+}
+
+.badge-input {
+  background: hsla(145, 65%, 45%, 0.15);
+  color: hsl(145, 65%, 55%);
+  border: 1px solid hsla(145, 65%, 45%, 0.25);
+}
+
+.badge-layout {
+  background: hsla(38, 85%, 55%, 0.15);
+  color: hsl(38, 85%, 60%);
+  border: 1px solid hsla(38, 85%, 55%, 0.25);
+}
+
+.badge-navigation {
+  background: hsla(270, 65%, 55%, 0.15);
+  color: hsl(270, 65%, 65%);
+  border: 1px solid hsla(270, 65%, 55%, 0.25);
+}
+
+.badge-feedback {
+  background: hsla(350, 70%, 55%, 0.15);
+  color: hsl(350, 70%, 65%);
+  border: 1px solid hsla(350, 70%, 55%, 0.25);
+}
+
+.badge-display {
+  background: hsla(175, 70%, 45%, 0.15);
+  color: hsl(175, 70%, 55%);
+  border: 1px solid hsla(175, 70%, 45%, 0.25);
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a:not([class]) {
+  color: var(--color-fd-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:not([class]):hover {
+  color: hsl(175, 70%, 55%);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+::selection {
+  background: hsla(175, 70%, 45%, 0.3);
+  color: inherit;
+}
+
+/* ============================================
+   Focus States
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Fumadocs Overrides — Sleek Polish
+   ============================================ */
+
+/* Sidebar */
+.dark [data-sidebar] {
+  background: hsla(225, 25%, 5%, 0.95);
+  border-color: hsla(220, 25%, 18%, 0.4);
+}
+
+/* Navbar */
+.dark nav[data-nav] {
+  background: hsla(225, 25%, 5%, 0.85);
+  backdrop-filter: blur(12px);
+  border-color: hsla(220, 25%, 18%, 0.35);
+}
+
+/* Search */
+.dark [data-search] {
+  background: hsla(225, 22%, 8%, 0.98);
+  border-color: hsla(220, 25%, 22%, 0.5);
+}
+
+/* Cards in docs */
+.dark .fd-card {
+  background: hsla(225, 22%, 7%, 0.8);
+  border-color: hsla(220, 25%, 20%, 0.4);
+}
+
+.dark .fd-card:hover {
+  border-color: hsla(175, 60%, 45%, 0.35);
+}
+
+/* Headings in docs */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.prose h1 {
+  font-size: 2rem;
+}
+.prose h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+}
+.prose h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+/* Tables */
+.prose table {
+  font-size: 0.875rem;
+}
+
+.prose th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--color-fd-muted-foreground);
+}
+
+.dark .prose th {
+  background: hsla(225, 20%, 12%, 0.6);
+}
+
+.dark .prose td {
+  border-color: hsla(220, 25%, 18%, 0.4);
+}
+
+/* Blockquotes */
+.prose blockquote {
+  border-left: 3px solid var(--color-accent);
+  background: hsla(175, 50%, 45%, 0.06);
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: normal;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+/* ============================================
+   Callout Styles (for MDX components)
+   ============================================ */
+.callout {
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid;
+  margin: 1.5rem 0;
+}
+
+.callout-info {
+  background: hsla(200, 70%, 50%, 0.08);
+  border-color: hsla(200, 70%, 50%, 0.25);
+}
+
+.callout-info .callout-title {
+  color: hsl(200, 70%, 60%);
+}
+
+.callout-warning {
+  background: hsla(38, 85%, 55%, 0.08);
+  border-color: hsla(38, 85%, 55%, 0.25);
+}
+
+.callout-warning .callout-title {
+  color: hsl(38, 85%, 60%);
+}
+
+.callout-error {
+  background: hsla(350, 70%, 55%, 0.08);
+  border-color: hsla(350, 70%, 55%, 0.25);
+}
+
+.callout-error .callout-title {
+  color: hsl(350, 70%, 65%);
+}
+
+.callout-success {
+  background: hsla(145, 65%, 45%, 0.08);
+  border-color: hsla(145, 65%, 45%, 0.25);
+}
+
+.callout-success .callout-title {
+  color: hsl(145, 65%, 55%);
+}
+
+/* ============================================
+   Terminal Window Component
+   ============================================ */
+.terminal-window {
+  border-radius: 0.75rem;
+  border: 1px solid hsla(220, 25%, 20%, 0.5);
+  background: hsl(225, 28%, 6%);
+  overflow: hidden;
+  box-shadow:
+    0 4px 6px -1px hsla(0, 0%, 0%, 0.2),
+    0 2px 4px -2px hsla(0, 0%, 0%, 0.15);
+}
+
+.terminal-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: hsla(225, 22%, 10%, 0.8);
+  border-bottom: 1px solid hsla(220, 25%, 18%, 0.4);
+}
+
+.terminal-window-dots {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.terminal-window-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.terminal-window-dot-red {
+  background: hsl(0, 72%, 51%);
+}
+.terminal-window-dot-yellow {
+  background: hsl(45, 93%, 47%);
+}
+.terminal-window-dot-green {
+  background: hsl(142, 71%, 45%);
+}
+
+.terminal-window-title {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-fd-muted-foreground);
+}
+
+.terminal-window-content {
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsla(175, 70%, 45%, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 30px hsla(175, 70%, 45%, 0.25);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}

@@ -1,0 +1,107 @@
+---
+title: Data Table
+description: Advanced table with sorting, filtering, and pagination
+---
+
+# Data Table
+
+Feature-rich data table component with sorting, filtering, pagination, and row selection.
+
+```bash
+hauk add data-table
+```
+
+## Usage
+
+### Basic Data Table
+
+```tsx
+import { DataTable } from "./tui/components/data-table";
+
+const columns = [
+  { key: "name", header: "Name" },
+  { key: "email", header: "Email" },
+  { key: "role", header: "Role" },
+];
+
+const data = [
+  { id: 1, name: "Alice", email: "alice@example.com", role: "Admin" },
+  { id: 2, name: "Bob", email: "bob@example.com", role: "User" },
+];
+
+<DataTable columns={columns} data={data} />;
+```
+
+### With Sorting
+
+```tsx
+import { DataTable } from "./tui/components/data-table";
+
+<DataTable
+  columns={columns}
+  data={data}
+  sortable
+  defaultSort={{ column: "name", direction: "asc" }}
+/>;
+```
+
+### With Selection
+
+```tsx
+import { DataTable } from "./tui/components/data-table";
+
+<DataTable
+  columns={columns}
+  data={data}
+  selectable
+  selectedRows={selected}
+  onSelectRows={setSelected}
+/>;
+```
+
+### With Pagination
+
+```tsx
+import { DataTable } from "./tui/components/data-table";
+
+<DataTable
+  columns={columns}
+  data={data}
+  pagination
+  pageSize={10}
+  currentPage={page}
+  onPageChange={setPage}
+/>;
+```
+
+## Props
+
+| Prop         | Type                 | Default | Description                   |
+| ------------ | -------------------- | ------- | ----------------------------- |
+| `columns`    | `Column[]`           | -       | Column definitions (required) |
+| `data`       | `any[]`              | -       | Table data rows (required)    |
+| `sortable`   | `boolean`            | `false` | Enable column sorting         |
+| `selectable` | `boolean`            | `false` | Enable row selection          |
+| `pagination` | `boolean`            | `false` | Enable pagination             |
+| `pageSize`   | `number`             | `10`    | Rows per page                 |
+| `onRowClick` | `(row: any) => void` | -       | Handler for row clicks        |
+
+## Keyboard Shortcuts
+
+| Key            | Action                        |
+| -------------- | ----------------------------- |
+| `↑` / `k`      | Navigate up                   |
+| `↓` / `j`      | Navigate down                 |
+| `Space`        | Select/deselect row           |
+| `Enter`        | Activate row action           |
+| `s`            | Toggle sort on focused column |
+| `Page Up/Down` | Jump pages (if paginated)     |
+
+## Features
+
+- **Sorting** - Click columns to sort ascending/descending
+- **Selection** - Single or multiple row selection
+- **Pagination** - Navigate large datasets
+- **Filtering** - Built-in or custom filters
+- **Keyboard navigation** - Full keyboard support
+- **Customizable** - Custom cell renderers

@@ -1,0 +1,136 @@
+---
+title: Skeleton
+description: Animated loading placeholder for content
+---
+
+# Skeleton
+
+Animated loading placeholder to show while content is being loaded.
+
+```bash
+hauk add skeleton
+```
+
+## Usage
+
+```tsx
+import { Skeleton } from "./tui/components/skeleton";
+
+function App() {
+  const [loading, setLoading] = useState(true);
+
+  if (loading) {
+    return (
+      <Box flexDirection="column" gap={1}>
+        <Skeleton width={30} />
+        <Skeleton width={20} />
+        <Skeleton width={25} />
+      </Box>
+    );
+  }
+
+  return <Text>Content loaded!</Text>;
+}
+```
+
+## Examples
+
+### Basic Skeleton
+
+```tsx
+<Skeleton width={20} />
+```
+
+### Multi-line Skeleton
+
+```tsx
+<Skeleton width={30} height={3} />
+```
+
+### Circular Skeleton
+
+```tsx
+<Skeleton variant="circular" width={8} />
+```
+
+### Rectangular Skeleton
+
+```tsx
+<Skeleton variant="rectangular" width={20} height={5} />
+```
+
+### Without Animation
+
+```tsx
+<Skeleton width={20} animate={false} />
+```
+
+### Loading Card
+
+```tsx
+<Box flexDirection="column" gap={1}>
+  <Skeleton variant="circular" width={5} />
+  <Skeleton width={20} />
+  <Skeleton width={30} />
+  <Skeleton width={25} />
+</Box>
+```
+
+### Loading Table
+
+```tsx
+<Box flexDirection="column" gap={1}>
+  <Skeleton width={50} />
+  <Skeleton width={50} />
+  <Skeleton width={50} />
+  <Skeleton width={50} />
+</Box>
+```
+
+## Props
+
+| Prop      | Type                                        | Default  | Description              |
+| --------- | ------------------------------------------- | -------- | ------------------------ |
+| `width`   | `number`                                    | `20`     | Width in characters      |
+| `height`  | `number`                                    | `1`      | Height in lines          |
+| `variant` | `"text"` \| `"circular"` \| `"rectangular"` | `"text"` | Skeleton variant         |
+| `animate` | `boolean`                                   | `true`   | Enable shimmer animation |
+
+## Variants
+
+### Text Variant
+
+```
+░░░░░░░░░░░░░░░░░░░░
+```
+
+### Circular Variant
+
+```
+(░░░░░░)
+```
+
+### Rectangular Variant (multi-line)
+
+```
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+```
+
+## Animation
+
+The skeleton animates between three shading characters:
+
+```
+░ → ▒ → ▓ → ░
+```
+
+Animation cycles every 500ms for a subtle shimmer effect.
+
+## Notes
+
+- Use to indicate loading states
+- Match skeleton dimensions to expected content size
+- Disable animation for static placeholders
+- Supports text, circular, and rectangular variants

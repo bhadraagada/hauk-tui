@@ -1,0 +1,92 @@
+---
+title: Slider
+description: Adjustable range input control
+---
+
+# Slider
+
+Slider component for selecting numeric values within a range using keyboard navigation.
+
+```bash
+hauk add slider
+```
+
+## Usage
+
+### Basic Slider
+
+```tsx
+import { Slider } from "./tui/components/slider";
+
+<Slider
+  value={volume}
+  onValueChange={setVolume}
+  min={0}
+  max={100}
+  label="Volume"
+/>;
+```
+
+### With Steps
+
+```tsx
+import { Slider } from "./tui/components/slider";
+
+<Slider
+  value={brightness}
+  onValueChange={setBrightness}
+  min={0}
+  max={100}
+  step={10}
+  label="Brightness"
+  showValue
+/>;
+```
+
+### Range Slider
+
+```tsx
+import { Slider } from "./tui/components/slider";
+
+<Slider
+  value={priceRange}
+  onValueChange={setPriceRange}
+  min={0}
+  max={1000}
+  range
+  label="Price range"
+/>;
+```
+
+## Props
+
+| Prop            | Type                                          | Default | Description                          |
+| --------------- | --------------------------------------------- | ------- | ------------------------------------ |
+| `value`         | `number` \| `[number, number]`                | -       | Current slider value or range        |
+| `onValueChange` | `(value: number \| [number, number]) => void` | -       | Handler when value changes           |
+| `min`           | `number`                                      | `0`     | Minimum value                        |
+| `max`           | `number`                                      | `100`   | Maximum value                        |
+| `step`          | `number`                                      | `1`     | Value increment step                 |
+| `range`         | `boolean`                                     | `false` | Enable range selection (two handles) |
+| `label`         | `string`                                      | -       | Label text                           |
+| `showValue`     | `boolean`                                     | `false` | Display current value                |
+| `disabled`      | `boolean`                                     | `false` | Disable interaction                  |
+
+## Keyboard Shortcuts
+
+| Key         | Action                       |
+| ----------- | ---------------------------- |
+| `←` `h`     | Decrease value               |
+| `→` `l`     | Increase value               |
+| `Home`      | Jump to minimum              |
+| `End`       | Jump to maximum              |
+| `Page Up`   | Increase by large step (10x) |
+| `Page Down` | Decrease by large step (10x) |
+
+## Features
+
+- **Range support** - Single value or dual-handle range
+- **Custom steps** - Define value increments
+- **Keyboard control** - Full keyboard navigation
+- **Visual feedback** - Clear value indicator
+- **Min/max boundaries** - Enforce value constraints

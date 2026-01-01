@@ -1,0 +1,346 @@
+---
+title: Focus Management
+description: Keyboard navigation and focus handling
+---
+
+# Focus Management
+
+haukTUI provides a robust focus management system for keyboard-first navigation. Every interactive component integrates with the focus system to provide a seamless keyboard experience.
+
+## Core Concepts
+
+### Focus Groups
+
+Focus groups organize focusable elements into logical containers. Navigation stays within a group until explicitly moved.
+
+```tsx
+import { FocusGroup, useFocus } from "@hauktui/core";
+
+function App() {
+  return (
+    <FocusGroup id="main">
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </FocusGroup>
+  );
+}
+```
+
+### Focus Context
+
+The focus context tracks which element is currently focused and provides navigation methods.
+
+```tsx
+import { FocusProvider, useFocusContext } from "@hauktui/core";
+
+function App() {
+  return (
+    <FocusProvider>
+      <Navigation />
+      <Content />
+    </FocusProvider>
+  );
+}
+
+function Navigation() {
+  const { focusNext, focusPrev } = useFocusContext();
+
+  // Navigate with Tab/Shift+Tab
+  useInput((input, key) => {
+    if (key.tab) {
+      key.shift ? focusPrev() : focusNext();
+    }
+  });
+
+  return <Sidebar />;
+}
+```
+
+## useFocus Hook
+
+The primary hook for making components focusable:
+
+```tsx
+import { useFocus } from "@hauktui/core";
+
+function FocusableItem({ id, children }) {
+  const { isFocused, focus } = useFocus(id);
+
+  return (
+    <Box>
+      {isFocused && <Text color="magenta">▶ </Text>}
+      <Text inverse={isFocused}>{children}</Text>
+    </Box>
+  );
+}
+```
+
+### Hook Options
+
+```tsx
+const { isFocused, focus, blur } = useFocus(id, {
+  // Auto-focus on mount
+  autoFocus: false,
+
+  // Disable focus for this element
+  disabled: false,
+
+  // Called when element receives focus
+  onFocus: () => {},
+
+  // Called when element loses focus
+  onBlur: () => {},
+
+  // Focus order (lower = earlier)
+  order: 0,
+});
+```
+
+## Focus Groups
+
+### Basic Group
+
+```tsx
+import { FocusGroup } from "@hauktui/core";
+
+function Form() {
+  return (
+    <FocusGroup id="form">
+      <TextInput label="Name" />
+      <TextInput label="Email" />
+      <Button>Submit</Button>
+    </FocusGroup>
+  );
+}
+```
+
+### Nested Groups
+
+Groups can be nested for complex layouts:
+
+```tsx
+function App() {
+  return (
+    <FocusGroup id="app" direction="horizontal">
+      <FocusGroup id="sidebar" direction="vertical">
+        <NavItem>Home</NavItem>
+        <NavItem>Settings</NavItem>
+      </FocusGroup>
+
+      <FocusGroup id="content" direction="vertical">
+        <Card>Content 1</Card>
+        <Card>Content 2</Card>
+      </FocusGroup>
+    </FocusGroup>
+  );
+}
+```
+
+### Group Options
+
+```tsx
+<FocusGroup
+  id="menu"
+  // Navigation direction
+  direction="vertical" // or "horizontal", "grid"
+  // Wrap around at edges
+  wrap={true}
+  // Trap focus within group
+  trap={false}
+  // Initial focused element
+  initialFocus="first" // or "last", or specific id
+  // Restore focus when leaving
+  restoreFocus={true}
+>
+  {children}
+</FocusGroup>
+```
+
+## Focus Navigation
+
+### Default Keybindings
+
+| Key          | Action                         |
+| ------------ | ------------------------------ |
+| `Tab`        | Move to next focusable         |
+| `Shift+Tab`  | Move to previous focusable     |
+| `↑` / `k`    | Move up (vertical groups)      |
+| `↓` / `j`    | Move down (vertical groups)    |
+| `←` / `h`    | Move left (horizontal groups)  |
+| `→` / `l`    | Move right (horizontal groups) |
+| `Home` / `g` | Move to first                  |
+| `End` / `G`  | Move to last                   |
+
+### Programmatic Navigation
+
+```tsx
+import { useFocusContext } from "@hauktui/core";
+
+function MyComponent() {
+  const focus = useFocusContext();
+
+  // Navigate
+  focus.focusNext();
+  focus.focusPrev();
+  focus.focusFirst();
+  focus.focusLast();
+
+  // Focus specific element
+  focus.focusById("submit-button");
+
+  // Focus within group
+  focus.focusGroup("sidebar");
+
+  // Check focus
+  focus.hasFocus("my-input"); // boolean
+  focus.getFocusedId(); // current id
+}
+```
+
+## Focus Trap
+
+Trap focus within a region (useful for modals):
+
+```tsx
+import { FocusTrap } from "@hauktui/core";
+
+function Modal({ isOpen, onClose }) {
+  if (!isOpen) return null;
+
+  return (
+    <FocusTrap active={isOpen} onEscape={onClose} restoreFocus={true}>
+      <Box borderStyle="double">
+        <Text>Modal Content</Text>
+        <Button onPress={onClose}>Close</Button>
+      </Box>
+    </FocusTrap>
+  );
+}
+```
+
+## Focus Indicators
+
+### Visual Indicators
+
+```tsx
+function FocusableButton({ children }) {
+  const { isFocused } = useFocus("button");
+  const tokens = useTokens();
+
+  return (
+    <Box>
+      {/* Prefix indicator */}
+      <Text color={tokens.colors.focus}>
+        {isFocused ? tokens.focus.indicator : " "}
+      </Text>
+
+      {/* Content with highlight */}
+      <Text
+        inverse={isFocused}
+        color={isFocused ? tokens.colors.focus : undefined}
+      >
+        {children}
+      </Text>
+    </Box>
+  );
+}
+```
+
+### Custom Focus Styles
+
+```tsx
+function CustomFocusItem({ children }) {
+  const { isFocused } = useFocus();
+
+  return (
+    <Box
+      borderStyle={isFocused ? "double" : "single"}
+      borderColor={isFocused ? "magenta" : "gray"}
+      paddingX={1}
+    >
+      <Text bold={isFocused}>{children}</Text>
+    </Box>
+  );
+}
+```
+
+## Focus Events
+
+### onFocus / onBlur
+
+```tsx
+function TrackedInput() {
+  const { isFocused } = useFocus("input", {
+    onFocus: () => {
+      console.log("Input focused");
+    },
+    onBlur: () => {
+      console.log("Input blurred");
+    },
+  });
+
+  return <TextInput />;
+}
+```
+
+### Focus Change Listener
+
+```tsx
+import { useFocusChange } from "@hauktui/core";
+
+function FocusLogger() {
+  useFocusChange((previousId, currentId) => {
+    console.log(`Focus changed: ${previousId} → ${currentId}`);
+  });
+
+  return null;
+}
+```
+
+## Accessibility Best Practices
+
+### 1. Always Show Focus
+
+```tsx
+// Good - visible focus indicator
+{isFocused && <Text color="magenta">▶ </Text>}
+
+// Avoid - no visual indicator
+<Text color={isFocused ? 'magenta' : 'white'}>
+```
+
+### 2. Logical Tab Order
+
+```tsx
+// Good - logical order
+<FocusGroup>
+  <TextInput label="First Name" order={1} />
+  <TextInput label="Last Name" order={2} />
+  <TextInput label="Email" order={3} />
+  <Button order={4}>Submit</Button>
+</FocusGroup>
+```
+
+### 3. Skip Links
+
+```tsx
+function App() {
+  const { focusById } = useFocusContext();
+
+  return (
+    <>
+      <Button onPress={() => focusById("main-content")}>Skip to content</Button>
+      <Navigation />
+      <Box id="main-content">
+        <Content />
+      </Box>
+    </>
+  );
+}
+```
+
+## Next Steps
+
+- [Keymaps](/docs/theming/keymaps) - Customize keyboard shortcuts
+- [Components](/docs/components) - Browse focusable components

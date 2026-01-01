@@ -1,0 +1,180 @@
+---
+title: Terminal
+description: Terminal output display with command/output/error lines
+---
+
+# Terminal
+
+Terminal output display component that mimics a real terminal with command prompts, output, and error messages.
+
+```bash
+hauk add terminal
+```
+
+## Usage
+
+```tsx
+import { Terminal } from "./tui/components/terminal";
+
+function App() {
+  const lines = [
+    { content: "npm install", type: "command" },
+    { content: "added 150 packages", type: "output" },
+    { content: "Done in 2.5s", type: "success" },
+  ];
+
+  return <Terminal lines={lines} title="Terminal" />;
+}
+```
+
+## Examples
+
+### Basic Terminal
+
+```tsx
+<Terminal
+  lines={[
+    { content: "ls -la", type: "command" },
+    { content: "total 32", type: "output" },
+    {
+      content: "drwxr-xr-x  5 user  staff  160 Dec 25 10:00 .",
+      type: "output",
+    },
+    {
+      content: "drwxr-xr-x  3 user  staff   96 Dec 25 09:00 ..",
+      type: "output",
+    },
+  ]}
+/>
+```
+
+Output:
+
+```
+╭─────────────────────────────────────╮
+│ ● ● ●              Terminal         │
+├─────────────────────────────────────┤
+│ $ ls -la                            │
+│ total 32                            │
+│ drwxr-xr-x  5 user  staff  160 ...  │
+│ drwxr-xr-x  3 user  staff   96 ...  │
+╰─────────────────────────────────────╯
+```
+
+### With Different Line Types
+
+```tsx
+<Terminal
+  lines={[
+    { content: "npm run build", type: "command" },
+    { content: "Building project...", type: "output" },
+    { content: "Warning: Unused variable", type: "warning" },
+    { content: "Error: Module not found", type: "error" },
+    { content: "Build complete!", type: "success" },
+  ]}
+  title="Build Output"
+/>
+```
+
+### With Timestamps
+
+```tsx
+<Terminal
+  lines={[
+    { content: "Starting server...", type: "info", timestamp: new Date() },
+    {
+      content: "Server running on port 3000",
+      type: "success",
+      timestamp: new Date(),
+    },
+  ]}
+  showTimestamps={true}
+/>
+```
+
+### Custom Prompt
+
+```tsx
+<Terminal
+  lines={[
+    { content: "git status", type: "command" },
+    { content: "On branch main", type: "output" },
+  ]}
+  prompt="❯ "
+/>
+```
+
+### Limited Lines
+
+```tsx
+<Terminal lines={manyLines} maxLines={10} title="Last 10 Lines" />
+```
+
+### Empty Terminal
+
+```tsx
+<Terminal lines={[]} title="Ready" />
+```
+
+Output shows cursor waiting for input:
+
+```
+╭─────────────────────────────────────╮
+│ ● ● ●              Ready            │
+├─────────────────────────────────────┤
+│ $ █                                 │
+╰─────────────────────────────────────╯
+```
+
+### Custom Width
+
+```tsx
+<Terminal lines={lines} width={60} />
+```
+
+## Props
+
+| Prop             | Type             | Default      | Description           |
+| ---------------- | ---------------- | ------------ | --------------------- |
+| `lines`          | `TerminalLine[]` | -            | Terminal lines        |
+| `title`          | `string`         | `"Terminal"` | Terminal title        |
+| `prompt`         | `string`         | `"$ "`       | Default prompt prefix |
+| `showTimestamps` | `boolean`        | `false`      | Show timestamps       |
+| `maxLines`       | `number`         | -            | Max lines to display  |
+| `width`          | `number`         | -            | Terminal width        |
+
+## TerminalLine
+
+```tsx
+interface TerminalLine {
+  content: string; // Line content
+  type?: "command" | "output" | "error" | "success" | "info" | "warning";
+  prefix?: string; // Optional prefix/prompt
+  timestamp?: Date; // Timestamp
+}
+```
+
+## Line Types
+
+| Type      | Color   | Description            |
+| --------- | ------- | ---------------------- |
+| `command` | accent  | User input commands    |
+| `output`  | default | Standard output        |
+| `error`   | red     | Error messages         |
+| `success` | green   | Success messages       |
+| `info`    | blue    | Informational messages |
+| `warning` | yellow  | Warning messages       |
+
+## Features
+
+- **Title Bar** - macOS-style title bar with traffic lights
+- **Line Types** - Different colors for commands, output, errors
+- **Timestamps** - Optional timestamps for each line
+- **Custom Prompt** - Configurable prompt character
+- **Max Lines** - Limit displayed lines (shows last N)
+
+## Notes
+
+- Supports timestamps and multiple line types
+- Command lines automatically get the prompt prefix
+- Empty terminal shows a blinking cursor

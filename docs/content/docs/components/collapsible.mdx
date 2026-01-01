@@ -1,0 +1,76 @@
+---
+title: Collapsible
+description: Expandable/collapsible content section
+---
+
+# Collapsible
+
+Collapsible component for showing and hiding content sections with smooth transitions.
+
+```bash
+hauk add collapsible
+```
+
+## Usage
+
+### Basic Collapsible
+
+```tsx
+import { Collapsible } from "./tui/components/collapsible";
+
+<Collapsible
+  open={isOpen}
+  onOpenChange={setIsOpen}
+  trigger={<Text>Show details</Text>}
+>
+  <Text>Hidden content that can be revealed</Text>
+</Collapsible>;
+```
+
+### With Custom Trigger
+
+```tsx
+import { Collapsible } from "./tui/components/collapsible";
+
+<Collapsible
+  open={expanded}
+  onOpenChange={setExpanded}
+  trigger={
+    <Box gap={1}>
+      <Text>{expanded ? "▼" : "▶"}</Text>
+      <Text>Advanced Options</Text>
+    </Box>
+  }
+>
+  <Box flexDirection="column" gap={1}>
+    <Text>Option 1</Text>
+    <Text>Option 2</Text>
+    <Text>Option 3</Text>
+  </Box>
+</Collapsible>;
+```
+
+## Props
+
+| Prop           | Type                      | Default | Description                                     |
+| -------------- | ------------------------- | ------- | ----------------------------------------------- |
+| `open`         | `boolean`                 | -       | Control collapsed state (required)              |
+| `onOpenChange` | `(open: boolean) => void` | -       | Handler for state changes (required)            |
+| `trigger`      | `ReactNode`               | -       | Content to display as trigger button (required) |
+| `children`     | `ReactNode`               | -       | Collapsible content (required)                  |
+| `disabled`     | `boolean`                 | `false` | Disable interaction                             |
+
+## Keyboard Shortcuts
+
+| Key               | Action                   |
+| ----------------- | ------------------------ |
+| `Space` / `Enter` | Toggle open/closed       |
+| `Tab`             | Navigate to next element |
+
+## Features
+
+- **Controlled state** - Manage open/closed externally
+- **Custom trigger** - Any component as trigger button
+- **Keyboard accessible** - Space or Enter to toggle
+- **Focusable** - Integrates with focus management
+- **Nested support** - Collapsibles can contain other collapsibles

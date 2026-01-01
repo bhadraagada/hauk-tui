@@ -1,0 +1,81 @@
+---
+title: Input OTP
+description: One-time password input with auto-focus
+---
+
+# Input OTP
+
+Specialized input for entering one-time passwords (OTP) or verification codes with automatic field advancement.
+
+```bash
+hauk add input-otp
+```
+
+## Usage
+
+### Basic OTP Input
+
+```tsx
+import { InputOTP } from "./tui/components/input-otp";
+
+<InputOTP value={code} onValueChange={setCode} length={6} />;
+```
+
+### With Auto-Submit
+
+```tsx
+import { InputOTP } from "./tui/components/input-otp";
+
+<InputOTP
+  value={verificationCode}
+  onValueChange={setVerificationCode}
+  length={6}
+  onComplete={(code) => {
+    verifyCode(code);
+  }}
+/>;
+```
+
+### Custom Pattern
+
+```tsx
+import { InputOTP } from "./tui/components/input-otp";
+
+<InputOTP
+  value={pin}
+  onValueChange={setPin}
+  length={4}
+  pattern="[0-9]*"
+  type="password"
+/>;
+```
+
+## Props
+
+| Prop            | Type                                   | Default  | Description                    |
+| --------------- | -------------------------------------- | -------- | ------------------------------ |
+| `value`         | `string`                               | -        | Current OTP value (required)   |
+| `onValueChange` | `(value: string) => void`              | -        | Handler when value changes     |
+| `length`        | `number`                               | `6`      | Number of input fields         |
+| `onComplete`    | `(value: string) => void`              | -        | Handler when all fields filled |
+| `type`          | `"text"` \| `"password"` \| `"number"` | `"text"` | Input type                     |
+| `pattern`       | `string`                               | -        | Regex pattern for validation   |
+| `disabled`      | `boolean`                              | `false`  | Disable input                  |
+
+## Keyboard Shortcuts
+
+| Key         | Action                            |
+| ----------- | --------------------------------- |
+| `0-9` `A-Z` | Enter character (auto-advances)   |
+| `Backspace` | Delete and move to previous field |
+| `←` `→`     | Move between fields               |
+| `Ctrl+V`    | Paste code (auto-fills)           |
+
+## Features
+
+- **Auto-advance** - Automatically moves to next field
+- **Auto-complete** - Triggers callback when all fields filled
+- **Paste support** - Paste entire code at once
+- **Validation** - Pattern-based input validation
+- **Type options** - Text, password, or number types
+- **Custom length** - Flexible number of fields

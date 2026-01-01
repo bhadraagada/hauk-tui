@@ -1,0 +1,82 @@
+---
+title: Switch
+description: Animated toggle switch with smooth transitions
+---
+
+# Switch
+
+A visually enhanced toggle switch with smooth on/off transitions and optional labels.
+
+```bash
+hauk add switch
+```
+
+## Usage
+
+### Basic Switch
+
+```tsx
+import { Switch } from "./tui/components/switch";
+
+<Switch checked={isActive} onCheckedChange={setIsActive} />;
+```
+
+### With Label
+
+```tsx
+import { Switch } from "./tui/components/switch";
+
+<Box flexDirection="row" gap={2}>
+  <Switch checked={notifications} onCheckedChange={setNotifications} />
+  <Text>Enable push notifications</Text>
+</Box>;
+```
+
+### Variants
+
+```tsx
+import { Switch } from "./tui/components/switch";
+
+<Box flexDirection="column" gap={1}>
+  <Box gap={2}>
+    <Switch checked variant="default" />
+    <Text>Default</Text>
+  </Box>
+
+  <Box gap={2}>
+    <Switch checked variant="success" />
+    <Text>Success</Text>
+  </Box>
+
+  <Box gap={2}>
+    <Switch checked variant="warning" />
+    <Text>Warning</Text>
+  </Box>
+</Box>;
+```
+
+## Props
+
+| Prop              | Type                                      | Default     | Description                     |
+| ----------------- | ----------------------------------------- | ----------- | ------------------------------- |
+| `checked`         | `boolean`                                 | -           | Current switch state (required) |
+| `onCheckedChange` | `(checked: boolean) => void`              | -           | Handler when switch changes     |
+| `variant`         | `"default"` \| `"success"` \| `"warning"` | `"default"` | Visual style variant            |
+| `disabled`        | `boolean`                                 | `false`     | Disable interaction             |
+| `size`            | `"sm"` \| `"md"` \| `"lg"`                | `"md"`      | Switch size                     |
+
+## Keyboard Shortcuts
+
+| Key     | Action                             |
+| ------- | ---------------------------------- |
+| `Space` | Toggle switch                      |
+| `Enter` | Toggle switch                      |
+| `Tab`   | Navigate to next focusable element |
+
+## Features
+
+- **Smooth transitions** - Animated switch with visual feedback
+- **Multiple variants** - Default, success, warning color schemes
+- **Size options** - Small, medium, large sizes
+- **Keyboard accessible** - Full keyboard support
+- **Disabled state** - Visual indication when disabled

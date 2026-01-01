@@ -1,0 +1,71 @@
+---
+title: Separator
+description: Visual divider between content sections
+---
+
+# Separator
+
+Horizontal or vertical separator line for dividing content sections.
+
+```bash
+hauk add separator
+```
+
+## Usage
+
+### Horizontal Separator
+
+```tsx
+import { Separator } from "./tui/components/separator";
+
+<Box flexDirection="column">
+  <Text>Section 1</Text>
+  <Separator />
+  <Text>Section 2</Text>
+</Box>;
+```
+
+### Vertical Separator
+
+```tsx
+import { Separator } from "./tui/components/separator";
+
+<Box flexDirection="row">
+  <Text>Left</Text>
+  <Separator orientation="vertical" />
+  <Text>Right</Text>
+</Box>;
+```
+
+### With Label
+
+```tsx
+import { Separator } from "./tui/components/separator";
+
+<Separator label="OR" />;
+```
+
+### Custom Style
+
+```tsx
+import { Separator } from "./tui/components/separator";
+
+<Separator variant="dashed" color="cyan" />;
+```
+
+## Props
+
+| Prop          | Type                              | Default        | Description                       |
+| ------------- | --------------------------------- | -------------- | --------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'`      | `'horizontal'` | Separator direction               |
+| `label`       | `string`                          | -              | Text label in center of separator |
+| `variant`     | `'solid' \| 'dashed' \| 'dotted'` | `'solid'`      | Line style                        |
+| `color`       | `string`                          | -              | Line color                        |
+
+## Features
+
+- **Horizontal/Vertical** - Both orientations supported
+- **Optional label** - Text in center of line
+- **Style variants** - Solid, dashed, or dotted lines
+- **Custom colors** - Match your theme
+- **Minimal** - Clean visual divider

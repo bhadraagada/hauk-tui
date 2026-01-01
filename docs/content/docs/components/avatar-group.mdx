@@ -1,0 +1,146 @@
+---
+title: AvatarGroup
+description: Stacked avatars with overflow indicator
+---
+
+# AvatarGroup
+
+Stacked avatar component for displaying multiple users with an overflow indicator.
+
+```bash
+hauk add avatar-group
+```
+
+## Usage
+
+```tsx
+import { AvatarGroup } from "./tui/components/avatar-group";
+
+function App() {
+  const users = ["Alice Smith", "Bob Jones", "Carol White", "David Brown"];
+
+  return <AvatarGroup avatars={users} />;
+}
+```
+
+## Examples
+
+### Basic Avatar Group
+
+```tsx
+<AvatarGroup avatars={["Alice", "Bob", "Carol"]} />
+```
+
+Output:
+
+```
+ AS  BJ  CW
+```
+
+### With Overflow
+
+```tsx
+<AvatarGroup
+  avatars={["Alice", "Bob", "Carol", "David", "Eve", "Frank", "Grace"]}
+  max={4}
+/>
+```
+
+Output:
+
+```
+ AL  BO  CA  DA +3
+```
+
+### Different Sizes
+
+```tsx
+// Small
+<AvatarGroup avatars={names} size="sm" />
+
+// Medium (default)
+<AvatarGroup avatars={names} size="md" />
+
+// Large
+<AvatarGroup avatars={names} size="lg" />
+```
+
+### Stacking Direction
+
+```tsx
+// Stack to the right (default)
+<AvatarGroup avatars={names} direction="right" />
+
+// Stack to the left
+<AvatarGroup avatars={names} direction="left" />
+```
+
+### Custom Max Display
+
+```tsx
+<AvatarGroup avatars={manyUsers} max={3} />
+```
+
+### Team Display
+
+```tsx
+const team = [
+  "John Doe",
+  "Jane Smith",
+  "Mike Johnson",
+  "Sarah Williams",
+  "Tom Brown",
+];
+
+<AvatarGroup avatars={team} max={4} size="lg" />;
+```
+
+## Props
+
+| Prop        | Type                       | Default   | Description              |
+| ----------- | -------------------------- | --------- | ------------------------ |
+| `avatars`   | `string[]`                 | -         | Avatar names or initials |
+| `max`       | `number`                   | `5`       | Maximum avatars to show  |
+| `size`      | `"sm"` \| `"md"` \| `"lg"` | `"md"`    | Size variant             |
+| `direction` | `"left"` \| `"right"`      | `"right"` | Stacking direction       |
+
+## Size Dimensions
+
+| Size | Width | Initials |
+| ---- | ----- | -------- |
+| `sm` | 3     | 1 char   |
+| `md` | 4     | 2 chars  |
+| `lg` | 5     | 2 chars  |
+
+## Initials Generation
+
+Initials are automatically generated from names:
+
+| Name          | Initials |
+| ------------- | -------- |
+| Alice         | AL       |
+| Bob Smith     | BS       |
+| Mary Jane Doe | MJ       |
+| X             | X        |
+
+## Color Assignment
+
+Colors are deterministically assigned based on name:
+
+- Same name always gets the same color
+- Colors are from a 15-color palette
+- Ensures visual distinction between avatars
+
+## Features
+
+- **Initials Generation** - Automatic initials from names
+- **Overflow Indicator** - Shows +N for remaining avatars
+- **Deterministic Colors** - Consistent colors per name
+- **Multiple Sizes** - Small, medium, large variants
+- **Stacking** - Overlapping avatar display
+
+## Notes
+
+- Configurable max display with +N overflow
+- Colors are automatically assigned based on name hash
+- Avatars stack with slight overlap for compact display

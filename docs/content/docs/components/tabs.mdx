@@ -1,0 +1,151 @@
+---
+title: Tabs
+description: Tab navigation with horizontal and vertical layouts
+---
+
+# Tabs
+
+Tab navigation component with keyboard support and multiple layout options.
+
+```bash
+hauk add tabs
+```
+
+## Usage
+
+```tsx
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "./tui/components/tabs";
+
+function App() {
+  return (
+    <Tabs defaultValue="tab1">
+      <TabsList>
+        <TabsTrigger value="tab1">General</TabsTrigger>
+        <TabsTrigger value="tab2">Settings</TabsTrigger>
+        <TabsTrigger value="tab3">About</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="tab1">
+        <Text>General content</Text>
+      </TabsContent>
+      <TabsContent value="tab2">
+        <Text>Settings content</Text>
+      </TabsContent>
+      <TabsContent value="tab3">
+        <Text>About content</Text>
+      </TabsContent>
+    </Tabs>
+  );
+}
+```
+
+## Examples
+
+### Basic Tabs
+
+```tsx
+<Tabs defaultValue="first">
+  <TabsList>
+    <TabsTrigger value="first">First</TabsTrigger>
+    <TabsTrigger value="second">Second</TabsTrigger>
+  </TabsList>
+  <TabsContent value="first">First panel</TabsContent>
+  <TabsContent value="second">Second panel</TabsContent>
+</Tabs>
+```
+
+### Vertical Layout
+
+```tsx
+<Tabs defaultValue="tab1" orientation="vertical">
+  <TabsList>
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">Content 1</TabsContent>
+  <TabsContent value="tab2">Content 2</TabsContent>
+</Tabs>
+```
+
+### Boxed Variant
+
+```tsx
+<Tabs defaultValue="tab1" variant="boxed">
+  <TabsList>
+    <TabsTrigger value="tab1">Boxed</TabsTrigger>
+    <TabsTrigger value="tab2">Tabs</TabsTrigger>
+  </TabsList>
+  ...
+</Tabs>
+```
+
+### Controlled
+
+```tsx
+const [activeTab, setActiveTab] = useState("tab1");
+
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  ...
+</Tabs>;
+```
+
+## Props
+
+### Tabs
+
+| Prop            | Type                         | Default        | Description           |
+| --------------- | ---------------------------- | -------------- | --------------------- |
+| `defaultValue`  | `string`                     | -              | Initially active tab  |
+| `value`         | `string`                     | -              | Controlled active tab |
+| `onValueChange` | `(value: string) => void`    | -              | Tab change handler    |
+| `orientation`   | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction      |
+| `variant`       | `"underline" \| "boxed"`     | `"underline"`  | Visual style          |
+
+### TabsTrigger
+
+| Prop       | Type      | Default | Description      |
+| ---------- | --------- | ------- | ---------------- |
+| `value`    | `string`  | -       | Tab identifier   |
+| `disabled` | `boolean` | `false` | Disable this tab |
+
+## Keyboard Shortcuts
+
+| Key       | Action                    |
+| --------- | ------------------------- |
+| `←` / `h` | Previous tab (horizontal) |
+| `→` / `l` | Next tab (horizontal)     |
+| `↑` / `k` | Previous tab (vertical)   |
+| `↓` / `j` | Next tab (vertical)       |
+| `1-9`     | Jump to tab N             |
+| `Home`    | First tab                 |
+| `End`     | Last tab                  |
+
+## Styling
+
+### Underline Variant
+
+```
+[General]  Settings  About
+─────────
+General content here
+```
+
+### Boxed Variant
+
+```
+┌─────────┐ ┌──────────┐ ┌───────┐
+│ General │ │ Settings │ │ About │
+└─────────┴─┴──────────┴─┴───────┘
+General content here
+```
+
+## Notes
+
+- Number keys 1-9 for quick access
+- Supports boxed and underline variants
+- Works with vertical and horizontal orientation

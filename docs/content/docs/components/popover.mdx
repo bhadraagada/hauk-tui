@@ -1,0 +1,171 @@
+---
+title: Popover
+description: Floating popover content
+---
+
+# Popover
+
+Floating popover content that appears relative to a trigger element.
+
+```bash
+hauk add popover
+```
+
+## Usage
+
+```tsx
+import { Popover } from "./tui/components/popover";
+
+function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover
+      open={open}
+      content={<Text>Popover content here</Text>}
+      title="Info"
+    >
+      <Button onPress={() => setOpen(!open)}>Toggle Popover</Button>
+    </Popover>
+  );
+}
+```
+
+## Examples
+
+### Basic Popover
+
+```tsx
+<Popover open={isOpen} content={<Text>Hello!</Text>}>
+  <Text>Hover target</Text>
+</Popover>
+```
+
+### With Title
+
+```tsx
+<Popover
+  open={isOpen}
+  title="Details"
+  content={<Text>Additional information about this item.</Text>}
+>
+  <Text>[?]</Text>
+</Popover>
+```
+
+### Position Variants
+
+```tsx
+// Top
+<Popover open={isOpen} position="top" content={<Text>Above</Text>}>
+  <Button>Top</Button>
+</Popover>
+
+// Bottom (default)
+<Popover open={isOpen} position="bottom" content={<Text>Below</Text>}>
+  <Button>Bottom</Button>
+</Popover>
+
+// Left
+<Popover open={isOpen} position="left" content={<Text>Left side</Text>}>
+  <Button>Left</Button>
+</Popover>
+
+// Right
+<Popover open={isOpen} position="right" content={<Text>Right side</Text>}>
+  <Button>Right</Button>
+</Popover>
+```
+
+### Custom Width
+
+```tsx
+<Popover
+  open={isOpen}
+  width={40}
+  content={
+    <Box flexDirection="column">
+      <Text>Line 1</Text>
+      <Text>Line 2</Text>
+      <Text>Line 3</Text>
+    </Box>
+  }
+>
+  <Text>Wide popover</Text>
+</Popover>
+```
+
+### Rich Content
+
+```tsx
+<Popover
+  open={isOpen}
+  title="User Profile"
+  content={
+    <Box flexDirection="column" gap={1}>
+      <Text>John Doe</Text>
+      <Text color="gray">john@example.com</Text>
+      <Text>Role: Admin</Text>
+    </Box>
+  }
+>
+  <Avatar name="John Doe" />
+</Popover>
+```
+
+## Props
+
+| Prop       | Type                                           | Default    | Description                   |
+| ---------- | ---------------------------------------------- | ---------- | ----------------------------- |
+| `open`     | `boolean`                                      | -          | Whether popover is visible    |
+| `content`  | `ReactNode`                                    | -          | Popover content               |
+| `children` | `ReactNode`                                    | -          | Trigger element               |
+| `position` | `"top"` \| `"bottom"` \| `"left"` \| `"right"` | `"bottom"` | Position relative to trigger  |
+| `width`    | `number`                                       | `30`       | Popover width                 |
+| `title`    | `string`                                       | -          | Optional title                |
+| `focusId`  | `string`                                       | -          | Focus ID for focus management |
+
+## Positioning
+
+### Bottom (default)
+
+```
+[ Button ]
+╭────────────────────────────╮
+│ Title                      │
+│ ────────────────────────── │
+│ Popover content            │
+╰────────────────────────────╯
+```
+
+### Top
+
+```
+╭────────────────────────────╮
+│ Popover content            │
+╰────────────────────────────╯
+[ Button ]
+```
+
+### Left
+
+```
+╭────────────────────╮
+│ Popover content    │ [ Button ]
+╰────────────────────╯
+```
+
+### Right
+
+```
+           ╭────────────────────╮
+[ Button ] │ Popover content    │
+           ╰────────────────────╯
+```
+
+## Notes
+
+- Supports top/bottom/left/right positions
+- Optional title with separator
+- Use for additional info, tooltips, or mini forms
+- Integrates with focus management system

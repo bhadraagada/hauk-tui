@@ -1,0 +1,316 @@
+---
+title: Design Tokens
+description: The token system for consistent styling
+---
+
+# Design Tokens
+
+Design tokens are the foundation of haukTUI's theming system. They provide semantic variables for colors, spacing, and visual elements that can be customized globally.
+
+## Token Categories
+
+### Color Tokens
+
+```tsx
+const colors = {
+  // Brand colors
+  primary: "magenta", // Main accent color
+  secondary: "cyan", // Secondary accent
+  accent: "blue", // Tertiary accent
+
+  // Status colors
+  success: "green", // Success states
+  warning: "yellow", // Warning states
+  error: "red", // Error states
+  info: "blue", // Informational
+
+  // UI colors
+  foreground: "white", // Default text
+  background: "black", // Default background
+  muted: "gray", // Disabled/secondary text
+  border: "gray", // Border color
+
+  // Interactive states
+  focus: "magenta", // Focused elements
+  hover: "cyan", // Hover state (if supported)
+  active: "magentaBright", // Active/pressed state
+};
+```
+
+### Focus Tokens
+
+```tsx
+const focus = {
+  indicator: "▶", // Character shown for focus
+  indicatorColor: "magenta",
+  cursorStyle: "block", // block, underline, bar
+  cursorBlink: true,
+};
+```
+
+### Border Tokens
+
+```tsx
+const borders = {
+  // Border styles
+  style: "single", // single, double, rounded, bold, none
+
+  // Single line borders
+  single: {
+    topLeft: "┌",
+    top: "─",
+    topRight: "┐",
+    left: "│",
+    right: "│",
+    bottomLeft: "└",
+    bottom: "─",
+    bottomRight: "┘",
+  },
+
+  // Rounded corners
+  rounded: {
+    topLeft: "╭",
+    topRight: "╮",
+    bottomLeft: "╰",
+    bottomRight: "╯",
+  },
+
+  // Double line borders
+  double: {
+    topLeft: "╔",
+    top: "═",
+    topRight: "╗",
+    left: "║",
+    right: "║",
+    bottomLeft: "╚",
+    bottom: "═",
+    bottomRight: "╝",
+  },
+};
+```
+
+## Using the TokensProvider
+
+Wrap your application with `TokensProvider`:
+
+```tsx
+import { TokensProvider } from "@hauktui/tokens";
+
+function App() {
+  return (
+    <TokensProvider
+      tokens={{
+        colors: {
+          primary: "cyan",
+          secondary: "magenta",
+        },
+      }}
+    >
+      <MyApp />
+    </TokensProvider>
+  );
+}
+```
+
+## Accessing Tokens
+
+### useTokens Hook
+
+```tsx
+import { useTokens } from "@hauktui/tokens";
+
+function MyComponent() {
+  const tokens = useTokens();
+
+  return (
+    <Box borderColor={tokens.colors.border}>
+      <Text color={tokens.colors.primary}>Styled with tokens</Text>
+    </Box>
+  );
+}
+```
+
+### Direct Import
+
+For non-component code, import tokens directly:
+
+```tsx
+import { getTokens } from "@hauktui/tokens";
+
+const tokens = getTokens();
+console.log(tokens.colors.primary); // 'magenta'
+```
+
+## Token Detection
+
+haukTUI can detect terminal capabilities:
+
+```tsx
+import { detectTerminalCapabilities } from "@hauktui/tokens";
+
+const caps = detectTerminalCapabilities();
+
+console.log(caps);
+// {
+//   colors: 256,        // or 16, or 'truecolor'
+//   unicode: true,      // Unicode support
+//   emoji: false,       // Emoji support
+//   sixel: false,       // Image support
+// }
+```
+
+### Adaptive Themes
+
+Create themes that adapt to terminal capabilities:
+
+```tsx
+import { detectTerminalCapabilities } from "@hauktui/tokens";
+
+const caps = detectTerminalCapabilities();
+
+const tokens = {
+  colors: {
+    primary: caps.colors >= 256 ? "#a855f7" : "magenta",
+  },
+  borders: {
+    style: caps.unicode ? "rounded" : "ascii",
+  },
+};
+```
+
+## Creating Custom Themes
+
+### Theme Definition
+
+```tsx
+// themes/cyberpunk.ts
+export const cyberpunkTheme = {
+  name: "cyberpunk",
+  colors: {
+    primary: "magenta",
+    secondary: "cyan",
+    accent: "yellow",
+    success: "green",
+    warning: "yellow",
+    error: "red",
+    foreground: "white",
+    background: "black",
+    muted: "gray",
+    border: "magenta",
+    focus: "cyan",
+  },
+  focus: {
+    indicator: "█",
+    indicatorColor: "cyan",
+  },
+  borders: {
+    style: "double",
+  },
+};
+```
+
+### Theme Switching
+
+```tsx
+import { useState } from "react";
+import { TokensProvider } from "@hauktui/tokens";
+import { defaultTheme } from "./themes/default";
+import { cyberpunkTheme } from "./themes/cyberpunk";
+
+function App() {
+  const [theme, setTheme] = useState(defaultTheme);
+
+  return (
+    <TokensProvider tokens={theme}>
+      <ThemeSwitcher
+        onSwitch={() =>
+          setTheme(theme === defaultTheme ? cyberpunkTheme : defaultTheme)
+        }
+      />
+      <MyApp />
+    </TokensProvider>
+  );
+}
+```
+
+## Default Token Values
+
+Here are the default token values used when none are specified:
+
+```tsx
+const defaultTokens = {
+  colors: {
+    primary: "magenta",
+    secondary: "cyan",
+    accent: "blue",
+    success: "green",
+    warning: "yellow",
+    error: "red",
+    info: "blue",
+    foreground: "white",
+    background: "black",
+    muted: "gray",
+    border: "gray",
+    focus: "magenta",
+  },
+  focus: {
+    indicator: "▶",
+    indicatorColor: "magenta",
+  },
+  borders: {
+    style: "single",
+  },
+};
+```
+
+## Best Practices
+
+### 1. Define Complete Token Sets
+
+```tsx
+// Good - complete token set
+const theme = {
+  colors: {
+    primary: "cyan",
+    secondary: "magenta",
+    success: "green",
+    error: "red",
+    // ... all colors
+  },
+};
+
+// Avoid - partial tokens
+const theme = {
+  colors: {
+    primary: "cyan",
+    // Missing other colors
+  },
+};
+```
+
+### 2. Use Semantic Names
+
+```tsx
+// Good - semantic
+tokens.colors.error;
+tokens.colors.success;
+
+// Avoid - literal colors
+tokens.colors.red;
+tokens.colors.green;
+```
+
+### 3. Test in Multiple Terminals
+
+Different terminals render colors differently. Test your themes in:
+
+- macOS Terminal
+- iTerm2
+- Windows Terminal
+- VS Code integrated terminal
+- SSH sessions
+
+## Next Steps
+
+- [Focus Management](/docs/theming/focus) - Keyboard navigation
+- [Keymaps](/docs/theming/keymaps) - Customize keyboard shortcuts

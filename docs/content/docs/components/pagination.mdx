@@ -1,0 +1,68 @@
+---
+title: Pagination
+description: Page navigation for large datasets
+---
+
+# Pagination
+
+Pagination component for navigating through pages of content.
+
+```bash
+hauk add pagination
+```
+
+## Usage
+
+### Basic Pagination
+
+```tsx
+import { Pagination } from "./tui/components/pagination";
+
+<Pagination
+  currentPage={page}
+  totalPages={totalPages}
+  onPageChange={setPage}
+/>;
+```
+
+### With Page Size Selector
+
+```tsx
+import { Pagination } from "./tui/components/pagination";
+
+<Pagination
+  currentPage={page}
+  totalPages={totalPages}
+  onPageChange={setPage}
+  pageSize={pageSize}
+  onPageSizeChange={setPageSize}
+  pageSizeOptions={[10, 25, 50, 100]}
+/>;
+```
+
+## Props
+
+| Prop            | Type                     | Default | Description                                |
+| --------------- | ------------------------ | ------- | ------------------------------------------ |
+| `currentPage`   | `number`                 | -       | Current page number (1-indexed) (required) |
+| `totalPages`    | `number`                 | -       | Total number of pages (required)           |
+| `onPageChange`  | `(page: number) => void` | -       | Page change handler (required)             |
+| `pageSize`      | `number`                 | -       | Items per page                             |
+| `showFirstLast` | `boolean`                | `true`  | Show first/last page buttons               |
+
+## Keyboard Shortcuts
+
+| Key       | Action        |
+| --------- | ------------- |
+| `←` / `h` | Previous page |
+| `→` / `l` | Next page     |
+| `Home`    | First page    |
+| `End`     | Last page     |
+
+## Features
+
+- **Page navigation** - Navigate through large datasets
+- **First/last buttons** - Quick jump to start/end
+- **Page size selector** - Configurable items per page
+- **Keyboard navigation** - Arrow keys and vim bindings
+- **Disabled states** - Proper handling at boundaries

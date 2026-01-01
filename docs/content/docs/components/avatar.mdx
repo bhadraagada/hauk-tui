@@ -1,0 +1,95 @@
+---
+title: Avatar
+description: User avatar with initials generated from name
+---
+
+# Avatar
+
+User avatar component that generates initials from a name. Supports multiple sizes.
+
+```bash
+hauk add avatar
+```
+
+## Usage
+
+```tsx
+import { Avatar } from "./tui/components/avatar";
+
+function App() {
+  return <Avatar name="John Doe" />;
+}
+```
+
+## Examples
+
+### Basic Avatar
+
+```tsx
+<Avatar name="John Doe" />
+// Displays: JD
+```
+
+### Sizes
+
+```tsx
+<Avatar name="Alice" size="sm" />
+<Avatar name="Bob" size="md" />
+<Avatar name="Charlie" size="lg" />
+```
+
+### With Color
+
+```tsx
+<Avatar name="User" color="magenta" />
+<Avatar name="Admin" color="cyan" />
+```
+
+### In User Lists
+
+```tsx
+<Box gap={1}>
+  <Avatar name="John Doe" size="sm" />
+  <Text>John Doe</Text>
+</Box>
+```
+
+## Props
+
+| Prop    | Type                   | Default     | Description                    |
+| ------- | ---------------------- | ----------- | ------------------------------ |
+| `name`  | `string`               | -           | Name to generate initials from |
+| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      | Avatar size                    |
+| `color` | `string`               | `"primary"` | Background color               |
+
+### Sizes
+
+| Size | Dimensions | Initials  |
+| ---- | ---------- | --------- |
+| `sm` | 3x1        | 1-2 chars |
+| `md` | 5x2        | 1-2 chars |
+| `lg` | 7x3        | 1-2 chars |
+
+## Styling
+
+Avatars display as bordered boxes with initials:
+
+```
+Small:  [JD]
+
+Medium: ┌───┐
+        │JD │
+        └───┘
+
+Large:  ┌─────┐
+        │     │
+        │ JD  │
+        │     │
+        └─────┘
+```
+
+## Notes
+
+- Generates initials from name (e.g., "John Doe" → "JD")
+- Supports sm/md/lg sizes
+- Colors use design tokens

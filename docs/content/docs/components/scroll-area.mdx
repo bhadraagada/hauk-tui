@@ -1,0 +1,87 @@
+---
+title: Scroll Area
+description: Scrollable content area with custom scrollbars
+---
+
+# Scroll Area
+
+Scrollable container with keyboard-navigable custom scrollbars for terminal UIs.
+
+```bash
+hauk add scroll-area
+```
+
+## Usage
+
+### Basic Scroll Area
+
+```tsx
+import { ScrollArea } from "./tui/components/scroll-area";
+
+<ScrollArea height={10}>
+  <Box flexDirection="column">
+    {longContent.map((item, i) => (
+      <Text key={i}>{item}</Text>
+    ))}
+  </Box>
+</ScrollArea>;
+```
+
+### Horizontal Scroll
+
+```tsx
+import { ScrollArea } from "./tui/components/scroll-area";
+
+<ScrollArea width={40} orientation="horizontal">
+  <Box>
+    <Text>
+      Very long text that needs horizontal scrolling to view completely
+    </Text>
+  </Box>
+</ScrollArea>;
+```
+
+### Both Directions
+
+```tsx
+import { ScrollArea } from "./tui/components/scroll-area";
+
+<ScrollArea width={40} height={10} orientation="both">
+  <Box flexDirection="column">
+    {data.map((row, i) => (
+      <Text key={i}>{row}</Text>
+    ))}
+  </Box>
+</ScrollArea>;
+```
+
+## Props
+
+| Prop            | Type                                   | Default      | Description                           |
+| --------------- | -------------------------------------- | ------------ | ------------------------------------- |
+| `children`      | `ReactNode`                            | -            | Content to make scrollable (required) |
+| `height`        | `number`                               | -            | Fixed height in lines                 |
+| `width`         | `number`                               | -            | Fixed width in columns                |
+| `orientation`   | `'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Scroll direction(s)                   |
+| `showScrollbar` | `boolean`                              | `true`       | Show scrollbar indicator              |
+
+## Keyboard Shortcuts
+
+| Key         | Action               |
+| ----------- | -------------------- |
+| `↑` / `k`   | Scroll up            |
+| `↓` / `j`   | Scroll down          |
+| `←` / `h`   | Scroll left          |
+| `→` / `l`   | Scroll right         |
+| `Page Up`   | Scroll up one page   |
+| `Page Down` | Scroll down one page |
+| `Home`      | Scroll to top        |
+| `End`       | Scroll to bottom     |
+
+## Features
+
+- **Keyboard scrolling** - Arrow keys and vim bindings
+- **Custom scrollbars** - Terminal-friendly indicators
+- **Both directions** - Vertical, horizontal, or both
+- **Smooth scrolling** - Natural scroll behavior
+- **Size constraints** - Fixed dimensions for content

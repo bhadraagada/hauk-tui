@@ -1,0 +1,142 @@
+---
+title: Toast
+description: Temporary notification messages with auto-dismiss
+---
+
+# Toast
+
+Temporary notification messages that automatically dismiss after a timeout.
+
+```bash
+hauk add toast
+```
+
+## Usage
+
+```tsx
+import { Toaster, toast } from "./tui/components/toast";
+
+function App() {
+  return (
+    <>
+      <Button onPress={() => toast("Hello!")}>Show Toast</Button>
+      <Toaster />
+    </>
+  );
+}
+```
+
+## Examples
+
+### Basic Toast
+
+```tsx
+toast("Operation completed");
+```
+
+### Success Toast
+
+```tsx
+toast.success("File saved successfully");
+```
+
+### Error Toast
+
+```tsx
+toast.error("Failed to save file");
+```
+
+### Warning Toast
+
+```tsx
+toast.warning("Disk space running low");
+```
+
+### Info Toast
+
+```tsx
+toast.info("New version available");
+```
+
+### With Duration
+
+```tsx
+toast("This stays longer", { duration: 5000 });
+```
+
+### With Title
+
+```tsx
+toast({
+  title: "Update Available",
+  description: "A new version is ready to install.",
+  variant: "info",
+});
+```
+
+## API
+
+### toast(message, options?)
+
+```tsx
+toast("Simple message");
+
+toast("With options", {
+  duration: 3000,
+  variant: "success",
+});
+
+toast({
+  title: "Title",
+  description: "Description",
+  variant: "error",
+});
+```
+
+### Options
+
+| Option        | Type     | Default     | Description            |
+| ------------- | -------- | ----------- | ---------------------- |
+| `duration`    | `number` | `3000`      | Auto-dismiss time (ms) |
+| `variant`     | `string` | `"default"` | Toast variant          |
+| `title`       | `string` | -           | Toast title            |
+| `description` | `string` | -           | Toast description      |
+
+### Variants
+
+| Variant   | Color  | Use Case              |
+| --------- | ------ | --------------------- |
+| `default` | white  | General messages      |
+| `success` | green  | Success confirmations |
+| `error`   | red    | Error messages        |
+| `warning` | yellow | Warnings              |
+| `info`    | blue   | Informational         |
+
+### Toaster Props
+
+| Prop        | Type                | Default    | Description            |
+| ----------- | ------------------- | ---------- | ---------------------- |
+| `position`  | `"top" \| "bottom"` | `"bottom"` | Toast position         |
+| `maxToasts` | `number`            | `3`        | Maximum visible toasts |
+
+## Styling
+
+```
+┌─────────────────────────────────┐
+│ ✓ File saved successfully      │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│ ✕ Failed to save file          │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│ ⚠ Disk space running low       │
+└─────────────────────────────────┘
+```
+
+## Notes
+
+- Supports success, error, warning, info variants with auto-dismiss
+- Multiple toasts stack vertically
+- Auto-dismisses after duration (default 3000ms)

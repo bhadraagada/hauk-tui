@@ -1,0 +1,222 @@
+---
+title: Carousel
+description: Carousel/slider for cycling through items
+---
+
+# Carousel
+
+Carousel component for cycling through a collection of items with keyboard navigation.
+
+```bash
+hauk add carousel
+```
+
+## Usage
+
+```tsx
+import { Carousel } from "./tui/components/carousel";
+
+function App() {
+  const items = [
+    { id: "1", content: <Text>Slide 1</Text>, label: "First" },
+    { id: "2", content: <Text>Slide 2</Text>, label: "Second" },
+    { id: "3", content: <Text>Slide 3</Text>, label: "Third" },
+  ];
+
+  return <Carousel items={items} />;
+}
+```
+
+## Examples
+
+### Basic Carousel
+
+```tsx
+<Carousel
+  items={[
+    { id: "1", content: <Text>Slide 1</Text> },
+    { id: "2", content: <Text>Slide 2</Text> },
+    { id: "3", content: <Text>Slide 3</Text> },
+  ]}
+/>
+```
+
+### With Labels
+
+```tsx
+<Carousel
+  items={[
+    { id: "1", content: <Text>Feature A details</Text>, label: "Feature A" },
+    { id: "2", content: <Text>Feature B details</Text>, label: "Feature B" },
+    { id: "3", content: <Text>Feature C details</Text>, label: "Feature C" },
+  ]}
+/>
+```
+
+### Auto-Play
+
+```tsx
+<Carousel
+  items={items}
+  autoPlay={3000} // 3 seconds
+/>
+```
+
+### Controlled
+
+```tsx
+function App() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <Carousel
+      items={items}
+      activeIndex={activeIndex}
+      onChange={setActiveIndex}
+    />
+  );
+}
+```
+
+### Without Arrows
+
+```tsx
+<Carousel items={items} showArrows={false} />
+```
+
+### Without Dots
+
+```tsx
+<Carousel items={items} showDots={false} />
+```
+
+### Vertical Orientation
+
+```tsx
+<Carousel items={items} orientation="vertical" />
+```
+
+### Image Gallery
+
+```tsx
+<Carousel
+  items={[
+    {
+      id: "1",
+      label: "Photo 1",
+      content: (
+        <Box>
+          <Text>┌─────────────────┐</Text>
+          <Text>│ │</Text>
+          <Text>│ Image 1 │</Text>
+          <Text>│ │</Text>
+          <Text>└─────────────────┘</Text>
+        </Box>
+      ),
+    },
+    // ... more items
+  ]}
+/>
+```
+
+### Testimonials
+
+```tsx
+<Carousel
+  items={[
+    {
+      id: "1",
+      label: "John D.",
+      content: (
+        <Box flexDirection="column">
+          <Text>"Amazing product!"</Text>
+          <Text dimColor>- CEO at TechCorp</Text>
+        </Box>
+      ),
+    },
+    // ... more testimonials
+  ]}
+  autoPlay={5000}
+/>
+```
+
+## Props
+
+| Prop          | Type                           | Default        | Description             |
+| ------------- | ------------------------------ | -------------- | ----------------------- |
+| `items`       | `CarouselItem[]`               | -              | Carousel items          |
+| `activeIndex` | `number`                       | `0`            | Controlled active index |
+| `onChange`    | `(index: number) => void`      | -              | Index change callback   |
+| `autoPlay`    | `number`                       | `0`            | Auto-play interval (ms) |
+| `showArrows`  | `boolean`                      | `true`         | Show navigation arrows  |
+| `showDots`    | `boolean`                      | `true`         | Show dot indicators     |
+| `orientation` | `"horizontal"` \| `"vertical"` | `"horizontal"` | Carousel orientation    |
+| `focusId`     | `string`                       | -              | Focus ID for management |
+
+## CarouselItem
+
+```tsx
+interface CarouselItem {
+  id: string; // Unique identifier
+  content: ReactNode; // Slide content
+  label?: string; // Optional label/title
+}
+```
+
+## Keyboard Shortcuts
+
+### Horizontal Orientation
+
+| Key   | Action         |
+| ----- | -------------- |
+| `←`   | Previous slide |
+| `→`   | Next slide     |
+| `h`   | Previous slide |
+| `l`   | Next slide     |
+| `1-9` | Go to slide N  |
+
+### Vertical Orientation
+
+| Key   | Action         |
+| ----- | -------------- |
+| `↑`   | Previous slide |
+| `↓`   | Next slide     |
+| `k`   | Previous slide |
+| `j`   | Next slide     |
+| `1-9` | Go to slide N  |
+
+## Styling
+
+### Horizontal
+
+```
+     ╭─────────────────────────────────╮
+◀    │ Slide Title                     │    ▶
+     │                                 │
+     │ Slide content goes here...      │
+     │                                 │
+     ╰─────────────────────────────────╯
+              ○  ●  ○  ○  ○
+```
+
+### Vertical
+
+```
+                   ▲
+     ╭─────────────────────────────────╮
+     │ Slide Title                     │
+     │                                 │
+     │ Slide content goes here...      │
+     │                                 │
+     ╰─────────────────────────────────╯
+                   ▼
+              ○  ●  ○  ○  ○
+```
+
+## Notes
+
+- Supports auto-play with configurable interval
+- Wraps around at first/last slide
+- Number keys 1-9 for direct slide access
+- Auto-play pauses when focused
+- Supports horizontal and vertical orientations

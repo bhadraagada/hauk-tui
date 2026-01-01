@@ -1,0 +1,97 @@
+---
+title: TextInput
+description: A single-line text input with cursor navigation
+---
+
+# TextInput
+
+A single-line text input with cursor navigation and editing support.
+
+```bash
+hauk add text-input
+```
+
+## Usage
+
+```tsx
+import { TextInput } from "./tui/components/text-input";
+
+function App() {
+  const [value, setValue] = useState("");
+
+  return (
+    <TextInput value={value} onChange={setValue} placeholder="Enter text..." />
+  );
+}
+```
+
+## Examples
+
+### Basic Input
+
+```tsx
+<TextInput value={name} onChange={setName} placeholder="Your name" />
+```
+
+### With Label
+
+```tsx
+<Box flexDirection="column">
+  <Label>Username</Label>
+  <TextInput value={username} onChange={setUsername} />
+</Box>
+```
+
+### Password Input
+
+```tsx
+<TextInput value={password} onChange={setPassword} mask="*" />
+```
+
+### Disabled
+
+```tsx
+<TextInput value="Cannot edit" disabled />
+```
+
+## Props
+
+| Prop          | Type                      | Default | Description             |
+| ------------- | ------------------------- | ------- | ----------------------- |
+| `value`       | `string`                  | `""`    | Current value           |
+| `onChange`    | `(value: string) => void` | -       | Change handler          |
+| `placeholder` | `string`                  | -       | Placeholder text        |
+| `mask`        | `string`                  | -       | Character to mask input |
+| `disabled`    | `boolean`                 | `false` | Disable input           |
+| `focusId`     | `string`                  | auto    | Custom focus ID         |
+
+## Keyboard Shortcuts
+
+| Key         | Action               |
+| ----------- | -------------------- |
+| `←` / `→`   | Move cursor          |
+| `Ctrl+a`    | Beginning of line    |
+| `Ctrl+e`    | End of line          |
+| `Ctrl+w`    | Delete word backward |
+| `Ctrl+u`    | Delete to beginning  |
+| `Ctrl+k`    | Delete to end        |
+| `Backspace` | Delete character     |
+| `Delete`    | Delete forward       |
+
+## Styling
+
+```
+┌──────────────────────┐
+│ Enter text...        │  (placeholder)
+└──────────────────────┘
+
+┌──────────────────────┐
+│ Hello world█         │  (with cursor)
+└──────────────────────┘
+```
+
+## Notes
+
+- Use mask prop for password inputs
+- Supports standard text editing shortcuts
+- Cursor position is visible when focused
