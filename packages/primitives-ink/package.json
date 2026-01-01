@@ -21,6 +21,14 @@
   },
   "keywords": ["tui", "terminal", "ink", "primitives"],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhadraagada/hauk-tui.git",
+    "directory": "packages/primitives-ink"
+  },
   "dependencies": {
     "@hauktui/tokens": "workspace:*",
     "@hauktui/core": "workspace:*",

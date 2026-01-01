@@ -21,6 +21,14 @@
   },
   "keywords": ["tui", "terminal", "core", "contracts"],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhadraagada/hauk-tui.git",
+    "directory": "packages/core"
+  },
   "dependencies": {
     "@hauktui/tokens": "workspace:*"
   },

@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "description": "A shadcn-like workflow for Terminal UIs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhadraagada/hauk-tui.git"
+  },
   "type": "module",
   "scripts": {
     "build": "pnpm -r run build",

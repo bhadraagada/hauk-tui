@@ -21,6 +21,14 @@
   },
   "keywords": ["tui", "terminal", "tokens", "theme"],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhadraagada/hauk-tui.git",
+    "directory": "packages/tokens"
+  },
   "devDependencies": {
     "tsup": "^8.0.1",
     "typescript": "^5.3.2"
