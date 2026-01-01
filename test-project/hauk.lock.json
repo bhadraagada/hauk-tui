@@ -1,0 +1,518 @@
+{
+  "version": "1.0.0",
+  "components": {
+    "accordion": {
+      "name": "accordion",
+      "version": "0.0.1",
+      "files": {
+        "accordion.tsx": "7930c3bfeee089eb",
+        "index.ts": "f8c0448daa5fde90"
+      },
+      "installedAt": "2025-12-29T11:32:56.511Z"
+    },
+    "alert": {
+      "name": "alert",
+      "version": "0.0.1",
+      "files": {
+        "alert.tsx": "179d071391299858",
+        "index.ts": "b2016d02da18e168"
+      },
+      "installedAt": "2025-12-29T11:32:56.516Z"
+    },
+    "avatar": {
+      "name": "avatar",
+      "version": "0.0.1",
+      "files": {
+        "avatar.tsx": "0f902fc6363428dc",
+        "index.ts": "fdff927332f72725"
+      },
+      "installedAt": "2025-12-29T11:32:56.526Z"
+    },
+    "badge": {
+      "name": "badge",
+      "version": "0.0.1",
+      "files": {
+        "badge.tsx": "8f4d0fb944709062",
+        "index.ts": "9c04dadb332a68e2"
+      },
+      "installedAt": "2025-12-29T11:32:56.532Z"
+    },
+    "breadcrumb": {
+      "name": "breadcrumb",
+      "version": "0.0.1",
+      "files": {
+        "breadcrumb.tsx": "a234eb55c850e58b",
+        "index.ts": "0ab33609298c999d"
+      },
+      "installedAt": "2025-12-29T11:32:56.537Z"
+    },
+    "button": {
+      "name": "button",
+      "version": "0.0.1",
+      "files": {
+        "button.tsx": "337c031446c4c999",
+        "index.ts": "9dc14145ab13ecb7"
+      },
+      "installedAt": "2025-12-29T11:32:56.543Z"
+    },
+    "card": {
+      "name": "card",
+      "version": "0.0.1",
+      "files": {
+        "card.tsx": "ea40e354812346fe",
+        "index.ts": "537a599d66d860c9"
+      },
+      "installedAt": "2025-12-29T11:32:56.546Z"
+    },
+    "checkbox": {
+      "name": "checkbox",
+      "version": "0.0.1",
+      "files": {
+        "checkbox.tsx": "457a0f2f7f1442de",
+        "index.ts": "5c75c18777e44b58"
+      },
+      "installedAt": "2025-12-29T11:32:56.552Z"
+    },
+    "confirm-dialog": {
+      "name": "confirm-dialog",
+      "version": "0.0.1",
+      "files": {
+        "confirm-dialog.tsx": "05e969ba8cab0785",
+        "index.ts": "57f77afb1e6032ac"
+      },
+      "installedAt": "2025-12-29T11:32:56.557Z"
+    },
+    "dialog": {
+      "name": "dialog",
+      "version": "0.0.1",
+      "files": {
+        "dialog.tsx": "b037c8733392954e",
+        "index.ts": "efd6ffffa898ea9a"
+      },
+      "installedAt": "2025-12-29T11:32:56.563Z"
+    },
+    "kbd": {
+      "name": "kbd",
+      "version": "0.0.1",
+      "files": {
+        "kbd.tsx": "c305e60a04e6ba89",
+        "index.ts": "a821530c6c97ad0e"
+      },
+      "installedAt": "2025-12-29T11:32:56.569Z"
+    },
+    "label": {
+      "name": "label",
+      "version": "0.0.1",
+      "files": {
+        "label.tsx": "a2062500613e36d9",
+        "index.ts": "2a5edaba778310bb"
+      },
+      "installedAt": "2025-12-29T11:32:56.575Z"
+    },
+    "list": {
+      "name": "list",
+      "version": "0.0.1",
+      "files": {
+        "list.tsx": "c161beec548e215e",
+        "index.ts": "baec2b65bf6de3ef"
+      },
+      "installedAt": "2025-12-29T11:32:56.580Z"
+    },
+    "pagination": {
+      "name": "pagination",
+      "version": "0.0.1",
+      "files": {
+        "pagination.tsx": "ea855ed05062ac97",
+        "index.ts": "704f55b86313b36a"
+      },
+      "installedAt": "2025-12-29T11:32:56.586Z"
+    },
+    "password-input": {
+      "name": "password-input",
+      "version": "0.0.1",
+      "files": {
+        "password-input.tsx": "453d8528a5f8e965",
+        "index.ts": "ee6989c53c89397b"
+      },
+      "installedAt": "2025-12-29T11:32:56.592Z"
+    },
+    "progress": {
+      "name": "progress",
+      "version": "0.0.1",
+      "files": {
+        "progress.tsx": "f8f9d5b3f21872e6",
+        "index.ts": "f5ba50cb8b15d421"
+      },
+      "installedAt": "2025-12-29T11:32:56.597Z"
+    },
+    "radio-group": {
+      "name": "radio-group",
+      "version": "0.0.1",
+      "files": {
+        "radio-group.tsx": "434590d6eb2f2628",
+        "index.ts": "2bdc88982e16f52f"
+      },
+      "installedAt": "2025-12-29T11:32:56.601Z"
+    },
+    "select": {
+      "name": "select",
+      "version": "0.0.1",
+      "files": {
+        "select.tsx": "3ca7bba6cbc1e948",
+        "index.ts": "60f175a5ed8de041"
+      },
+      "installedAt": "2025-12-29T11:32:56.605Z"
+    },
+    "separator": {
+      "name": "separator",
+      "version": "0.0.1",
+      "files": {
+        "separator.tsx": "7d514ba7f6727df1",
+        "index.ts": "586c1013fb9ad1ce"
+      },
+      "installedAt": "2025-12-29T11:32:56.610Z"
+    },
+    "skeleton": {
+      "name": "skeleton",
+      "version": "0.0.1",
+      "files": {
+        "skeleton.tsx": "fa1ec4bf247af967",
+        "index.ts": "3cd65a09d2057e38"
+      },
+      "installedAt": "2025-12-29T11:32:56.615Z"
+    },
+    "slider": {
+      "name": "slider",
+      "version": "0.0.1",
+      "files": {
+        "slider.tsx": "562d32ef9919943b",
+        "index.ts": "bb685237192bcbbb"
+      },
+      "installedAt": "2025-12-29T11:32:56.618Z"
+    },
+    "spinner": {
+      "name": "spinner",
+      "version": "0.0.1",
+      "files": {
+        "spinner.tsx": "35703e00c2e4628d",
+        "index.ts": "5a3242bb1c276367"
+      },
+      "installedAt": "2025-12-29T11:32:56.623Z"
+    },
+    "table": {
+      "name": "table",
+      "version": "0.0.1",
+      "files": {
+        "table.tsx": "5c8608e6f158e8b5",
+        "index.ts": "885db27dbf859782"
+      },
+      "installedAt": "2025-12-29T11:32:56.627Z"
+    },
+    "tabs": {
+      "name": "tabs",
+      "version": "0.0.1",
+      "files": {
+        "tabs.tsx": "dd3d27e3b25dc33f",
+        "index.ts": "fb6ead202df8b95a"
+      },
+      "installedAt": "2025-12-29T11:32:56.632Z"
+    },
+    "text-input": {
+      "name": "text-input",
+      "version": "0.0.1",
+      "files": {
+        "text-input.tsx": "24ae5799a6c22047",
+        "index.ts": "05fa288f1b9bc05c"
+      },
+      "installedAt": "2025-12-29T11:32:56.636Z"
+    },
+    "textarea": {
+      "name": "textarea",
+      "version": "0.0.1",
+      "files": {
+        "textarea.tsx": "99365cd8f7716175",
+        "index.ts": "a6a72f104f95cf3e"
+      },
+      "installedAt": "2025-12-29T11:32:56.640Z"
+    },
+    "toast": {
+      "name": "toast",
+      "version": "0.0.1",
+      "files": {
+        "toast.tsx": "89926596bffb7d5c",
+        "index.ts": "a7a8ca4f83445407"
+      },
+      "installedAt": "2025-12-29T11:32:56.643Z"
+    },
+    "toggle": {
+      "name": "toggle",
+      "version": "0.0.1",
+      "files": {
+        "toggle.tsx": "4cf422249bb5021c",
+        "index.ts": "34ce7fbe9593fb41"
+      },
+      "installedAt": "2025-12-29T11:32:56.648Z"
+    },
+    "banner": {
+      "name": "banner",
+      "version": "0.0.1",
+      "files": {
+        "banner.tsx": "c974d57b9c7c9b02",
+        "index.ts": "abb54e951cf62de6"
+      },
+      "installedAt": "2025-12-29T11:32:56.654Z"
+    },
+    "collapsible": {
+      "name": "collapsible",
+      "version": "0.0.1",
+      "files": {
+        "collapsible.tsx": "4f9bdd8fdb18546f",
+        "index.ts": "441cdf47a057eb69"
+      },
+      "installedAt": "2025-12-29T11:32:56.658Z"
+    },
+    "command": {
+      "name": "command",
+      "version": "0.0.1",
+      "files": {
+        "command.tsx": "9493272bfe0dcd96",
+        "index.ts": "68e8674f4b860206"
+      },
+      "installedAt": "2025-12-29T11:32:56.664Z"
+    },
+    "empty": {
+      "name": "empty",
+      "version": "0.0.1",
+      "files": {
+        "empty.tsx": "5812e281f1408b8e",
+        "index.ts": "166792276883b0ca"
+      },
+      "installedAt": "2025-12-29T11:32:56.669Z"
+    },
+    "field": {
+      "name": "field",
+      "version": "0.0.1",
+      "files": {
+        "field.tsx": "76ecf5f0152c9662",
+        "index.ts": "cbc24a852d006fd1"
+      },
+      "installedAt": "2025-12-29T11:32:56.672Z"
+    },
+    "input-otp": {
+      "name": "input-otp",
+      "version": "0.0.1",
+      "files": {
+        "input-otp.tsx": "474c120d7c09965c",
+        "index.ts": "3a401c95a92b7203"
+      },
+      "installedAt": "2025-12-29T11:32:56.676Z"
+    },
+    "scroll-area": {
+      "name": "scroll-area",
+      "version": "0.0.1",
+      "files": {
+        "scroll-area.tsx": "751af9759e91e56d",
+        "index.ts": "c95241defff88c26"
+      },
+      "installedAt": "2025-12-29T11:32:56.680Z"
+    },
+    "toggle-group": {
+      "name": "toggle-group",
+      "version": "0.0.1",
+      "files": {
+        "toggle-group.tsx": "5de364b5ee8bf4d0",
+        "index.ts": "1d655d6e6524cc2d"
+      },
+      "installedAt": "2025-12-29T11:32:56.683Z"
+    },
+    "typography": {
+      "name": "typography",
+      "version": "0.0.1",
+      "files": {
+        "typography.tsx": "9b60d4c031d00ebf",
+        "index.ts": "1de21f2917904a9e"
+      },
+      "installedAt": "2025-12-29T11:32:56.687Z"
+    },
+    "alert-dialog": {
+      "name": "alert-dialog",
+      "version": "0.0.1",
+      "files": {
+        "alert-dialog.tsx": "eda57075cf674976",
+        "index.ts": "24fa8c8a678a7e00"
+      },
+      "installedAt": "2025-12-29T11:32:56.692Z"
+    },
+    "combobox": {
+      "name": "combobox",
+      "version": "0.0.1",
+      "files": {
+        "combobox.tsx": "0d85d1a8f0f9e6a3",
+        "index.ts": "ce570046f23d03c8"
+      },
+      "installedAt": "2025-12-29T11:32:56.696Z"
+    },
+    "context-menu": {
+      "name": "context-menu",
+      "version": "0.0.1",
+      "files": {
+        "context-menu.tsx": "dafe9b83a13268d7",
+        "index.ts": "777cc8fdd4000279"
+      },
+      "installedAt": "2025-12-29T11:32:56.700Z"
+    },
+    "drawer": {
+      "name": "drawer",
+      "version": "0.0.1",
+      "files": {
+        "drawer.tsx": "563bbd99badc79da",
+        "index.ts": "05cda1e5aa2c0a19"
+      },
+      "installedAt": "2025-12-29T11:32:56.704Z"
+    },
+    "dropdown-menu": {
+      "name": "dropdown-menu",
+      "version": "0.0.1",
+      "files": {
+        "dropdown-menu.tsx": "ea7c78f23359a61b",
+        "index.ts": "8574e339f2eb6ba9"
+      },
+      "installedAt": "2025-12-29T11:32:56.708Z"
+    },
+    "menubar": {
+      "name": "menubar",
+      "version": "0.0.1",
+      "files": {
+        "menubar.tsx": "f5159bf11de66211",
+        "index.ts": "e4d8c2d23fe5b859"
+      },
+      "installedAt": "2025-12-29T11:32:56.712Z"
+    },
+    "popover": {
+      "name": "popover",
+      "version": "0.0.1",
+      "files": {
+        "popover.tsx": "7c65b60dde314755",
+        "index.ts": "3a32cd3991964b34"
+      },
+      "installedAt": "2025-12-29T11:32:56.715Z"
+    },
+    "sheet": {
+      "name": "sheet",
+      "version": "0.0.1",
+      "files": {
+        "sheet.tsx": "f87a90920776b437",
+        "index.ts": "390fa79cf9604bfb"
+      },
+      "installedAt": "2025-12-29T11:32:56.720Z"
+    },
+    "sidebar": {
+      "name": "sidebar",
+      "version": "0.0.1",
+      "files": {
+        "sidebar.tsx": "eaf28b85cdad6c38",
+        "index.ts": "36a5339ce8573e6c"
+      },
+      "installedAt": "2025-12-29T11:32:56.725Z"
+    },
+    "tooltip": {
+      "name": "tooltip",
+      "version": "0.0.1",
+      "files": {
+        "tooltip.tsx": "ddac506fa605a129",
+        "index.ts": "4a1c0cc3166889ca"
+      },
+      "installedAt": "2025-12-29T11:32:56.730Z"
+    },
+    "switch": {
+      "name": "switch",
+      "version": "0.0.1",
+      "files": {
+        "switch.tsx": "15168336c864dfe7",
+        "index.ts": "85dd123de3b8ca3d"
+      },
+      "installedAt": "2025-12-29T11:32:56.734Z"
+    },
+    "hover-card": {
+      "name": "hover-card",
+      "version": "0.0.1",
+      "files": {
+        "hover-card.tsx": "94a1cde99a1e7d04",
+        "index.ts": "8ccb81d95d0490d5"
+      },
+      "installedAt": "2025-12-29T11:32:56.738Z"
+    },
+    "navigation-menu": {
+      "name": "navigation-menu",
+      "version": "0.0.1",
+      "files": {
+        "navigation-menu.tsx": "3b5922616cc63192",
+        "index.ts": "524da99d0eda5af3"
+      },
+      "installedAt": "2025-12-29T11:32:56.743Z"
+    },
+    "resizable": {
+      "name": "resizable",
+      "version": "0.0.1",
+      "files": {
+        "resizable.tsx": "5e3589d6ecfc6903",
+        "index.ts": "684ade77a6919fb3"
+      },
+      "installedAt": "2025-12-29T11:32:56.747Z"
+    },
+    "calendar": {
+      "name": "calendar",
+      "version": "0.0.1",
+      "files": {
+        "calendar.tsx": "c792239b082fa0ea",
+        "index.ts": "b7ad204adda0dc8c"
+      },
+      "installedAt": "2025-12-29T11:32:56.751Z"
+    },
+    "date-picker": {
+      "name": "date-picker",
+      "version": "0.0.1",
+      "files": {
+        "date-picker.tsx": "290c60a6fdb65a1c",
+        "index.ts": "91b6d2088aff05e4"
+      },
+      "installedAt": "2025-12-29T11:32:56.756Z"
+    },
+    "carousel": {
+      "name": "carousel",
+      "version": "0.0.1",
+      "files": {
+        "carousel.tsx": "a3a3f4c220edf897",
+        "index.ts": "2dfdb60ea00bd8a6"
+      },
+      "installedAt": "2025-12-29T11:32:56.760Z"
+    },
+    "chart": {
+      "name": "chart",
+      "version": "0.0.1",
+      "files": {
+        "chart.tsx": "ae81c41958245728",
+        "index.ts": "115f60af6f78f53a"
+      },
+      "installedAt": "2025-12-29T11:32:56.763Z"
+    },
+    "data-table": {
+      "name": "data-table",
+      "version": "0.0.1",
+      "files": {
+        "data-table.tsx": "2600734bc9f8263a",
+        "index.ts": "85cc9467fcbf0097"
+      },
+      "installedAt": "2025-12-29T11:32:56.767Z"
+    },
+    "form": {
+      "name": "form",
+      "version": "0.0.1",
+      "files": {
+        "form.tsx": "58e154edde8fc08c",
+        "index.ts": "7ba9b06a58f64faf"
+      },
+      "installedAt": "2025-12-29T11:32:56.771Z"
+    }
+  }
+}

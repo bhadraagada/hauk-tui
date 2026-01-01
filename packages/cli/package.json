@@ -1,27 +1,39 @@
 {
   "name": "@hauktui/cli",
   "version": "0.0.1",
+  "description": "CLI for haukTUI - add components to your project",
   "type": "module",
-  "description": "CLI scaffolder for haukTUI components (copy source files into your project)",
   "bin": {
-    "hauktui": "dist/index.js"
+    "hauktui": "./dist/index.js"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "templates"
-  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "clean": "if (Test-Path dist) { Remove-Item -Recurse -Force dist }"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
   },
+  "keywords": ["tui", "terminal", "cli", "scaffolding"],
+  "license": "MIT",
   "dependencies": {
-    "commander": "^12.1.0"
+    "@hauktui/registry": "workspace:*",
+    "@clack/prompts": "^0.7.0",
+    "commander": "^12.0.0",
+    "picocolors": "^1.0.0",
+    "fs-extra": "^11.2.0"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.6.0"
-  },
-  "license": "MIT"
+    "@types/fs-extra": "^11.0.4",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2"
+  }
 }

@@ -1,0 +1,33 @@
+{
+  "name": "@hauktui/registry",
+  "version": "0.0.1",
+  "description": "Component registry for haukTUI",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./registry.json": "./registry.json"
+  },
+  "files": ["dist", "registry.json", "components"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "keywords": ["tui", "terminal", "registry", "components"],
+  "license": "MIT",
+  "dependencies": {
+    "@hauktui/tokens": "workspace:*",
+    "@hauktui/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2"
+  }
+}

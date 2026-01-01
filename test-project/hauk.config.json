@@ -1,0 +1,9 @@
+{
+  "$schema": "https://hauktui.dev/schema/config.json",
+  "componentDir": "src/tui/components",
+  "tokensPath": "src/tui/tokens.ts",
+  "registryUrl": "https://raw.githubusercontent.com/hauktui/hauktui/main/packages/registry",
+  "aliases": {
+    "@/tui": "./src/tui"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "extends": "./configs/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@hauktui/tokens": ["packages/tokens/src"],
+      "@hauktui/core": ["packages/core/src"],
+      "@hauktui/primitives-ink": ["packages/primitives-ink/src"],
+      "@hauktui/registry": ["packages/registry/src"],
+      "@hauktui/cli": ["packages/cli/src"]
+    }
+  },
+  "references": [
+    { "path": "./packages/tokens" },
+    { "path": "./packages/core" },
+    { "path": "./packages/primitives-ink" },
+    { "path": "./packages/registry" },
+    { "path": "./packages/cli" }
+  ],
+  "include": [],
+  "exclude": ["node_modules", "dist"]
+}

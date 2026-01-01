@@ -1,241 +1,191 @@
-absolutely — here’s a clean, complete `idea.md` for your repo (`haukTUI/idea.md`). it’s written to give **coding agents (and future contributors)** full context of the project’s **vision, purpose, structure, and roadmap** — like a design + strategy doc.
+# haukTUI — Project Plan (Production-Ready)
 
----
+> A shadcn-like workflow for Terminal UIs: a registry + CLI that copies editable component source into user projects.
 
-````markdown
-# 🦅 haukTUI — The Shadcn for Terminal UIs
+## Goals
 
-> **Tagline:** razor-sharp, copy-paste-ready TUI components for the modern terminal.
+- **Copy-into-project ownership**: users run `hauktui add <component>` and get editable TS/TSX files.
+- **Unstyled by default**: styling comes from tokens + optional local overrides.
+- **Ink-first, not Ink-locked**: components are authored for Ink, while core contracts stay renderer-agnostic.
+- **OSS-ready + npm-ready**: monorepo, CI, versioning, changelogs, and automated publishing.
 
----
+## Non-goals (initially)
 
-## 🌱 The Core Idea
+- No heavy runtime UI framework with opaque internals.
+- No “theme that can’t be escaped”.
+- No monolithic dependency tree for apps that only want a few components.
 
-**haukTUI** is a new **TypeScript/JavaScript component library and toolkit for building terminal user interfaces (TUIs)** — inspired by **shadcn/ui** (for web GUIs) but designed entirely for **text-based interfaces** using frameworks like **Ink** (React for CLIs).
+## Architecture Overview
 
-Instead of a compiled widget library, haukTUI lets you **copy the actual source code** of components into your project — giving you full ownership, editability, and control, just like `shadcn add button` does for web components.
+haukTUI is composed of:
 
-This project aims to bring **beautiful developer experience (DX)**, **reusable design patterns**, and **structured composition** to the terminal world — where most libraries today are either monolithic, over-styled, or too low-level.
+1) **Runtime libraries** (published packages)
+- Tokens + core contracts + Ink primitives.
 
----
+2) **Component registry** (source-of-truth)
+- Canonical component source files and metadata that the CLI uses.
 
-## 🎯 Mission Statement
+3) **CLI** (developer workflow)
+- Initializes config, installs deps, copies component sources, supports diff/update.
 
-> Build the **definitive open-source TUI component system** for Node.js and TypeScript — unstyled by default, composable, framework-agnostic (Ink-first), and developer-owned.
-
----
-
-## 💡 Why It Exists
-
-Modern devs spend half their time in terminals — yet most CLI tools still rely on brittle, ad-hoc prompts or dashboards.
-
-There are incredible foundations (Ink, Blessed, BubbleTea, Ratatui, Textual), but what’s missing is a **DX-focused, unopinionated design system** for TUIs — one that you can import, extend, theme, or fork at will.
-
-**haukTUI** fills that gap by doing for terminal UIs what **shadcn/ui** did for React GUIs:
-- provides **unstyled, composable building blocks**
-- uses **copy-into-project** architecture (no runtime dependency)
-- emphasizes **DX, accessibility, and ownership**
-- offers **CLI scaffolding + patterns**, not just widgets
-
----
-
-## 🧩 Key Concepts
-
-### 1. **Component Ownership**
-Each component is copied directly into your app with:
-```bash
-npx @hauktui/cli add button select
-````
-
-→ generates local, editable TSX files under `src/tui/`.
-
-No hidden runtime dependencies — just plain React Ink components you can modify freely.
-
----
-
-### 2. **Unstyled by Default**
-
-All components are **unstyled primitives** using Ink’s `Text` and `Box`.
-Color, spacing, and borders come from a simple `tokens` system that adapts to:
-
-* terminal color depth (16 / 256 / truecolor)
-* user themes
-* runtime capabilities (via env + supports-color)
-
----
-
-### 3. **Composable Architecture**
-
-Each primitive and component is React-based:
-
-* `FocusRing` — handles keyboard focus borders
-* `KeymapProvider` — centralized keybinding management
-* `Button`, `Select`, `Checkbox`, `TextInput` — interactive widgets
-* `Wizard`, `Form`, `Table`, `Progress` — higher-level patterns
-
-Everything works seamlessly with Ink’s hooks (`useInput`, `useFocus`, etc).
-
----
-
-### 4. **CLI Scaffolding**
-
-A lightweight CLI `hauktui` provides commands like:
-
-```bash
-hauktui add button select
-hauktui list
-hauktui update all
-```
-
-Copies actual component code, similar to shadcn’s workflow.
-Goal: let users **own the code** while benefiting from upstream updates.
-
----
-
-### 5. **Theming & Tokens**
-
-* Semantic tokens (`accent`, `muted`, `focus`, etc)
-* Auto-detect color depth (16/256/24-bit)
-* Optional theme overrides (dark/light/accented)
-* Future: config-based themes via `hauktui theme init`
-
----
-
-## 🏗️ Project Structure
+## Repo Layout (pnpm workspaces)
 
 ```
 hauktui/
 ├─ packages/
-│  ├─ tokens/         → color & spacing tokens
-│  ├─ primitives/     → FocusRing, KeymapProvider, etc
-│  ├─ components/     → Button, Select, Checkbox, TextInput, etc
-│  ├─ cli/            → hauktui add <component> (file copier)
+│  ├─ tokens/            # @hauktui/tokens
+│  ├─ core/              # @hauktui/core
+│  ├─ primitives-ink/     # @hauktui/primitives-ink
+│  ├─ registry/           # @hauktui/registry (metadata + source templates)
+│  └─ cli/                # @hauktui/cli
 ├─ examples/
-│  ├─ demo.tsx        → Ink showcase app
-│  ├─ wizard-demo.tsx → step-based example (planned)
-├─ idea.md            → this file
-└─ README.md          → general documentation
+│  ├─ demo-basic/
+│  └─ demo-wizard/
+├─ configs/               # shared tsconfig/eslint/vitest/etc
+├─ .github/workflows/
+├─ README.md
+├─ CONTRIBUTING.md
+├─ CODE_OF_CONDUCT.md
+├─ SECURITY.md
+└─ LICENSE
 ```
 
----
+## Package Responsibilities
 
-## ⚙️ Tech Stack
+### `@hauktui/tokens`
+- Detect terminal capabilities (color depth, unicode support where possible).
+- Provide semantic tokens: `accent`, `muted`, `danger`, `focus`, `border`, `bg`, `fg`, `space.*`.
+- Keep **renderer-agnostic** (no Ink imports).
 
-| Layer        | Tool / Framework                           | Purpose                     |
-| ------------ | ------------------------------------------ | --------------------------- |
-| UI Framework | [Ink](https://github.com/vadimdemedes/ink) | React renderer for CLI apps |
-| Language     | TypeScript                                 | Type-safe components        |
-| CLI          | Node.js + CommonJS                         | lightweight file copier     |
-| Build        | tsc + pnpm workspaces                      | monorepo-friendly           |
-| Testing      | vitest + ink-testing-library (planned)     | snapshot + behavior tests   |
+Exports:
+- `createDefaultTokens()`
+- `mergeTokens(base, overrides)`
+- `detectTerminalCapabilities()`
 
----
+### `@hauktui/core`
+- Shared types and contracts:
+  - key actions + keymaps
+  - focus model contracts
+  - accessibility-ish metadata (labels, descriptions)
+  - utilities (clamp, memo, stable ids)
 
-## 📦 Package Scopes
+### `@hauktui/primitives-ink`
+- Ink-specific implementations:
+  - `KeymapProvider`
+  - `FocusRing`, `FocusGroup`
+  - `ScrollView` (if feasible)
+  - `Text`/`Box` wrappers that accept tokens
 
-| Package               | Purpose                                       |
-| --------------------- | --------------------------------------------- |
-| `@hauktui/tokens`     | shared design tokens (colors, spacing, depth) |
-| `@hauktui/primitives` | low-level TUI primitives                      |
-| `@hauktui/components` | ready-to-use interactive components           |
-| `@hauktui/cli`        | scaffolding tool (copy source files)          |
+### `@hauktui/registry`
+- Holds canonical component source (templates) + manifest.
 
----
-
-## 🧠 Example Usage
-
-```tsx
-import { render, Box } from "ink";
-import { createDefaultTokens } from "@hauktui/tokens";
-import { Button } from "@hauktui/components/Button";
-import { Select } from "@hauktui/components/Select";
-
-const tokens = createDefaultTokens();
-
-render(
-  <Box flexDirection="column">
-    <Button tokens={tokens} onPress={() => console.log("Clicked!")}>Click Me</Button>
-    <Select
-      tokens={tokens}
-      items={[{ label: "Apple", value: "apple" }, { label: "Banana", value: "banana" }]}
-      onChange={(v) => console.log("Selected:", v)}
-    />
-  </Box>
-);
+Suggested structure:
+```
+packages/registry/
+├─ registry.json
+└─ components/
+   ├─ button/
+   │  ├─ index.ts
+   │  └─ button.tsx
+   ├─ select/
+   └─ ...
 ```
 
----
+Each entry in `registry.json` describes:
+- files to copy
+- required npm deps
+- required haukTUI deps
+- post-install notes
 
-## 🧭 Roadmap
+### `@hauktui/cli`
+Commands:
+- `hauktui init`:
+  - creates `hauk.config.json`
+  - installs baseline deps
+  - adds folder structure (`src/tui/...`)
+- `hauktui add <name...>`:
+  - fetches registry (remote + cache)
+  - copies component files
+  - updates `hauk.lock.json` with version + file hashes
+- `hauktui list/search/view`:
+  - discovery + preview
+- `hauktui diff <name>`:
+  - shows local vs upstream differences
+- `hauktui update <name|all>`:
+  - safe updates (prefer 3-way merge; fallback to “new file + manual review”)
 
-### Phase 1 — MVP
+Config files:
+- `hauk.config.json`: paths, registry url, token defaults
+- `hauk.lock.json`: installed components, versions, file hashes
 
-* [x] Tokens system (color depth detection)
-* [x] Primitives: `FocusRing`, `KeymapProvider`
-* [x] Components: `Button`, `Select`
-* [x] CLI scaffolder (`hauktui add ...`)
-* [ ] TextInput, Checkbox, Progress
-* [ ] Snapshot tests (render-to-string)
+## Contracts (must be consistent everywhere)
 
-### Phase 2 — UX + Patterns
+### Tokens
+- All components accept `{ tokens }`.
+- Components may accept optional `{ styles }` overrides but must work without them.
 
-* [ ] Wizard / Form pattern
-* [ ] Table with paging + filter
-* [ ] SplitPane + ScrollView
-* [ ] Async job monitor + status indicators
+### Controlled/uncontrolled
+For inputs/select-like widgets:
+- `value?: T`
+- `defaultValue?: T`
+- `onChange?: (value: T) => void`
 
-### Phase 3 — Ecosystem
+### Keyboard + focus
+- Standard actions: `submit`, `cancel`, `next`, `prev`, `up`, `down`, `left`, `right`, `tab`, `backtab`.
+- Provide a common `KeymapProvider` and allow per-component overrides.
 
-* [ ] Theming engine (`hauktui theme init`)
-* [ ] Templates gallery (e.g. log viewer, repo browser)
-* [ ] VS Code + Neovim devtools integrations
-* [ ] Port adapters: BubbleTea (Go), Ratatui (Rust)
+## Component Roadmap
 
----
+### Foundation (ship first)
+- Primitives: `FocusRing`, `FocusGroup`, `KeymapProvider`, `Panel`, `Divider`, `Spinner`, `ProgressBar`.
+- Core components: `Button`, `Select`.
 
-## 🦅 Branding Notes
+### Inputs
+- `TextInput` (single line)
+- `PasswordInput`
+- `Checkbox`, `RadioGroup`, `Toggle`
 
-* **Name meaning:**
-  “**Hauk**” = “hawk” (Nordic spelling) → speed, focus, precision.
-  “**TUI**” = Terminal User Interface.
-  Together: *razor-sharp TUIs for developers with hawk-eye precision.*
+### Patterns
+- `Form` (validation + error rendering)
+- `Wizard` (step flow)
+- `Table` (paging later)
+- `CommandPalette` (fuzzy search)
 
-* **Tagline ideas:**
+## Testing Strategy
 
-  * “The shadcn for your terminal.”
-  * “Own your UI, even in the CLI.”
-  * “Build razor-sharp TUIs in TypeScript.”
+- Unit tests for token logic in `@hauktui/tokens`.
+- Snapshot tests for Ink render output for primitives/components.
+- Input simulation tests for keyboard navigation and selection.
 
-* **Mascot:** minimal ASCII hawk head or wings banner.
+## Tooling & Standards
 
----
+- TypeScript, strict mode, project references.
+- ESLint + Prettier.
+- Vitest.
+- Changesets for versioning + changelogs.
 
-## 🧰 For Coding Agents
+## CI/CD (GitHub Actions)
 
-When generating code or docs for this project:
+Workflows:
+- `ci.yml`: lint, typecheck, test, build.
+- `release.yml`: Changesets action creates release PR; merges trigger publish to npm.
 
-* **Use the imports and structure shown above.**
-* Assume Ink 4.x and React 18.
-* Respect the modular package layout.
-* New components should follow `tsx` composition style using Ink primitives.
-* Keep components **unstyled by default**; styling via tokens only.
-* Components should support keyboard navigation via `useInput` + `useFocus`.
+Secrets:
+- `NPM_TOKEN`
 
----
+## NPM Publishing Model
 
-## 💬 Summary
+- Publish runtime packages: `@hauktui/tokens`, `@hauktui/core`, `@hauktui/primitives-ink`, `@hauktui/cli`.
+- Registry can be published (optional) but primarily served as a static JSON + source directory via GitHub.
 
-**haukTUI** is the missing piece between low-level TUI frameworks and high-level design systems — a **developer-owned, copy-paste component library for the terminal**.
+## First Milestone Checklist (MVP)
 
-Think:
-🧱 composable primitives
-🎨 token-based theming
-⚡ shadcn-style DX
-🦅 razor-sharp focus
-
-> **Goal:** Make building beautiful, interactive terminal apps as fast, ergonomic, and extensible as building React web apps.
-
----
-
-```
-
+- [ ] Monorepo scaffolding + shared configs
+- [ ] `@hauktui/tokens` with capability detection + semantic tokens
+- [ ] `@hauktui/core` keymap + focus contracts
+- [ ] `@hauktui/primitives-ink` FocusRing + KeymapProvider
+- [ ] Registry with Button + Select
+- [ ] CLI: init/add/list/view
+- [ ] Example app demonstrating the flow
+- [ ] CI running on PRs
+- [ ] Changesets release pipeline
