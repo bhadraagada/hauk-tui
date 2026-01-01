@@ -1,6 +1,6 @@
 {
   "name": "@hauktui/tokens",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Semantic tokens and terminal capability detection for haukTUI",
   "type": "module",
   "main": "./dist/index.js",

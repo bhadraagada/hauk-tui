@@ -1,6 +1,6 @@
 {
   "name": "@hauktui/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Core contracts, types, and utilities for haukTUI",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,7 +30,7 @@
     "directory": "packages/core"
   },
   "dependencies": {
-    "@hauktui/tokens": "workspace:*"
+    "@hauktui/tokens": "^0.0.1"
   },
   "devDependencies": {
     "tsup": "^8.0.1",
