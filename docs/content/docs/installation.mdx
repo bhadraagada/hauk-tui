@@ -32,23 +32,23 @@ npm install -D typescript @types/react tsx
 ## Install the CLI
 
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
-  <Tab value="npm">```bash npm install -g @hauktui/cli ```</Tab>
-  <Tab value="pnpm">```bash pnpm add -g @hauktui/cli ```</Tab>
-  <Tab value="yarn">```bash yarn global add @hauktui/cli ```</Tab>
-  <Tab value="bun">```bash bun add -g @hauktui/cli ```</Tab>
+  <Tab value="npm">```bash npm install -g hauktui ```</Tab>
+  <Tab value="pnpm">```bash pnpm add -g hauktui ```</Tab>
+  <Tab value="yarn">```bash yarn global add hauktui ```</Tab>
+  <Tab value="bun">```bash bun add -g hauktui ```</Tab>
 </Tabs>
 
 Or use it directly with `npx`:
 
 ```bash
-npx @hauktui/cli <command>
+npx hauktui <command>
 ```
 
 ## Initialize Your Project
 
 <Steps>
   <Step>
-    ### Run the init command ```bash npx @hauktui/cli init ``` This will: -
+    ### Run the init command ```bash npx hauktui init ``` This will: -
     Create a `hauk.config.json` configuration file - Create a `hauk.lock.json`
     to track installed components - Set up the default component directory
     (`src/tui/components`)
@@ -61,7 +61,7 @@ npx @hauktui/cli <command>
   </Step>
 
   <Step>
-    ### Add your first component ```bash npx @hauktui/cli add button ``` This
+    ### Add your first component ```bash npx hauktui add button ``` This
     copies the Button component to your project.
   </Step>
 </Steps>

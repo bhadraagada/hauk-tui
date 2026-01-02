@@ -107,7 +107,7 @@ export default function HomePage() {
                   <span className="text-accent select-none">$</span>
                   <span>
                     <span className="text-yellow-400">npx</span>
-                    <span className="text-fd-foreground"> @hauktui/cli </span>
+                    <span className="text-fd-foreground"> hauktui </span>
                     <span className="text-cyan-400">init</span>
                     <span className="text-fd-foreground"> my-app</span>
                   </span>
@@ -120,7 +120,7 @@ export default function HomePage() {
                   <span className="text-accent select-none">$</span>
                   <span>
                     <span className="text-yellow-400">npx</span>
-                    <span className="text-fd-foreground"> @hauktui/cli </span>
+                    <span className="text-fd-foreground"> hauktui </span>
                     <span className="text-cyan-400">add</span>
                     <span className="text-emerald-400"> button dialog toast</span>
                   </span>
@@ -383,7 +383,7 @@ export default function HomePage() {
 
           <div className="inline-flex items-center gap-3 px-6 py-4 mb-10 rounded-lg bg-fd-card/80 border border-fd-border/60 font-mono text-sm">
             <span className="text-accent">$</span>
-            <span className="text-fd-foreground">npm install -g @hauktui/cli</span>
+            <span className="text-fd-foreground">npm install -g hauktui</span>
             <button className="ml-4 p-2 rounded hover:bg-fd-muted/50 transition-colors text-fd-muted-foreground hover:text-fd-foreground">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
