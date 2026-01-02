@@ -1,0 +1,35 @@
+{
+  "name": "hauktui",
+  "version": "0.0.3",
+  "description": "shadcn-style Terminal UI components for React Ink",
+  "type": "module",
+  "bin": {
+    "hauktui": "./bin.js"
+  },
+  "files": [
+    "bin.js"
+  ],
+  "keywords": [
+    "terminal-ui",
+    "tui",
+    "react",
+    "ink",
+    "react-ink",
+    "component-library",
+    "cli",
+    "shadcn",
+    "typescript"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhadraagada/hauk-tui.git",
+    "directory": "packages/hauktui"
+  },
+  "dependencies": {
+    "@hauktui/cli": "^0.0.3"
+  }
+}

@@ -11,7 +11,7 @@ const program = new Command();
 program
   .name("hauktui")
   .description("A shadcn-like workflow for Terminal UIs")
-  .version("0.0.1");
+  .version("0.0.3");
 
 program.addCommand(initCommand);
 program.addCommand(addCommand);

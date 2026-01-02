@@ -59,14 +59,16 @@ Components live in your codebase. No black boxes, no overrides, just your code.
 ## Installation
 
 ```bash
-# Install the CLI globally
-npm install -g @hauktui/cli
-
 # Initialize in your project
-hauk init
+npx hauktui init
 
 # Add components you need
-hauk add button select table
+npx hauktui add button select table
+
+# Or install globally
+npm install -g hauktui
+hauktui init
+hauktui add button select table
 ```
 
 That's it. Components are now in your project ready to use and customize.
